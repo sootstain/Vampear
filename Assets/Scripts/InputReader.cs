@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
+    public bool isAttacking { get; private set; }
     public Vector2 MovementValue { get; private set; }
     public event Action JumpEvent;
     public event Action DodgeEvent;
@@ -28,12 +29,15 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        //Func for cinemachine component
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        //Doing this way so that we can hold down attack to continue the combo
+        if (context.performed) isAttacking = true;
+        else if (context.canceled) isAttacking = false;
+        
     }
 
     public void OnInteract(InputAction.CallbackContext context)

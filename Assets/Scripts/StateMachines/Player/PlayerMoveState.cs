@@ -4,6 +4,9 @@ public class PlayerMoveState : PlayerBaseState
 {
     private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed"); //readonly for anim
     
+    private readonly int MoveBlendTree = Animator.StringToHash("MoveBlendTree"); //for camera change
+
+    
     private float timer;
     public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -11,10 +14,20 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.InputReader.TargetEvent += OnTarget;
+        stateMachine.Animator.Play(MoveBlendTree);
     }
 
     public override void Exit()
     {
+        stateMachine.InputReader.TargetEvent -= OnTarget;
+    }
+    
+    private void OnTarget()
+    {
+        if (!stateMachine.Targeter.SelectTarget()) return; //no targets in range to target
+        
+        stateMachine.SwitchState(new PlayerTargetState(stateMachine));
     }
 
     public override void Tick(float deltaTime)
@@ -27,7 +40,7 @@ public class PlayerMoveState : PlayerBaseState
 
         Vector3 movement = CalculateMovement();
         
-        Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
+        Move(movement * stateMachine.StandardMovementSpeed, deltaTime);
 
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {

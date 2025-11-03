@@ -8,6 +8,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public Vector2 MovementValue { get; private set; }
     public event Action JumpEvent;
     public event Action DodgeEvent;
+    public event Action TargetEvent;
+    public event Action CancelTarget;
     
     private Controls controls;
     private void Start()
@@ -34,7 +36,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        //Doing this way so that we can hold down attack to continue the combo
+        //Doing this way instead of event so that we can hold down attack to continue the combo
         if (context.performed) isAttacking = true;
         else if (context.canceled) isAttacking = false;
         
@@ -58,6 +60,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         }
     }
 
+    //For potential dialogue?
     public void OnPrevious(InputAction.CallbackContext context)
     {
         throw new System.NotImplementedException();
@@ -77,5 +80,18 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (!context.performed) return; 
         DodgeEvent?.Invoke();
+    }
+
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+        if(!context.performed) return;
+        TargetEvent?.Invoke();
+    }
+    
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        //When right click let go of?
+        if(!context.performed) return;
+        CancelTarget?.Invoke();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Attack
 {
-    //Just for now
+    //Just for now, dumb method
     [field: SerializeField] public string AnimationName { get; private set; }
     [field: SerializeField] public float TransitionDuration { get; private set; }
     [field: SerializeField] public int ComboIndex { get; private set; } = -1;

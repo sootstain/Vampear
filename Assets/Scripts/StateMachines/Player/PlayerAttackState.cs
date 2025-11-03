@@ -26,7 +26,7 @@ public class PlayerAttackState : PlayerBaseState
         
         float normalisedTime = GetNormalisedTime();
 
-        if (normalisedTime > previousFrameTime && normalisedTime < 1f)
+        if (normalisedTime >= previousFrameTime && normalisedTime < 1f)
         {
             if (stateMachine.InputReader.isAttacking)
             {
@@ -35,7 +35,14 @@ public class PlayerAttackState : PlayerBaseState
         }
         else
         {
-            stateMachine.SwitchState(new PlayerMoveState(stateMachine));
+            if (stateMachine.Targeter.CurrentTarget != null)
+            {
+                stateMachine.SwitchState(new PlayerTargetState(stateMachine));;
+            }
+            else
+            {
+                stateMachine.SwitchState(new PlayerMoveState(stateMachine));    
+            }
         }
         
         previousFrameTime = normalisedTime;

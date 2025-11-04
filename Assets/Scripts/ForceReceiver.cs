@@ -18,7 +18,10 @@ public class ForceReceiver : MonoBehaviour
 
     private void Update()
     {
+        
+        //TODO: Maybe change this out, use root motion?
         //Apply gravity, to customise a bit more with jumping / parkour movements
+        
         if (verticalVelocity < 0f && controller.isGrounded)
         {
             verticalVelocity = Physics.gravity.y * Time.deltaTime;
@@ -54,7 +57,7 @@ public class ForceReceiver : MonoBehaviour
             agent.enabled = false;
         }
     }
-
+    
     public void Jump(float jumpForce)
     {
         verticalVelocity += jumpForce;

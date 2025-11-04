@@ -4,6 +4,7 @@ public class PlayerAttackState : PlayerBaseState
 {
     private Attack attack;
     private float previousFrameTime;
+    private bool forceApplied;
     public PlayerAttackState(PlayerStateMachine stateMachine, int comboIndex) : base(stateMachine)
     {
         attack = stateMachine.Attacks[comboIndex];
@@ -28,6 +29,10 @@ public class PlayerAttackState : PlayerBaseState
 
         if (normalisedTime >= previousFrameTime && normalisedTime < 1f)
         {
+            if (normalisedTime >= attack.ForceTime)
+            {
+                ApplyForce();
+            }
             if (stateMachine.InputReader.isAttacking)
             {
                 ComboAttack(normalisedTime);
@@ -55,6 +60,14 @@ public class PlayerAttackState : PlayerBaseState
         if (normalisedTime < attack.ComboAttackTime) return; //hasn't finished previous anim / previous attack
         
         stateMachine.SwitchState(new PlayerAttackState(stateMachine,attack.ComboIndex));
+    }
+
+    //Move forwards
+    private void ApplyForce()
+    {
+        if (forceApplied) return;
+        stateMachine.ForceReceiver.AddForce(stateMachine.transform.forward * attack.ForceStrength);
+        forceApplied = true;
     }
 
     private float GetNormalisedTime()

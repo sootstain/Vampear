@@ -10,6 +10,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action DodgeEvent;
     public event Action TargetEvent;
     public event Action CancelTarget;
+
+    public event Action TransformEvent;
     
     private Controls controls;
     private void Start()
@@ -93,5 +95,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         //When right click let go of?
         if(!context.performed) return;
         CancelTarget?.Invoke();
+    }
+
+    public void OnTransform(InputAction.CallbackContext context)
+    {
+        Debug.Log("Changing into Bat");
+        if(!context.performed) return;
+        TransformEvent?.Invoke();
     }
 }

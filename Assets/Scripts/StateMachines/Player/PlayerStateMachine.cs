@@ -20,9 +20,12 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public GameObject PlayerMesh { get; private set; }
     [field: SerializeField] public GameObject BatMesh { get; private set; }
-    
+
+    [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
 
+    [field: SerializeField] public LedgeDetection LedgeDetection { get; private set; }
+    
     private bool isVampire;
     private void Start()
     {

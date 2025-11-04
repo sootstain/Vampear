@@ -93,8 +93,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnCancel(InputAction.CallbackContext context)
     {
         //When right click let go of?
-        if(!context.performed) return;
-        CancelTarget?.Invoke();
+        //if(!context.performed) return;
+        //CancelTarget?.Invoke();
     }
 
     public void OnTransform(InputAction.CallbackContext context)

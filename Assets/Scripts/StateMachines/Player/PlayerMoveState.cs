@@ -6,21 +6,38 @@ public class PlayerMoveState : PlayerBaseState
     
     private readonly int MoveBlendTree = Animator.StringToHash("MoveBlendTree"); //for camera change
 
+    private bool shouldFade;
+    
+    private const float CrossFadeDuration = 0.1f;
     
     private float timer;
-    public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerMoveState(PlayerStateMachine stateMachine, bool shouldFade = true) : base(stateMachine)
     {
+        this.shouldFade = shouldFade;
     }
 
     public override void Enter()
     {
         stateMachine.InputReader.TargetEvent += OnTarget;
-        stateMachine.Animator.Play(MoveBlendTree);
+        stateMachine.InputReader.JumpEvent += OnJump;
+        
+        stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0f); //reset
+        
+        if (shouldFade)
+        {
+            stateMachine.Animator.CrossFadeInFixedTime(MoveBlendTree, CrossFadeDuration);
+        }
+        else
+        {
+            stateMachine.Animator.Play(MoveBlendTree);
+        }
+        
     }
 
     public override void Exit()
     {
         stateMachine.InputReader.TargetEvent -= OnTarget;
+        stateMachine.InputReader.JumpEvent -= OnJump;
     }
     
     private void OnTarget()
@@ -28,6 +45,11 @@ public class PlayerMoveState : PlayerBaseState
         if (!stateMachine.Targeter.SelectTarget()) return; //no targets in range to target
         
         stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+    }
+
+    private void OnJump()
+    {
+        stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
 
     public override void Tick(float deltaTime)

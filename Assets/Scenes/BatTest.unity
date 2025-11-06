@@ -801,7 +801,7 @@ Transform:
   m_GameObject: {fileID: 638772810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.783, y: 2.307, z: -6.147}
+  m_LocalPosition: {x: 12.783, y: 2.396, z: -6.245}
   m_LocalScale: {x: 3.2416232, y: 0.1715749, z: 0.49074543}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -892,6 +892,7 @@ GameObject:
   - component: {fileID: 699975891}
   - component: {fileID: 699975893}
   - component: {fileID: 699975892}
+  - component: {fileID: 699975894}
   m_Layer: 6
   m_Name: LedgeDetection
   m_TagString: Untagged
@@ -962,6 +963,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &699975894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699975890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450749b197a07b84f92f705c10aa9e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LedgeDetection
 --- !u!1 &739667790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,7 +1526,7 @@ Transform:
   m_GameObject: {fileID: 1081925192}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.71, y: 3.7, z: 1.74}
+  m_LocalPosition: {x: 11.71, y: -0.51, z: 1.74}
   m_LocalScale: {x: 6.305359, y: 7.641, z: 13.3365}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3323,7 +3336,7 @@ PrefabInstance:
     - target: {fileID: -4750986864715964598, guid: ab21c9c361e222542b61b44062cae9a0, type: 3}
       propertyPath: <LedgeDetection>k__BackingField
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 699975894}
     - target: {fileID: 58228901664364690, guid: ab21c9c361e222542b61b44062cae9a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 15.641951

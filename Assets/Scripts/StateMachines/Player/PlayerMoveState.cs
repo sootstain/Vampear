@@ -11,6 +11,9 @@ public class PlayerMoveState : PlayerBaseState
     private const float CrossFadeDuration = 0.1f;
     
     private float timer;
+    
+    private const float SnapAngleThreshold = 120f;
+    private const float RotationSpeed = 20f;
     public PlayerMoveState(PlayerStateMachine stateMachine, bool shouldFade = true) : base(stateMachine)
     {
         this.shouldFade = shouldFade;
@@ -92,9 +95,25 @@ public class PlayerMoveState : PlayerBaseState
 
     private void FaceMoveDirection(Vector3 movement, float deltaTime)
     {
-        stateMachine.transform.rotation = Quaternion.Lerp
-            (stateMachine.transform.rotation, 
-            Quaternion.LookRotation(movement), 
-            deltaTime * stateMachine.RotationDamping);
+        if (movement.sqrMagnitude > Mathf.Epsilon)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            float angleDifference = Quaternion.Angle(stateMachine.transform.rotation, targetRotation);
+            if (angleDifference > SnapAngleThreshold)
+            {
+                stateMachine.transform.rotation = targetRotation;
+            }
+            else
+            {
+                // Slerp is used
+                // BUT Quaternion.RotateTowards can be used for framerate independent fast rotation
+                float rotationAmount = Mathf.Min(1f, RotationSpeed * deltaTime);
+                stateMachine.transform.rotation = Quaternion.Slerp(
+                    stateMachine.transform.rotation, 
+                    targetRotation, 
+                    rotationAmount
+                );
+            }
+        }
     }
 }

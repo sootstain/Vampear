@@ -13,5 +13,6 @@ public class Attack
     [field: SerializeField] public float ForceTime { get; private set; }
     
     [field: SerializeField] public float ForceStrength { get; private set; }
-
+    [field: SerializeField] public float Damage { get; private set; }
+    [field: SerializeField] public float Knockback { get; private set; }
 }

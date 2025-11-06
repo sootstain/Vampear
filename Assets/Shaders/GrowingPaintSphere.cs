@@ -2,50 +2,51 @@ using UnityEngine;
 
 public class GrowingPaintSphere : MonoBehaviour
 {
-    [Header("Growth Settings")]
+    [SerializeField] private GameObject spherePrefab;
+
     [SerializeField] public float minRadius = 0.1f;
     [SerializeField] public float maxRadius = 2f;
     [SerializeField] public float growthSpeed = 1f;
 
-    [Header("Paint Settings")]
     public float hardness = 0.8f;
     public float strength = 1f;
     public Color paintColor = Color.white;
-
-    private SphereCollider currentSphere;
+    
+    private GameObject spawnedSphere;
+    private SphereCollider currentCollider;
     private float currentScale;
 
     void Start()
     {
-        currentSphere = GetComponent<SphereCollider>();
+        spawnedSphere = Instantiate(spherePrefab, transform.position, Quaternion.identity);
+        currentCollider = spawnedSphere.GetComponent<SphereCollider>();
 
-        // Start the sphere small
-        transform.localScale = Vector3.one * minRadius;
+        spawnedSphere.transform.localScale = Vector3.one * minRadius;
         currentScale = minRadius;
     }
 
     void Update()
     {
-        // Grow the sphere
         if (currentScale < maxRadius)
         {
             currentScale += growthSpeed * Time.deltaTime;
             currentScale = Mathf.Min(currentScale, maxRadius);
-            transform.localScale = Vector3.one * currentScale;
+            spawnedSphere.transform.localScale = Vector3.one * currentScale;
+            
+            currentCollider.radius = currentScale;
         }
-
-        // Compute world-space radius
-        float worldRadius = currentSphere.radius * transform.lossyScale.x;
-
-        // Find overlapping colliders
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, worldRadius);
+        
+        float paintRadius = currentScale * 0.5f; //this doesn't really work, IDK the scale is super annoying :)
+        
+        //Also this shit doesn't work with the sphere unless I make it huge so wtf
+        Collider[] hitColliders = Physics.OverlapSphere(currentCollider.transform.position, currentScale);
 
         foreach (Collider col in hitColliders)
         {
             if (col.TryGetComponent(out Paintable p))
             {
-                Vector3 closestPoint = col.ClosestPoint(transform.position);
-                PaintManager.instance.paint(p, closestPoint, worldRadius, hardness, strength, paintColor);
+                Vector3 closestPoint = col.ClosestPoint(currentCollider.transform.position);
+                PaintManager.instance.paint(p, closestPoint, paintRadius, hardness, strength, paintColor);
             }
         }
     }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4851849998274140978}
   - component: {fileID: 97488463120262845}
   - component: {fileID: 8582230413173187917}
-  - component: {fileID: 5115461864514755994}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -30,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8685, y: 0, z: -6.16}
-  m_LocalScale: {x: 0.44315, y: 0.44315, z: 0.44315}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,25 +105,9 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5115461864514755994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2555734448600350902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d4bf03ec3b8d2439c73a3d84c5f58f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SphereReveal
-  hardness: 0.8
-  strength: 1
-  paintColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColliders: []

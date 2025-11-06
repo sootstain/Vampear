@@ -48,8 +48,8 @@
 
                 if(island.z < 1){
                     float4 extendedColor = color;
-                    for	(int i = 0; i < offsets.Length; i++){
-                        float2 currentUV = uv + offsets[i] * _MainTex_TexelSize.xy;
+                    for (int j = 0; j < 8; j++){
+                        float2 currentUV = uv + offsets[j] * _MainTex_TexelSize.xy;
                         float4 offsettedColor = tex2D(_MainTex, currentUV);
                         extendedColor = max(offsettedColor, extendedColor);
                     }

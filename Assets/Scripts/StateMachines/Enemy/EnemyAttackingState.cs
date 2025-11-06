@@ -7,21 +7,19 @@ public class EnemyAttackingState : EnemyBaseState
     public EnemyAttackingState(EnemyStateMachine stateMachine) : base(stateMachine) { }
     public override void Enter()
     {
-        stateMachine.Weapon.SetAttack(stateMachine.AttackDamage);
         stateMachine.Animator.CrossFadeInFixedTime(AttackHash, TransitionDuration);
+        stateMachine.Weapon.SetAttack(stateMachine.AttackDamage, stateMachine.AttackKnockback);
     }
 
     public override void Exit() { }
 
     public override void Tick(float deltaTime)
     {
-        Move(deltaTime);
-        if (!IsInAttackRange())
+        if (GetNormalisedTime(stateMachine.Animator) >= 2f)
         {
             stateMachine.SwitchState(new EnemyChasingState(stateMachine));
-            return;
+            FacePlayer();
         }
-        FacePlayer();
     }
     
 }

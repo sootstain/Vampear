@@ -25,7 +25,7 @@ public class PlayerAttackState : PlayerBaseState
         
         Move(deltaTime);
         
-        float normalisedTime = GetNormalisedTime();
+        float normalisedTime = GetNormalisedTime(stateMachine.Animator);
 
         if (normalisedTime >= previousFrameTime && normalisedTime < 1f)
         {
@@ -68,24 +68,5 @@ public class PlayerAttackState : PlayerBaseState
         if (forceApplied) return;
         stateMachine.ForceReceiver.AddForce(stateMachine.transform.forward * attack.ForceStrength);
         forceApplied = true;
-    }
-
-    private float GetNormalisedTime()
-    {
-        AnimatorStateInfo currentStateInfo = stateMachine.Animator.GetCurrentAnimatorStateInfo(0);
-        AnimatorStateInfo nextStateInfo = stateMachine.Animator.GetNextAnimatorStateInfo(0);
-
-        if (stateMachine.Animator.IsInTransition(0) && nextStateInfo.IsTag("Attack"))
-        {
-            return nextStateInfo.normalizedTime;
-        }
-        
-        if (!stateMachine.Animator.IsInTransition(0) && currentStateInfo.IsTag("Attack"))
-        {
-            return currentStateInfo.normalizedTime;
-        }
-    
-        return 0f;            
-        
     }
 }

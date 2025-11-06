@@ -10,7 +10,7 @@ public class EnemyChasingState : EnemyBaseState
     private const float AnimatorDampTime = 0.1f;
     public override void Enter()
     {
-        stateMachine.Animator.CrossFadeInFixedTime("IdleHash", CrossFadeDuration);
+        stateMachine.Animator.CrossFadeInFixedTime(IdleHash, CrossFadeDuration);
     }
 
     public override void Exit()

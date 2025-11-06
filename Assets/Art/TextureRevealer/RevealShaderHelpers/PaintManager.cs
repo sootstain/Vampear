@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class PaintManager : Singleton<PaintManager>{
+public class ColourManager : MonoBehaviour{
 
+    public static ColourManager instance;
     public Shader texturePaint;
     public Shader extendIslands;
 
@@ -22,8 +23,15 @@ public class PaintManager : Singleton<PaintManager>{
 
     CommandBuffer command;
 
-    public override void Awake(){
-        base.Awake();
+    public void Awake(){
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);

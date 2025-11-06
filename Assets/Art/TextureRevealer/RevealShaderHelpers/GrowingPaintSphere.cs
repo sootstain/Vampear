@@ -46,7 +46,7 @@ public class GrowingPaintSphere : MonoBehaviour
             if (col.TryGetComponent(out Paintable p))
             {
                 Vector3 closestPoint = col.ClosestPoint(currentCollider.transform.position);
-                PaintManager.instance.paint(p, closestPoint, paintRadius, hardness, strength, paintColor);
+                ColourManager.instance.paint(p, closestPoint, paintRadius, hardness, strength, paintColor);
             }
         }
     }

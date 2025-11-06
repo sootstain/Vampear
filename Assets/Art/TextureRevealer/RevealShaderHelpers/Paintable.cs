@@ -36,7 +36,7 @@ public class Paintable : MonoBehaviour {
         rend = GetComponent<Renderer>();
         rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
 
-        PaintManager.instance.initTextures(this);
+        ColourManager.instance.initTextures(this);
     }
 
     void OnDisable(){

@@ -32,6 +32,8 @@ public class ColourManager : MonoBehaviour{
         {
             Destroy(gameObject);
         }
+
+        Cursor.visible = false;
         
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);

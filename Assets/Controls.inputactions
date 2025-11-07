@@ -106,7 +106,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Cancel",
+                    "name": "Pull",
                     "type": "Button",
                     "id": "fe1bbdfe-97ca-4ffe-9de6-2ec3cac01574",
                     "expectedControlType": "",
@@ -546,11 +546,11 @@
                 {
                     "name": "",
                     "id": "1b721d84-4e2f-45bf-a9e2-7b6a2b689873",
-                    "path": "<Keyboard>/tab",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cancel",
+                    "action": "Pull",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

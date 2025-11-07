@@ -18,15 +18,19 @@ public class PlayerTargetState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.InputReader.isTargeting = true;
         stateMachine.InputReader.TargetEvent += OnCancel;
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.PullEvent += OnPull;
         stateMachine.Animator.Play(TargetBlendTree);
     }
 
     public override void Exit()
     {
+        stateMachine.InputReader.isTargeting = false;
         stateMachine.InputReader.TargetEvent -= OnCancel;
-        stateMachine.InputReader.JumpEvent -= OnJump;       
+        stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.PullEvent -= OnPull;
     }
 
     public override void Tick(float deltaTime)
@@ -61,6 +65,11 @@ public class PlayerTargetState : PlayerBaseState
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
 
+    private void OnPull()
+    {
+        
+        stateMachine.SwitchState(new PlayerPullTargetState(stateMachine));
+    }
     private Vector3 CalculateMovement()
     {
         Vector3 movement = new Vector3();

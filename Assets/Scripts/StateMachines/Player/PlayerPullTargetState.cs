@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class PlayerPullTargetState : PlayerBaseState
 {
-    private readonly int PullAnim = Animator.StringToHash("Pull");
+    //private readonly int PullAnim = Animator.StringToHash("Pull");
+    private readonly int ChainAnim = Animator.StringToHash("ChainThrow");
     
     Transform cameraPos, whipBase;
     private float maxDistance;
@@ -20,7 +22,7 @@ public class PlayerPullTargetState : PlayerBaseState
     private Spring spring;
     public float damper = 14;
     public float strength = 800; 
-    public float velocity = 15;
+    public float velocity = 50;
     public float waveCount = 3;
     public float waveHeight = 1;
     
@@ -45,15 +47,18 @@ public class PlayerPullTargetState : PlayerBaseState
     
     public override void Enter()
     {
-        stateMachine.Animator.Play(PullAnim);
+        
+        stateMachine.Animator.Play(ChainAnim);
         pulling = true;
         whipAnimationTimer = 0f;
+        if (target != null)
+        {
+            grabPoint = target.gameObject.transform.position;
         
-        grabPoint = target.gameObject.transform.position;
-        
-        lr.enabled = true;
-        lr.positionCount = quality + 1;
-        spring.SetVelocity(velocity);
+            lr.enabled = true;
+            lr.positionCount = quality + 1;
+            spring.SetVelocity(velocity);
+        }
         
     }
 
@@ -70,15 +75,15 @@ public class PlayerPullTargetState : PlayerBaseState
         spring.Update(Time.deltaTime);
 
         Vector3 whipDirection = (grabPoint - whipBase.position).normalized;
+        
         var up = Quaternion.LookRotation(whipDirection) * Vector3.up;
-
+        
         currentWhipPosition = Vector3.Lerp(currentWhipPosition, grabPoint, Time.deltaTime *12f);
         
         for (var i = 0; i < quality + 1; i++) {
             var delta = i / (float) quality;
-            var offset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * spring.Value * affectCurve.Evaluate(delta));
-            
-            lr.SetPosition(i, Vector3.Lerp(whipBase.position, currentWhipPosition, delta) + offset);
+            var waveOffset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * spring.Value * affectCurve.Evaluate(delta));
+            lr.SetPosition(i, Vector3.Lerp(whipBase.position, currentWhipPosition, delta) + waveOffset);
         }
     }
 
@@ -91,22 +96,27 @@ public class PlayerPullTargetState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        if (pulling) // Only draw while pulling
+        if (pulling)
         {
             whipAnimationTimer += deltaTime;
             DrawWhip();
         }
+
         
         bool animationComplete = stateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f;
         bool whipExtended = whipAnimationTimer >= whipDuration;
         if (animationComplete && whipExtended)
         {
             PullTarget();
-            StopPull();
+            StopPull();                
         }
     }
+    
+    
+    
     private void PullTarget()
     {
+        
         Vector3 offset = new Vector3(0f, 0f, 2f); //TODO: lol fix for different directions
         target.GetPulled(stateMachine.WhipBase.position  + offset, 1);
 
@@ -122,20 +132,7 @@ public class PlayerPullTargetState : PlayerBaseState
 
 
 //IF WE WANT TO USE RAYCAST / NOT JUST POINT CLICK
-/*Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-RaycastHit hit;
-if(Physics.Raycast(ray, out hit, maxDistance))
-{
-    grabPoint = hit.point;
-    PullTarget();
-}
-else
-{
-    grabPoint = cameraPos.position + cameraPos.forward * maxDistance;
-
-    StopPull();
-}*/
+/**/
 
 /*private void Pull(RaycastHit ray)
 {

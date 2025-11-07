@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerBaseState
 {
+
     private Attack attack;
     private float previousFrameTime;
     private bool forceApplied;
@@ -33,7 +34,8 @@ public class PlayerAttackState : PlayerBaseState
             {
                 ApplyForce();
             }
-            if (stateMachine.InputReader.isAttacking)
+            
+            else if (stateMachine.InputReader.isAttacking)
             {
                 ComboAttack(normalisedTime);
             }        

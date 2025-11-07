@@ -18,6 +18,7 @@ public class PlayerTargetState : PlayerBaseState
 
     public override void Enter()
     {
+        //Move to over-the-shoulder camera
         stateMachine.InputReader.isTargeting = true;
         stateMachine.InputReader.TargetEvent += OnCancel;
         stateMachine.InputReader.JumpEvent += OnJump;

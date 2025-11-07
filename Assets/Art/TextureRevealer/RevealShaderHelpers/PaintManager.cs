@@ -22,7 +22,8 @@ public class ColourManager : MonoBehaviour{
     Material extendMaterial;
 
     CommandBuffer command;
-
+    public GameEvent gameEvent;
+    
     public void Awake(){
         if (instance == null)
         {
@@ -32,15 +33,14 @@ public class ColourManager : MonoBehaviour{
         {
             Destroy(gameObject);
         }
-
-        Cursor.visible = false;
+        
+        gameEvent.TriggerEvent();
         
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);
         command = new CommandBuffer();
         command.name = "CommmandBuffer - " + gameObject.name;
     }
-
     public void initTextures(Paintable paintable){
         RenderTexture mask = paintable.getMask();
         RenderTexture uvIslands = paintable.getUVIslands();

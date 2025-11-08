@@ -14,7 +14,12 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public Attack[] Attacks { get; private set; }
+    [field: SerializeField] public Health Health { get; private set; }
     public Transform MainCameraPosition { get; private set; }
+    
+    [field: SerializeField] public float WhipLength;
+    [field: SerializeField] public Transform WhipBase;
+    [field: SerializeField] public LineRenderer WhipLine;
     
     [field: SerializeField] public Targeter Targeter { get; private set; }
 
@@ -24,6 +29,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
 
+    [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public LedgeDetection LedgeDetection { get; private set; }
     
     private bool isVampire;
@@ -34,6 +40,23 @@ public class PlayerStateMachine : StateMachine
         MainCameraPosition = Camera.main.transform;
         SwitchState(new PlayerMoveState(this));
         InputReader.TransformEvent += OnTransform;
+    }
+    
+    private void OnEnable()
+    {
+        Health.OnTakeDamage += HandleTakeDamage;
+        Health.OnDeath += HandleDeath;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnTakeDamage -= HandleTakeDamage;
+        Health.OnDeath -= HandleDeath;
+    }
+
+    private void HandleTakeDamage()
+    {
+        SwitchState(new PlayerImpactState(this));
     }
 
     private void OnTransform()
@@ -50,5 +73,10 @@ public class PlayerStateMachine : StateMachine
             BatMesh.SetActive(false);
             isVampire = true;
         }
+    }
+
+    private void HandleDeath()
+    {
+        SwitchState(new PlayerDeadState(this));
     }
 }

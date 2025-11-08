@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerBaseState
 {
+    private readonly int Uppercut = Animator.StringToHash("Uppercut"); //for camera change
+
     private readonly int JumpRef = Animator.StringToHash("Jump");
     private const float CrossFadeDuration = 0.1f;
     private Vector3 momentum;
@@ -37,12 +39,17 @@ public class PlayerJumpState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         Move(momentum, deltaTime);
-
-        if (stateMachine.CharacterController.velocity.y <= 0f)
+        if (stateMachine.InputReader.isAttacking) 
+        {
+            stateMachine.Animator.SetBool("isAttacking", true);
+        }
+        else if (stateMachine.CharacterController.velocity.y <= 0f)
         {
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
             return;
         }
+
+
         
         FaceTarget();
     }

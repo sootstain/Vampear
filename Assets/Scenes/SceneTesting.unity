@@ -263,7 +263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &100183977
 RectTransform:
   m_ObjectHideFlags: 0
@@ -280,10 +280,10 @@ RectTransform:
   - {fileID: 965936352}
   m_Father: {fileID: 1363173241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 72, y: -324}
-  m_SizeDelta: {x: 1000, y: -826}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 332, y: -669.7147}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &100183978
 MonoBehaviour:
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 1
+  m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!114 &100183979
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0.392}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   maxRadius: 10
   growthSpeed: 3
   hardness: 1
-  strength: 10
+  strength: 0.2
   paintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &739667792
 Transform:
@@ -1521,10 +1521,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 965936352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 904.41, y: 56.7512}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 427.445, y: -81.23625}
+  m_SizeDelta: {x: 834.89, y: 82.0325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &868778786
 MonoBehaviour:
@@ -1573,8 +1573,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2101,10 +2101,10 @@ RectTransform:
   - {fileID: 868778785}
   m_Father: {fileID: 100183977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 914.4124, y: 100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 532.8101, y: -22.097}
+  m_SizeDelta: {x: 844.8887, y: 44.194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &965936353
 MonoBehaviour:
@@ -2120,7 +2120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 10
-    m_Right: 10
+    m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
@@ -3248,10 +3248,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 965936352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 904.41, y: 40.22}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 219.29855, y: -20.11}
+  m_SizeDelta: {x: 418.5971, y: 40.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1765517189
 MonoBehaviour:
@@ -3300,8 +3300,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3978,10 +3978,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 100183977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 86.1379, y: 100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 55.1829, y: -66.2934}
+  m_SizeDelta: {x: 110.3658, y: 132.5868}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1863810488
 MonoBehaviour:
@@ -4197,7 +4197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2077252589
 Transform:
   m_ObjectHideFlags: 0
@@ -4225,7 +4225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c987f32c695b84448850c3c8eb714a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OverlapRevealer
-  radius: 3
+  radius: 5
   hardness: 0.5
   strength: 1
   paintColor: {r: 1, g: 1, b: 1, a: 1}

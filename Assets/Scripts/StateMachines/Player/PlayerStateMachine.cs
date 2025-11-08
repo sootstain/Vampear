@@ -31,6 +31,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public LedgeDetection LedgeDetection { get; private set; }
     
+    [field: SerializeField] public float interactionDistance;
+    
     private bool isVampire;
     private void Start()
     {

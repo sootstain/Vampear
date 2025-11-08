@@ -1211,29 +1211,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7776443282522460338, guid: ab21c9c361e222542b61b44062cae9a0, type: 3}
   m_PrefabInstance: {fileID: 3913264605386673863}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1196396626 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2754603314407938421, guid: ab21c9c361e222542b61b44062cae9a0, type: 3}
-  m_PrefabInstance: {fileID: 3913264605386673863}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1196396629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196396626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7362d5a2f8ea3347bfcc808a1e9290e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineAutoFocus
-  FocusTarget: 2
-  CustomTarget: {fileID: 0}
-  FocusDepthOffset: 0
-  Damping: 0.2
-  AutoDetectionRadius: 0.02
-  m_ComputeShader: {fileID: 0}
 --- !u!1 &1231393421
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,9 +2927,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3595745195789594173, guid: ab21c9c361e222542b61b44062cae9a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1026982673}
-    - targetCorrespondingSourceObject: {fileID: 2754603314407938421, guid: ab21c9c361e222542b61b44062cae9a0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1196396629}
   m_SourcePrefab: {fileID: 100100000, guid: ab21c9c361e222542b61b44062cae9a0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

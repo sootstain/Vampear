@@ -22,8 +22,7 @@ public class ColourManager : MonoBehaviour{
     Material extendMaterial;
 
     CommandBuffer command;
-    public GameEvent gameEvent;
-    
+
     public void Awake(){
         if (instance == null)
         {
@@ -33,8 +32,6 @@ public class ColourManager : MonoBehaviour{
         {
             Destroy(gameObject);
         }
-        
-        gameEvent.TriggerEvent();
         
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);

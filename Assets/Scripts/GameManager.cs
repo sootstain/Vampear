@@ -10,12 +10,14 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+        
+        startingEvent.TriggerEvent();
     }
 
     void Start()
     {
         Debug.Log("Starting the Level");
         Cursor.visible = false;
-        startingEvent.TriggerEvent();
+        
     }
 }

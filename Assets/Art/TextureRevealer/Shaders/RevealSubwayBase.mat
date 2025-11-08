@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RevealWeeb
+  m_Name: RevealSubwayBase
   m_Shader: {fileID: -6465566751694194690, guid: b82c18d7180c74240a740e20e5a75c48, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -50,7 +50,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_41271c3c5f484ca2a435c65087a81705:
-        m_Texture: {fileID: 2800000, guid: 66f06726158899242adaf95180360b7b, type: 3}
+        m_Texture: {fileID: 2800000, guid: a3aa7c4721983194fbaa5ff83d60f337, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTexture:

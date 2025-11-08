@@ -5,11 +5,14 @@ using UnityEngine.InputSystem;
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     public bool isAttacking { get; private set; }
+    
+    public bool isTargeting { get; set; }
+
     public Vector2 MovementValue { get; private set; }
     public event Action JumpEvent;
     public event Action DodgeEvent;
     public event Action TargetEvent;
-    public event Action CancelTarget;
+    public event Action PullEvent;
 
     public event Action TransformEvent;
     
@@ -38,6 +41,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (isTargeting)
+        {
+            
+            PullEvent?.Invoke();
+            return;
+        }
+        
         //Doing this way instead of event so that we can hold down attack to continue the combo
         if (context.performed) isAttacking = true;
         else if (context.canceled) isAttacking = false;
@@ -90,11 +100,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         TargetEvent?.Invoke();
     }
     
-    public void OnCancel(InputAction.CallbackContext context)
+    public void OnPull(InputAction.CallbackContext context)
     {
-        //When right click let go of?
-        //if(!context.performed) return;
-        //CancelTarget?.Invoke();
+        if(!context.performed) return;
+        PullEvent?.Invoke();
     }
 
     public void OnTransform(InputAction.CallbackContext context)

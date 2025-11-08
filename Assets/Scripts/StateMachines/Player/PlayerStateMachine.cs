@@ -16,6 +16,10 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Attack[] Attacks { get; private set; }
     public Transform MainCameraPosition { get; private set; }
     
+    [field: SerializeField] public float WhipLength;
+    [field: SerializeField] public Transform WhipBase;
+    [field: SerializeField] public LineRenderer WhipLine;
+    
     [field: SerializeField] public Targeter Targeter { get; private set; }
 
     [field: SerializeField] public GameObject PlayerMesh { get; private set; }
@@ -24,6 +28,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
 
+    [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public LedgeDetection LedgeDetection { get; private set; }
     
     private bool isVampire;

@@ -38,7 +38,6 @@ public class ColourManager : MonoBehaviour{
         command = new CommandBuffer();
         command.name = "CommmandBuffer - " + gameObject.name;
     }
-
     public void initTextures(Paintable paintable){
         RenderTexture mask = paintable.getMask();
         RenderTexture uvIslands = paintable.getUVIslands();

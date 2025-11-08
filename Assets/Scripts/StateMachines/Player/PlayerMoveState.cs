@@ -45,8 +45,7 @@ public class PlayerMoveState : PlayerBaseState
     
     private void OnTarget()
     {
-        if (!stateMachine.Targeter.SelectTarget()) return; //no targets in range to target
-        
+        if (!stateMachine.Targeter.SelectTarget()) return;
         stateMachine.SwitchState(new PlayerTargetState(stateMachine));
     }
 

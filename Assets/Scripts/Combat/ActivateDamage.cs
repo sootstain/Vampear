@@ -13,6 +13,6 @@ public class DealDamage : MonoBehaviour
     
     public void DisableDamageDealing(int hand)
     {
-        catchableHands[hand].SetActive(true);
+        catchableHands[hand].SetActive(false);
     }
 }

@@ -14,6 +14,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public Attack[] Attacks { get; private set; }
+    [field: SerializeField] public Health Health { get; private set; }
     public Transform MainCameraPosition { get; private set; }
     
     [field: SerializeField] public Targeter Targeter { get; private set; }
@@ -35,6 +36,23 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerMoveState(this));
         InputReader.TransformEvent += OnTransform;
     }
+    
+    private void OnEnable()
+    {
+        Health.OnTakeDamage += HandleTakeDamage;
+        Health.OnDeath += HandleDeath;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnTakeDamage -= HandleTakeDamage;
+        Health.OnDeath -= HandleDeath;
+    }
+
+    private void HandleTakeDamage()
+    {
+        SwitchState(new PlayerImpactState(this));
+    }
 
     private void OnTransform()
     {
@@ -50,5 +68,10 @@ public class PlayerStateMachine : StateMachine
             BatMesh.SetActive(false);
             isVampire = true;
         }
+    }
+
+    private void HandleDeath()
+    {
+        SwitchState(new PlayerDeadState(this));
     }
 }

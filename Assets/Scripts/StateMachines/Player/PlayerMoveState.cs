@@ -7,11 +7,8 @@ public class PlayerMoveState : PlayerBaseState
     private readonly int MoveBlendTree = Animator.StringToHash("MoveBlendTree"); //for camera change
 
     private bool shouldFade;
-    
     private const float CrossFadeDuration = 0.1f;
-    
     private float timer;
-    
     private const float SnapAngleThreshold = 120f;
     private const float RotationSpeed = 20f;
     public PlayerMoveState(PlayerStateMachine stateMachine, bool shouldFade = true) : base(stateMachine)
@@ -23,6 +20,7 @@ public class PlayerMoveState : PlayerBaseState
     {
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.DashEvent += OnDash;
         
         stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0f); //reset
         
@@ -41,6 +39,7 @@ public class PlayerMoveState : PlayerBaseState
     {
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.DashEvent -= OnDash;
     }
     
     private void OnTarget()
@@ -56,6 +55,8 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        stateMachine.UpdateDashCooldown(deltaTime);
+        
         if (stateMachine.InputReader.isAttacking)
         {
             stateMachine.SwitchState(new PlayerAttackState(stateMachine, 0));
@@ -113,6 +114,13 @@ public class PlayerMoveState : PlayerBaseState
                     rotationAmount
                 );
             }
+        }
+    }
+    private void OnDash()
+    {
+        if (stateMachine.HasDashAvailable)
+        {
+            stateMachine.SwitchState(new PlayerDashState(stateMachine));
         }
     }
 }

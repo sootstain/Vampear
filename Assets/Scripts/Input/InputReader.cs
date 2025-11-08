@@ -10,7 +10,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public Vector2 MovementValue { get; private set; }
     public event Action JumpEvent;
-    public event Action DodgeEvent;
+    public event Action DashEvent;
     public event Action TargetEvent;
     public event Action PullEvent;
 
@@ -83,16 +83,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         throw new System.NotImplementedException();
     }
 
-    public void OnSprint(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnDodge(InputAction.CallbackContext context)
+    public void OnDash(InputAction.CallbackContext context)
     {
         if (!context.performed) return; 
-        DodgeEvent?.Invoke();
+        DashEvent?.Invoke();
     }
+    
 
     public void OnTarget(InputAction.CallbackContext context)
     {

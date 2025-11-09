@@ -4,14 +4,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerFreeAimState : PlayerBaseState
 {
+    
+    private GameObject sphere;
+    private readonly int Aim = Animator.StringToHash("SwingWait");
+    
     public PlayerFreeAimState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        GameObject sphere = stateMachine.visualSpherePrefab;
+        sphere = stateMachine.visualSpherePrefab;
     }
-
+    
     public override void Enter()
     {
         stateMachine.InputReader.AimEvent += OnAimCancel;
+        stateMachine.Animator.Play(Aim);
+        stateMachine.Animator.SetBool("ThrewBell", false);
     }
 
     public override void Exit()
@@ -43,26 +49,12 @@ public class PlayerFreeAimState : PlayerBaseState
                 }
                 else
                 {
-                    var sphere = Object.Instantiate(stateMachine.visualSpherePrefab, hitInfo.point, Quaternion.identity);
-                    stateMachine.SwitchState(new PlayerMoveState(stateMachine));
+                    
+                    stateMachine.SwitchState(new PlayerThrowBellState(stateMachine, hitInfo.point));
+                
                 }
             }
             //else sphere time baby
         }
     }
 }
-
-//IF WE WANT TO USE RAYCAST / NOT JUST POINT CLICK
-/**/
-
-/*private void Pull(RaycastHit ray)
-{
-    //non-target method
-    ray.rigidbody.gameObject.TryGetComponent(out Target target);
-    if(target != null)
-    {
-        Vector3 offset = new Vector3(0f, 0f, 2f); //TODO: lol fix for different directions
-        target.GetPulled(stateMachine.WhipBase.position + offset, 1);
-    }
-
-}*/

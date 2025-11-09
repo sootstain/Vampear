@@ -34,6 +34,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float interactionDistance;
     
     [field: SerializeField] public GameObject visualSpherePrefab;
+
+    [field: SerializeField] public SpriteRenderer visualTarget;
     
     private bool isVampire;
     private void Start()

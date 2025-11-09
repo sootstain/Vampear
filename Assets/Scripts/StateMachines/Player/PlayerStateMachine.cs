@@ -36,6 +36,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public GameObject visualSpherePrefab;
 
     [field: SerializeField] public SpriteRenderer visualTarget;
+
+    [field: SerializeField] public GameObject BellGameObject;
     
     private bool isVampire;
     private void Start()

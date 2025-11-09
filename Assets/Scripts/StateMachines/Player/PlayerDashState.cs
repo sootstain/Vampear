@@ -9,7 +9,9 @@ public class PlayerDashState : PlayerBaseState
     private const float DashSpeed = 20f;
     private float dashTimer;
     private Vector3 dashDirection;
-
+    private bool hasAttacked = false;
+    // It is just the 3rd attack of the attack slash
+    private int slash3Index = 2;
     public PlayerDashState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -28,20 +30,18 @@ public class PlayerDashState : PlayerBaseState
     {
         Move(dashDirection * DashSpeed, deltaTime);
         dashTimer -= deltaTime;
+        if (stateMachine.InputReader.isAttacking && !hasAttacked)
+        {
+            hasAttacked = true;
+            
+            // Switch to attack state with Slash 3
+            stateMachine.SwitchState(new PlayerDashAttackState(stateMachine, slash3Index, dashDirection, dashTimer));;
+            return;
+        }
+        
         if (dashTimer <= 0f)
         {
-            if (stateMachine.InputReader.isAttacking)
-            {
-                stateMachine.SwitchState(new PlayerAttackState(stateMachine, 0));
-            }
-            else if (stateMachine.InputReader.MovementValue != Vector2.zero)
-            {
-                stateMachine.SwitchState(new PlayerMoveState(stateMachine));
-            }
-            else
-            {
-                stateMachine.SwitchState(new PlayerMoveState(stateMachine));
-            }
+            stateMachine.SwitchState(new PlayerMoveState(stateMachine));
         }
     }
 
@@ -57,4 +57,5 @@ public class PlayerDashState : PlayerBaseState
         Vector2 input = stateMachine.InputReader.MovementValue;
         return stateMachine.transform.forward;
     }
+    
 }

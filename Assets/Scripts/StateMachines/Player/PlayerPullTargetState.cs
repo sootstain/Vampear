@@ -125,19 +125,3 @@ public class PlayerPullTargetState : PlayerBaseState
         stateMachine.SwitchState(new PlayerMoveState(stateMachine));
     }
 }
-
-
-//IF WE WANT TO USE RAYCAST / NOT JUST POINT CLICK
-/**/
-
-/*private void Pull(RaycastHit ray)
-{
-    //non-target method
-    ray.rigidbody.gameObject.TryGetComponent(out Target target);
-    if(target != null)
-    {
-        Vector3 offset = new Vector3(0f, 0f, 2f); //TODO: lol fix for different directions
-        target.GetPulled(stateMachine.WhipBase.position + offset, 1);
-    }
-
-}*/

@@ -10,7 +10,7 @@ public class Targeter : MonoBehaviour
     private Camera mainCamera;
     private List<Target> targets = new List<Target>();
 
-    public Target CurrentTarget { get; private set; }
+    public Target CurrentTarget { get; set; }
 
     private void Start()
     {

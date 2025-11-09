@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Debug.Log("Starting the Level");
-        Cursor.visible = false;
+        //Cursor.visible = false;
         
     }
 }

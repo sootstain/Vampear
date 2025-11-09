@@ -21,6 +21,7 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.InputReader.AimEvent += OnAim;
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.JumpEvent += OnJump;
         
@@ -39,6 +40,7 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.InputReader.AimEvent -= OnAim;
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.JumpEvent -= OnJump;
     }
@@ -54,6 +56,11 @@ public class PlayerMoveState : PlayerBaseState
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
 
+    private void OnAim()
+    {
+        stateMachine.SwitchState(new PlayerFreeAimState(stateMachine));
+    }
+    
     public override void Tick(float deltaTime)
     {
         if (stateMachine.InputReader.isAttacking)

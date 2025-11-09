@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GrowingPaintSphere : MonoBehaviour
@@ -57,6 +58,13 @@ public class GrowingPaintSphere : MonoBehaviour
                 ColourManager.instance.paint(p, closestPoint, paintRadius, hardness, strength, paintColor, fadeValue);
             }
         }
+
+        //DISABLED FOR NOW, can choose between floor looking right or cube looking right, not both :(
+        /*if (currentScale == maxRadius)
+        {
+            StartCoroutine(WaitALiLBit());
+            Destroy(gameObject);
+        }*/
         
         
     }
@@ -72,4 +80,9 @@ public class GrowingPaintSphere : MonoBehaviour
 
         PaintSphere();
     }
+
+    /*private IEnumerator WaitALiLBit()
+    {
+        yield return new WaitForSeconds(5f);
+    }*/
 }

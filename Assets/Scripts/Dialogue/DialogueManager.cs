@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -10,17 +8,33 @@ public class DialogueManager : MonoBehaviour
     //Making this into a singleton as well :)
     public static DialogueManager Instance;
 
-    public GameObject dialoguePanel;
-    public TextMeshProUGUI speakerText;
-    public TextMeshProUGUI dialogueText;
-    public Image characterImage;
+    private GameObject dialogueContainer;
+    public GameObject VNDialogueContainer;
+    public GameObject DSDialogueContainer;
+    
+    //For switching
+    private GameObject dialoguePanel;
+    private TextMeshProUGUI speakerText;
+    private TextMeshProUGUI dialogueText;
+    private Image characterImage;
+    
+    //For the DS Version, to link up in Inspector
+    public GameObject DSDialoguePanel;
+    public TextMeshProUGUI DSSpeakerText;
+    public TextMeshProUGUI DSDialogueText;
+    public Image DSCharacterImage;
 
+    //For the VN Version - might clean up later
+    public GameObject VNDialoguePanel;
+    public TextMeshProUGUI VNSpeakerText;
+    public TextMeshProUGUI VNDialogueText;
+    public Image VNCharacterImage;
+    
     public float typeSpeed = 0.03f;
     //public float delayBetweenLines = 0.5f;
 
     private DialogueSO currentDialogue;
     private int currentLineIndex = 0;
-    private bool dialogueActive = false;
 
     void Awake()
     {
@@ -28,25 +42,50 @@ public class DialogueManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+        
+        VNDialogueContainer.SetActive(false);
+        DSDialogueContainer.SetActive(false);
     }
-
-    void Start()
-    {
-        //if (dialoguePanel != null)
-        //    dialoguePanel.SetActive(false);
-    }
-
+    
     public void StartDialogue(DialogueSO dialogue)
     {
         Debug.Log("Starting the dialogue 2");
         currentDialogue = dialogue;
         currentLineIndex = 0;
-        dialogueActive = true;
 
-        if (dialoguePanel != null)
-            dialoguePanel.SetActive(true);
-
+        if (dialogue.DialogueType == DialogueType.ShortDSStyle)
+        {
+            DSSetup();
+        }
+        else if (dialogue.DialogueType == DialogueType.VisualNovelStyle)
+        {
+            VNSetup();
+        }
         DisplayLine();
+    }
+
+    private void DSSetup()
+    {
+        VNDialogueContainer.SetActive(false);
+        DSDialogueContainer.SetActive(true);
+        
+        dialogueContainer = DSDialogueContainer;
+        dialoguePanel = DSDialoguePanel;
+        speakerText = DSSpeakerText;
+        dialogueText = DSDialogueText;
+        characterImage = DSCharacterImage;
+    }
+
+    private void VNSetup()
+    {
+        DSDialogueContainer.SetActive(false);
+        VNDialogueContainer.SetActive(true);
+        
+        dialogueContainer = VNDialogueContainer;
+        dialoguePanel = VNDialoguePanel;
+        speakerText = VNSpeakerText;
+        dialogueText = VNDialogueText;
+        characterImage = VNCharacterImage;
     }
 
     public void DisplayLine()
@@ -82,8 +121,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        dialogueActive = false;
-        dialoguePanel.SetActive(false);
+        dialogueContainer.SetActive(false);
         currentDialogue = null;
     }
 }

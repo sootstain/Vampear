@@ -1,12 +1,13 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerFreeAimState : PlayerBaseState
 {
     
     private GameObject sphere;
-    private readonly int Aim = Animator.StringToHash("SwingWait");
+    private readonly int Shoot = Animator.StringToHash("ThrowDown");
     
     public PlayerFreeAimState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -16,12 +17,12 @@ public class PlayerFreeAimState : PlayerBaseState
     public override void Enter()
     {
         stateMachine.InputReader.AimEvent += OnAimCancel;
-        stateMachine.Animator.Play(Aim);
-        stateMachine.Animator.SetBool("ThrewBell", false);
+        stateMachine.Animator.Play(Shoot);
     }
 
     public override void Exit()
     {
+        stateMachine.visualTarget.enabled = false;
         stateMachine.InputReader.AimEvent -= OnAimCancel;
     }
 
@@ -38,6 +39,10 @@ public class PlayerFreeAimState : PlayerBaseState
         
         if (Physics.Raycast(rayOrigin, out hitInfo))
         {
+            stateMachine.visualTarget.enabled = true;
+            stateMachine.visualTarget.transform.LookAt(stateMachine.MainCameraPosition);
+            stateMachine.visualTarget.transform.position = hitInfo.point;
+            
             //Instantiate target
             if (stateMachine.InputReader.isAttacking)
             {

@@ -38,6 +38,14 @@ public class PlayerStateMachine : StateMachine
     
     public bool IsInvincible { get; set; }
     
+    [field: SerializeField] public float interactionDistance;
+    
+    [field: SerializeField] public GameObject visualSpherePrefab;
+
+    [field: SerializeField] public SpriteRenderer visualTarget;
+
+    [field: SerializeField] public GameObject BellGameObject;
+    
     private bool isVampire;
     private void Start()
     {

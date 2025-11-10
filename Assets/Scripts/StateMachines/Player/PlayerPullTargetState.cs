@@ -101,7 +101,6 @@ public class PlayerPullTargetState : PlayerBaseState
             whipAnimationTimer += deltaTime;
             DrawWhip();
         }
-
         
         bool animationComplete = stateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f;
         bool whipExtended = whipAnimationTimer >= whipDuration;
@@ -112,14 +111,11 @@ public class PlayerPullTargetState : PlayerBaseState
         }
     }
     
-    
-    
     private void PullTarget()
     {
-        
-        Vector3 offset = new Vector3(0f, 0f, 2f); //TODO: lol fix for different directions
-        target.GetPulled(stateMachine.WhipBase.position  + offset, 1);
-
+        Vector3 pullPosNorm = (stateMachine.WhipBase.position - target.transform.position).normalized;
+        Vector3 targetPos = stateMachine.WhipBase.position - (pullPosNorm * 1f);
+        target.GetPulled(targetPos, 1);
     }
 
     private void StopPull()
@@ -129,19 +125,3 @@ public class PlayerPullTargetState : PlayerBaseState
         stateMachine.SwitchState(new PlayerMoveState(stateMachine));
     }
 }
-
-
-//IF WE WANT TO USE RAYCAST / NOT JUST POINT CLICK
-/**/
-
-/*private void Pull(RaycastHit ray)
-{
-    //non-target method
-    ray.rigidbody.gameObject.TryGetComponent(out Target target);
-    if(target != null)
-    {
-        Vector3 offset = new Vector3(0f, 0f, 2f); //TODO: lol fix for different directions
-        target.GetPulled(stateMachine.WhipBase.position + offset, 1);
-    }
-
-}*/

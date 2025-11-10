@@ -183,18 +183,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pull"",
+                    ""name"": ""Transform"",
                     ""type"": ""Button"",
-                    ""id"": ""fe1bbdfe-97ca-4ffe-9de6-2ec3cac01574"",
+                    ""id"": ""791d829a-6419-45bd-bf24-8a44ec882a3b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Transform"",
+                    ""name"": ""EnterFreeAim"",
                     ""type"": ""Button"",
-                    ""id"": ""791d829a-6419-45bd-bf24-8a44ec882a3b"",
+                    ""id"": ""cce0989f-aab5-4445-8fd5-5bc462cf4a3d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -568,7 +568,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""213867a0-7dcd-4157-b3c4-4080f8dadae5"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -589,23 +589,23 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1b721d84-4e2f-45bf-a9e2-7b6a2b689873"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pull"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""66fc2466-eb84-4647-873b-c5ff674f889e"",
                     ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Transform"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b4d3782-109a-4fee-a5db-ce3bdce88cc2"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnterFreeAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1582,8 +1582,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
-        m_Player_Pull = m_Player.FindAction("Pull", throwIfNotFound: true);
         m_Player_Transform = m_Player.FindAction("Transform", throwIfNotFound: true);
+        m_Player_EnterFreeAim = m_Player.FindAction("EnterFreeAim", throwIfNotFound: true);
         // Bat
         m_Bat = asset.FindActionMap("Bat", throwIfNotFound: true);
         m_Bat_Move = m_Bat.FindAction("Move", throwIfNotFound: true);
@@ -1697,8 +1697,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Target;
-    private readonly InputAction m_Player_Pull;
     private readonly InputAction m_Player_Transform;
+    private readonly InputAction m_Player_EnterFreeAim;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1751,13 +1751,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Target => m_Wrapper.m_Player_Target;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Pull".
-        /// </summary>
-        public InputAction @Pull => m_Wrapper.m_Player_Pull;
-        /// <summary>
         /// Provides access to the underlying input action "Player/Transform".
         /// </summary>
         public InputAction @Transform => m_Wrapper.m_Player_Transform;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/EnterFreeAim".
+        /// </summary>
+        public InputAction @EnterFreeAim => m_Wrapper.m_Player_EnterFreeAim;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1814,12 +1814,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Target.started += instance.OnTarget;
             @Target.performed += instance.OnTarget;
             @Target.canceled += instance.OnTarget;
-            @Pull.started += instance.OnPull;
-            @Pull.performed += instance.OnPull;
-            @Pull.canceled += instance.OnPull;
             @Transform.started += instance.OnTransform;
             @Transform.performed += instance.OnTransform;
             @Transform.canceled += instance.OnTransform;
+            @EnterFreeAim.started += instance.OnEnterFreeAim;
+            @EnterFreeAim.performed += instance.OnEnterFreeAim;
+            @EnterFreeAim.canceled += instance.OnEnterFreeAim;
         }
 
         /// <summary>
@@ -1861,12 +1861,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Target.started -= instance.OnTarget;
             @Target.performed -= instance.OnTarget;
             @Target.canceled -= instance.OnTarget;
-            @Pull.started -= instance.OnPull;
-            @Pull.performed -= instance.OnPull;
-            @Pull.canceled -= instance.OnPull;
             @Transform.started -= instance.OnTransform;
             @Transform.performed -= instance.OnTransform;
             @Transform.canceled -= instance.OnTransform;
+            @EnterFreeAim.started -= instance.OnEnterFreeAim;
+            @EnterFreeAim.performed -= instance.OnEnterFreeAim;
+            @EnterFreeAim.canceled -= instance.OnEnterFreeAim;
         }
 
         /// <summary>
@@ -2400,19 +2400,19 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTarget(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Pull" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPull(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Transform" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTransform(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EnterFreeAim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEnterFreeAim(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Bat" which allows adding and removing callbacks.

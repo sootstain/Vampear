@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 8178310463383519404}
   - component: {fileID: 6625304919605211203}
   m_Layer: 0
-  m_Name: PLAYER
+  m_Name: MixamoPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

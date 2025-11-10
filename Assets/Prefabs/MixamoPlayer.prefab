@@ -608,13 +608,14 @@ GameObject:
   - component: {fileID: 8178310463383519404}
   - component: {fileID: 6625304919605211203}
   - component: {fileID: 2899006977240791605}
+  - component: {fileID: 2171813750450893254}
   m_Layer: 0
   m_Name: MixamoPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1944734525016631441
 Transform:
   m_ObjectHideFlags: 0
@@ -723,7 +724,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <LedgeDetection>k__BackingField: {fileID: 2899006977240791605}
+  <LedgeDetection>k__BackingField: {fileID: 2171813750450893254}
   <DashCooldown>k__BackingField: 1
   interactionDistance: 0
   visualSpherePrefab: {fileID: 5407649885477146253, guid: bbb21eabbc936694999f587f7cda80b3, type: 3}
@@ -783,6 +784,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
 --- !u!114 &2899006977240791605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595745195789594173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450749b197a07b84f92f705c10aa9e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LedgeDetection
+  characterController: {fileID: 2067082449507027229}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  upperDetectionHeight: 1.5
+  lowerDetectionHeight: 0.7
+  forwardDetectionOffset: 0.1
+  verticalHangOffset: 0.2
+  horizontalHangOffset: 0.4
+--- !u!114 &2171813750450893254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1290,7 +1312,7 @@ Transform:
   m_GameObject: {fileID: 6211887850578276201}
   serializedVersion: 2
   m_LocalRotation: {x: -0.1053508, y: 0.000000029636482, z: -0.000000003139699, w: 0.9944352}
-  m_LocalPosition: {x: -0.000000119209176, y: -0.00000011920929, z: 7.1589108}
+  m_LocalPosition: {x: -0.00000023841847, y: -0.00000011920929, z: 7.1589108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

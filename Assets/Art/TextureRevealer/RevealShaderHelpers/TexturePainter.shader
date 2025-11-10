@@ -64,7 +64,7 @@
                 float4 result;
                 if (_Fade > 0.5) //just as a test for now; set to arbitrary 0.01 alpha, to eventually make with sound
                 {
-                    float4 transparentColor = float4(0, 0, 0, 0.01);
+                    float4 transparentColor = float4(0, 0, 0, 0.1);
                     result = lerp(col, transparentColor, edge);
                 }
                 else

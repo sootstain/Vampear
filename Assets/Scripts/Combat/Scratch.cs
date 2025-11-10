@@ -25,6 +25,12 @@ public class Scratch : MonoBehaviour
             Debug.Log("Take damage!");
             health.TakeDamage(10);
         }
+        
+        if (other.TryGetComponent(out ForceReceiver forceReceiver))
+        {
+            Vector3 direction = (other.transform.position - playerCollider.transform.position).normalized;
+            forceReceiver.AddForce(direction * 5); //knockback force, currently arbitrary
+        }
 
     }
 }

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowDeathScreen()
     {
+        Pause();
         //Add fade scene transition
         deathScreen.SetActive(true);
     }

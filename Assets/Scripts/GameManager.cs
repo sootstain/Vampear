@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
         
-        deathScreen.SetActive(false);
+        //deathScreen.SetActive(false);
         if(startingEvent != null) startingEvent.TriggerEvent();
     }
 

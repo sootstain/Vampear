@@ -2474,13 +2474,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4750986864715964598, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+      propertyPath: visualTarget
+      value: 
+      objectReference: {fileID: 824010584}
+    - target: {fileID: -4750986864715964598, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+      propertyPath: <LedgeDetection>k__BackingField
+      value: 
+      objectReference: {fileID: 1345841433}
     - target: {fileID: 1944734525016631441, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6326294
       objectReference: {fileID: 0}
     - target: {fileID: 1944734525016631441, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.004
+      value: 0.044
       objectReference: {fileID: 0}
     - target: {fileID: 1944734525016631441, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2518,19 +2526,47 @@ PrefabInstance:
       propertyPath: m_Name
       value: MixamoPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 6675381114504022685, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.00000023841847
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675381114504022685, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.00000011920929
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3119058926282635243, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+    - {fileID: 2003386320599748718, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3595745195789594173, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1345841433}
   m_SourcePrefab: {fileID: 100100000, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+--- !u!1 &1345841431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3595745195789594173, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+  m_PrefabInstance: {fileID: 1345841430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &1345841432 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 2067082449507027229, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+  m_PrefabInstance: {fileID: 1345841430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1345841433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345841431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450749b197a07b84f92f705c10aa9e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LedgeDetection
+  characterController: {fileID: 1345841432}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  upperDetectionHeight: 1.5
+  lowerDetectionHeight: 0.7
+  forwardDetectionOffset: 0.1
+  verticalHangOffset: 0.2
+  horizontalHangOffset: 0.4
 --- !u!1 &1363173237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2646,7 +2682,7 @@ GameObject:
   - component: {fileID: 1509113633}
   - component: {fileID: 1509113632}
   - component: {fileID: 1509113631}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3628,7 +3664,7 @@ Transform:
   m_GameObject: {fileID: 1823688464}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11449435, y: 0.06935471, z: -0.0080131, w: 0.99096763}
-  m_LocalPosition: {x: 3.5856295, y: 2.3055058, z: -3.8052294}
+  m_LocalPosition: {x: 3.5856295, y: 2.3535056, z: -3.8052294}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3974,7 +4010,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851331011}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c900f5234f5178a4b82bf48eb145e6d5, type: 3}
   m_Name: 
@@ -4025,12 +4061,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851331011}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab083c86a7c30484ebf277332ebef9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   startingEvent: {fileID: 11400000, guid: a6bd4be418fbbe647bc5765136d8152d, type: 2}
+  deathScreen: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  isPaused: 0
 --- !u!1 &1860091953
 GameObject:
   m_ObjectHideFlags: 0
@@ -4043,7 +4082,7 @@ GameObject:
   - component: {fileID: 1860091957}
   - component: {fileID: 1860091956}
   - component: {fileID: 1860091955}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4058,13 +4097,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860091953}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.2319309, y: -0, z: -0, w: 0.9727323}
-  m_LocalPosition: {x: 12.7783, y: 2.48, z: -5.52}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.7783, y: 2.01, z: -5.52}
   m_LocalScale: {x: 3.2416232, y: 0.5625664, z: 1.8399962}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1231393422}
-  m_LocalEulerAnglesHint: {x: -26.822, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1860091955
 BoxCollider:
   m_ObjectHideFlags: 0

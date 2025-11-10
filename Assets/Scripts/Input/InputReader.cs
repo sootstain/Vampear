@@ -7,6 +7,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool isAttacking { get; private set; }
     
     public bool isTargeting { get; set; }
+    
+    public bool isJumping { get; private set; }
 
     public Vector2 MovementValue { get; private set; }
     public event Action JumpEvent;
@@ -68,7 +70,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (context.performed)
         {
+            isJumping = true;
             JumpEvent?.Invoke();
+        }
+        else
+        {
+            isJumping = false;
         }
     }
 

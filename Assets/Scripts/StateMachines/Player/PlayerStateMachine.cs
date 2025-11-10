@@ -35,6 +35,8 @@ public class PlayerStateMachine : StateMachine
     private bool isVampire;
     private void Start()
     {
+        Debug.Log("StateMachine LedgeDetection: " + (LedgeDetection != null ? "ASSIGNED" : "NULL!!!"));
+
         if (PlayerMesh.activeInHierarchy) isVampire = true;
         
         MainCameraPosition = Camera.main.transform;

@@ -91,11 +91,8 @@ AnimatorStateMachine:
     m_State: {fileID: 1595419942867568599}
     m_Position: {x: 280, y: 340, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -1509771555808562392}
-    m_Position: {x: 280, y: 410, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 8303056128997587812}
-    m_Position: {x: 560, y: 400, z: 0}
+    m_Position: {x: 540, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -645903003189577042}
     m_Position: {x: 280, y: 170, z: 0}
@@ -130,32 +127,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -3638496451386047531}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-1509771555808562392
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: ClimbUp
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 63f1b6b74f926d947bc93184ea31488c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -299,7 +270,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6d3068877c0cba34783baf4bf05a5d25, type: 2}
+  m_Motion: {fileID: -4233574706673202557, guid: 75318b04ccd65d5439c199f84d4f520d, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -408,7 +379,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6c78ae9c9053e33438c4c61cadc928f4, type: 2}
+  m_Motion: {fileID: 5408501491111534996, guid: 75318b04ccd65d5439c199f84d4f520d, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

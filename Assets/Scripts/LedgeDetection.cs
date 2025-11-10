@@ -7,24 +7,25 @@ public class LedgeDetection : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     
     [Header("Detection Settings")]
-    [SerializeField] private float upperDetectionHeight = 1.5f;
-    [SerializeField] private float lowerDetectionHeight = 0.7f;
+    [SerializeField] private float upperDetectionHeight = 3f;
+    [SerializeField] private float lowerDetectionHeight = 2.5f;
     [SerializeField] private float forwardDetectionOffset = 0.1f;
     //Controls the forward raycast in front. The larger the value the more you can detect ahead of you
     //This can detect edges inside the walls or cubes
-    [SerializeField] private float forwardReach = 1.5f;
+    [SerializeField] private float forwardReach = 2f;
 
     [Header("Hang Position")] 
     // vertical and horizontal offset should be TIGHT for the hang position to match the animation
     // if it is too big it will look bad and it WILL latch onto walls not intended
-    [SerializeField] private float verticalHangOffset = 0.2f;
-    [SerializeField] private float horizontalHangOffset = 0.2f;
+    [SerializeField] private float verticalHangOffset = 2.6f;
+    [SerializeField] private float horizontalHangOffset = 0f; //so her hand will touch, keeping it in case we need it
+    //for animation updates
     
     public event Action<Vector3, Vector3> OnLedgeDetected;
     
     private Vector3 detectedHangPosition;
     private bool ledgeDetected = false;
-
+    
     
     private void Update()
     {

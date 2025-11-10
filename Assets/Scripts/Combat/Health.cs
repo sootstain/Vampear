@@ -42,6 +42,10 @@ public class Health : MonoBehaviour
     {
         //FOR NOW, JUST TESTING
         //Add death anim
+
+        TryGetComponent(out PlayerStateMachine stateMachine);
+        if (stateMachine != null) return;
+        
         Destroy(gameObject);
     }
 

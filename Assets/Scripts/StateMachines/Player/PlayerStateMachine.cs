@@ -14,7 +14,12 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public Attack[] Attacks { get; private set; }
+    [field: SerializeField] public Health Health { get; private set; }
     public Transform MainCameraPosition { get; private set; }
+    
+    [field: SerializeField] public float WhipLength;
+    [field: SerializeField] public Transform WhipBase;
+    [field: SerializeField] public LineRenderer WhipLine;
     
     [field: SerializeField] public Targeter Targeter { get; private set; }
 
@@ -24,16 +29,55 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
 
+    [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public LedgeDetection LedgeDetection { get; private set; }
+    [field: SerializeField] public float DashCooldown { get; private set; } = 1f;
+    
+    public bool HasDashAvailable { get; private set; } = true;
+    private float dashCooldownTimer;
+    
+    public bool IsInvincible { get; set; }
+    
+    [field: SerializeField] public float interactionDistance;
+    
+    [field: SerializeField] public GameObject visualSpherePrefab;
+
+    [field: SerializeField] public SpriteRenderer visualTarget;
+
+    [field: SerializeField] public GameObject BellGameObject;
     
     private bool isVampire;
     private void Start()
     {
+        Debug.Log("StateMachine LedgeDetection: " + (LedgeDetection != null ? "ASSIGNED" : "NULL!!!"));
+
         if (PlayerMesh.activeInHierarchy) isVampire = true;
         
         MainCameraPosition = Camera.main.transform;
         SwitchState(new PlayerMoveState(this));
         InputReader.TransformEvent += OnTransform;
+    }
+    
+    private void OnEnable()
+    {
+        Health.OnTakeDamage += HandleTakeDamage;
+        Health.OnDeath += HandleDeath;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnTakeDamage -= HandleTakeDamage;
+        Health.OnDeath -= HandleDeath;
+    }
+
+    private void HandleTakeDamage()
+    {
+        if (TryGetComponent<PlayerStateMachine>(out var player) && player.IsInvincible)
+        {
+            return;
+        }
+        
+        SwitchState(new PlayerImpactState(this));
     }
 
     private void OnTransform()
@@ -50,5 +94,28 @@ public class PlayerStateMachine : StateMachine
             BatMesh.SetActive(false);
             isVampire = true;
         }
+    }
+
+    private void HandleDeath()
+    {
+        SwitchState(new PlayerDeadState(this));
+    }
+    
+    public void UpdateDashCooldown(float deltaTime)
+    {
+        if (!HasDashAvailable)
+        {
+            dashCooldownTimer -= deltaTime;
+            if (dashCooldownTimer <= 0f)
+            {
+                HasDashAvailable = true;
+            }
+        }
+    }
+
+    public void StartDashCooldown()
+    {
+        dashCooldownTimer = DashCooldown;
+        HasDashAvailable = false;
     }
 }

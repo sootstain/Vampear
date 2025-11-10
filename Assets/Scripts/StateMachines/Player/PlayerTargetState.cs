@@ -26,7 +26,7 @@ public class PlayerTargetState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.TargetEvent -= OnCancel;
-        stateMachine.InputReader.JumpEvent -= OnJump;       
+        stateMachine.InputReader.JumpEvent -= OnJump;
     }
 
     public override void Tick(float deltaTime)
@@ -60,7 +60,7 @@ public class PlayerTargetState : PlayerBaseState
     {
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
-
+    
     private Vector3 CalculateMovement()
     {
         Vector3 movement = new Vector3();

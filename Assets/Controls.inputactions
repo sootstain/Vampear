@@ -79,16 +79,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "641cd816-40e6-41b4-8c3d-04687c349290",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dodge",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "5228ef49-b832-4c43-a7eb-bb29eb741060",
                     "expectedControlType": "",
@@ -106,18 +97,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Cancel",
+                    "name": "Transform",
                     "type": "Button",
-                    "id": "fe1bbdfe-97ca-4ffe-9de6-2ec3cac01574",
+                    "id": "791d829a-6419-45bd-bf24-8a44ec882a3b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Transform",
+                    "name": "EnterFreeAim",
                     "type": "Button",
-                    "id": "791d829a-6419-45bd-bf24-8a44ec882a3b",
+                    "id": "cce0989f-aab5-4445-8fd5-5bc462cf4a3d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -380,39 +371,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f2e9ba44-c423-42a7-ad56-f20975884794",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8cbb2f4b-a784-49cc-8d5e-c010b8c7f4e6",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d8bf24bf-3f2f-4160-a97c-38ec1eb520ba",
-                    "path": "<XRController>/trigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "eb40bb66-4559-4dfa-9a2f-820438abb426",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -514,17 +472,17 @@
                     "name": "",
                     "id": "64a5e09b-f8c2-4dbd-9b09-b4a17b23bea4",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Dodge",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "213867a0-7dcd-4157-b3c4-4080f8dadae5",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -545,23 +503,23 @@
                 },
                 {
                     "name": "",
-                    "id": "1b721d84-4e2f-45bf-a9e2-7b6a2b689873",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "66fc2466-eb84-4647-873b-c5ff674f889e",
                     "path": "<Keyboard>/b",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Transform",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b4d3782-109a-4fee-a5db-ce3bdce88cc2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnterFreeAim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

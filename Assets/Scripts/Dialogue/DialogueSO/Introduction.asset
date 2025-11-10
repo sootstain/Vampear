@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e83f23f39331be4facdc531e8cf4e19, type: 3}
+  m_Name: Introduction
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  Context: 'TRIGGER: Nika at home, faint piano playing, triggered by scene start'
+  DialogueType: 0
+  Dialogue:
+  - Speaker: Maker
+    Text: You're still playing our old song.
+    Image: {fileID: 1564759471, guid: c92a997c895e6d341be3ea58257e0b1f, type: 3}
+  - Speaker: Nika
+    Text: It's just what this room sounds like. You know I need sound to see.
+    Image: {fileID: -506070943, guid: b9ec3bbb5fc7ae94bad1c4aefb4252e0, type: 3}
+  - Speaker: Maker
+    Text: It's a little out of tune... (just like you.)
+    Image: {fileID: 1564759471, guid: c92a997c895e6d341be3ea58257e0b1f, type: 3}
+  - Speaker: Nika
+    Text: Don't overinterpret.
+    Image: {fileID: -506070943, guid: b9ec3bbb5fc7ae94bad1c4aefb4252e0, type: 3}
+  - Speaker: Maker
+    Text: If you say so.
+    Image: {fileID: 1564759471, guid: c92a997c895e6d341be3ea58257e0b1f, type: 3}
+  - Speaker: Maker
+    Text: Here, on the desk. They left you a tape.
+    Image: {fileID: 1564759471, guid: c92a997c895e6d341be3ea58257e0b1f, type: 3}

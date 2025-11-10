@@ -10,13 +10,14 @@ public class EnemyIdleState : EnemyBaseState
     private const float AnimatorDampTime = 0.1f;
     public override void Enter()
     {
-        stateMachine.Animator.CrossFadeInFixedTime("IdleHash", CrossFadeDuration);
+        stateMachine.Animator.CrossFadeInFixedTime(IdleHash, CrossFadeDuration);
     }
 
     public override void Exit() { }
 
     public override void Tick(float deltaTime)
     {
+        if (stateMachine.Player == null) return;
         Move(deltaTime);
         if (IsInChaseRange())
         {

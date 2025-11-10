@@ -5,13 +5,19 @@ using UnityEngine.InputSystem;
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     public bool isAttacking { get; private set; }
+    
+    public bool isTargeting { get; set; }
+    
+    public bool isJumping { get; private set; }
+    public bool isAiming { get; set; }
+
     public Vector2 MovementValue { get; private set; }
     public event Action JumpEvent;
-    public event Action DodgeEvent;
+    public event Action DashEvent;
     public event Action TargetEvent;
-    public event Action CancelTarget;
-
+    public event Action PullEvent;
     public event Action TransformEvent;
+    public event Action AimEvent;
     
     private Controls controls;
     private void Start()
@@ -58,7 +64,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (context.performed)
         {
+            isJumping = true;
             JumpEvent?.Invoke();
+        }
+        else
+        {
+            isJumping = false;
         }
     }
 
@@ -73,16 +84,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         throw new System.NotImplementedException();
     }
 
-    public void OnSprint(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnDodge(InputAction.CallbackContext context)
+    public void OnDash(InputAction.CallbackContext context)
     {
         if (!context.performed) return; 
-        DodgeEvent?.Invoke();
+        DashEvent?.Invoke();
     }
+    
 
     public void OnTarget(InputAction.CallbackContext context)
     {
@@ -90,17 +97,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         TargetEvent?.Invoke();
     }
     
-    public void OnCancel(InputAction.CallbackContext context)
-    {
-        //When right click let go of?
-        //if(!context.performed) return;
-        //CancelTarget?.Invoke();
-    }
 
     public void OnTransform(InputAction.CallbackContext context)
     {
         Debug.Log("Changing into Bat");
         if(!context.performed) return;
         TransformEvent?.Invoke();
+    }
+
+    public void OnEnterFreeAim(InputAction.CallbackContext context)
+    {
+        if(!context.performed) return;
+        AimEvent?.Invoke();
     }
 }

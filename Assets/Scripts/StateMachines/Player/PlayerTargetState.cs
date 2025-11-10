@@ -3,12 +3,8 @@ using UnityEngine;
 
 public class PlayerTargetState : PlayerBaseState
 {
-    //Target state for the chain whip
-    private readonly int TargetBlendTree = Animator.StringToHash("TargetBlendTree"); //for camera change
 
     private readonly int TargetForward = Animator.StringToHash("TargetForwards"); //for camera change
-
-    private readonly int TargetRight = Animator.StringToHash("TargetRight"); //for camera change
 
     
     public PlayerTargetState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -20,7 +16,6 @@ public class PlayerTargetState : PlayerBaseState
     {
         stateMachine.InputReader.TargetEvent += OnCancel;
         stateMachine.InputReader.JumpEvent += OnJump;
-        stateMachine.Animator.Play(TargetBlendTree);
     }
 
     public override void Exit()
@@ -81,16 +76,6 @@ public class PlayerTargetState : PlayerBaseState
         {
             float value = stateMachine.InputReader.MovementValue.y > 0 ? 1f : -1f;
             stateMachine.Animator.SetFloat(TargetForward, value, 0.1f, Time.deltaTime);       
-        }
-        
-        if (stateMachine.InputReader.MovementValue.x == 0)
-        {
-            stateMachine.Animator.SetFloat(TargetRight, 0, 0.1f, Time.deltaTime);
-        }
-        else
-        {
-            float value = stateMachine.InputReader.MovementValue.x > 0 ? 1f : -1f;
-            stateMachine.Animator.SetFloat(TargetRight, value, 0.1f, Time.deltaTime);       
         }
     }
 }

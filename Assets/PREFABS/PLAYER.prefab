@@ -488,7 +488,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <LedgeDetection>k__BackingField: {fileID: 0}
+  <LedgeDetection>k__BackingField: {fileID: 1310741895781742380}
   <DashCooldown>k__BackingField: 1
   interactionDistance: 0
   visualSpherePrefab: {fileID: 5407649885477146253, guid: bbb21eabbc936694999f587f7cda80b3, type: 3}
@@ -623,7 +623,7 @@ MonoBehaviour:
   characterController: {fileID: 2067082449507027229}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   upperDetectionHeight: 1.5
   lowerDetectionHeight: 0.7
   forwardDetectionOffset: 0.1
@@ -1227,7 +1227,7 @@ Transform:
   m_GameObject: {fileID: 6211887850578276201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1368684e-13, y: -0.00000011920929, z: 7.1589108}
+  m_LocalPosition: {x: -0.00000005960453, y: -0.00000047683716, z: 7.1589108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

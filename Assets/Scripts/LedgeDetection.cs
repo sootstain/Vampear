@@ -10,12 +10,17 @@ public class LedgeDetection : MonoBehaviour
     [SerializeField] private float upperDetectionHeight = 1.5f;
     [SerializeField] private float lowerDetectionHeight = 0.7f;
     [SerializeField] private float forwardDetectionOffset = 0.1f;
+    //Controls the forward raycast in front. The larger the value the more you can detect ahead of you
+    //This can detect edges inside the walls or cubes
+    [SerializeField] private float forwardReach = 1.5f;
 
     [Header("Hang Position")] 
+    // vertical and horizontal offset should be TIGHT for the hang position to match the animation
+    // if it is too big it will look bad and it WILL latch onto walls not intended
     [SerializeField] private float verticalHangOffset = 0.2f;
-    [SerializeField] private float horizontalHangOffset = 0.4f;
+    [SerializeField] private float horizontalHangOffset = 0.2f;
     
-    public event Action<Vector3> OnLedgeDetected;
+    public event Action<Vector3, Vector3> OnLedgeDetected;
     
     private Vector3 detectedHangPosition;
     private bool ledgeDetected = false;
@@ -63,9 +68,11 @@ public class LedgeDetection : MonoBehaviour
 
                     detectedHangPosition = hangPos;
                     Vector3 ledgeForward = -fwdHit.normal;
-
+                    Vector3 surfaceNormal = fwdHit.normal;
+    
                     ledgeDetected = true;
-                    OnLedgeDetected?.Invoke(ledgeForward);
+    
+                    OnLedgeDetected?.Invoke(ledgeForward, surfaceNormal);
                 }
             }
         }

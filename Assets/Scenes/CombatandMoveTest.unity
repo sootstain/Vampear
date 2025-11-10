@@ -167,6 +167,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2899006977240791605, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899006977240791605, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
+      propertyPath: upperDetectionHeight
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3595745195789594173, guid: 24baa1022fb5cca4492f83a74e7968bf, type: 3}
       propertyPath: m_Name
       value: MixamoPlayer

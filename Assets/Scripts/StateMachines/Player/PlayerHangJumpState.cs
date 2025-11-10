@@ -32,20 +32,4 @@ public class PlayerHangJumpState : PlayerBaseState
         
         FaceTarget();
     }
-    
-    private Vector3 CalculateMovement()
-    {
-        Vector3 forward = stateMachine.MainCameraPosition.forward;
-        Vector3 right = stateMachine.MainCameraPosition.right;
-
-        //don't care about vertical pos
-        forward.y = 0;
-        right.y = 0;
-        
-        forward.Normalize();
-        right.Normalize();
-
-        return forward * stateMachine.InputReader.MovementValue.y + 
-               right * stateMachine.InputReader.MovementValue.x;
-    }
 }

@@ -46,6 +46,8 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public GameObject BellGameObject;
     
+    [field: SerializeField] public Vector3 Offset = new Vector3(0f, 2.325f, 0.65f);
+    
     private bool isVampire;
     private void Start()
     {

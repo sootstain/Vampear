@@ -8,17 +8,27 @@ public class PlayerHangState : PlayerBaseState
     
     private Vector3 targetHangPosition;
     private Vector3 ledgeForward;
+    private Vector3 surfaceNormal;
     private bool hasSnapped = false;
     
-    public PlayerHangState(PlayerStateMachine stateMachine, Vector3 ledgeForward) : base(stateMachine)
+    public PlayerHangState(PlayerStateMachine stateMachine, Vector3 ledgeForward, Vector3 surfaceNormal) : base(stateMachine)
     {
         this.ledgeForward = ledgeForward;
+        this.surfaceNormal = surfaceNormal;
         this.targetHangPosition = stateMachine.LedgeDetection.GetHangPosition();
     }
 
     public override void Enter()
     {
-        stateMachine.transform.rotation = Quaternion.LookRotation(ledgeForward, Vector3.up);
+        Vector3 horizontalForward = Vector3.ProjectOnPlane(ledgeForward, Vector3.up).normalized;
+
+        if (horizontalForward.sqrMagnitude < 0.1f)
+        {
+            horizontalForward = ledgeForward;
+        }
+        
+        stateMachine.transform.rotation = Quaternion.LookRotation(horizontalForward, Vector3.up);
+        
         stateMachine.Animator.CrossFadeInFixedTime(HangRef, CrossFadeDuration);
         stateMachine.ForceReceiver.Reset();
         stateMachine.CharacterController.enabled = false;
@@ -28,6 +38,8 @@ public class PlayerHangState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.transform.forward, Vector3.up);
+        
         stateMachine.CharacterController.enabled = true;
         stateMachine.LedgeDetection.ResetDetection();
         stateMachine.ForceReceiver.Reset();

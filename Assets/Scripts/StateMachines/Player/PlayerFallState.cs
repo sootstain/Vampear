@@ -63,9 +63,9 @@ public class PlayerFallState : PlayerBaseState
         FaceTarget();
     }
     
-    private void HandleLedgeDetection(Vector3 ledgeForward)
+    private void HandleLedgeDetection(Vector3 ledgeForward, Vector3 surfaceNormal)
     {
         Debug.Log("HANDLE LEDGE DETECTION CALLED IN FALL STATE!");
-        stateMachine.SwitchState(new PlayerHangState(stateMachine, ledgeForward));
+        stateMachine.SwitchState(new PlayerHangState(stateMachine, ledgeForward, surfaceNormal));
     }
 }

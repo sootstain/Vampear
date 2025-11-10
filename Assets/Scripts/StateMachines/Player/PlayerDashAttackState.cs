@@ -1,31 +1,42 @@
 using UnityEngine;
 
-public class PlayerAttackState : PlayerBaseState
+public class PlayerDashAttackState : PlayerBaseState
 {
-
     private Attack attack;
     private float previousFrameTime;
     private bool forceApplied;
-    public PlayerAttackState(PlayerStateMachine stateMachine, int comboIndex) : base(stateMachine)
+    private Vector3 dashDirection;
+    private const float DashAttackSpeed = 15f;
+    private float remainingDashTime;
+    
+    public PlayerDashAttackState(PlayerStateMachine stateMachine, int attackIndex, Vector3 dashDir, float remainingTime)
+        : base(stateMachine)
     {
-        attack = stateMachine.Attacks[comboIndex];
+        attack = stateMachine.Attacks[attackIndex];
+        dashDirection = dashDir;
+        remainingDashTime = Mathf.Max(0f, remainingTime);
     }
 
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
+        stateMachine.IsInvincible = true;
     }
 
     public override void Exit()
     {
+        stateMachine.IsInvincible = false;
     }
 
     public override void Tick(float deltaTime)
     {
-        //TODO: Face target method
-        
-        Move(deltaTime);
-        
+        // Continue moving only for the rest of the dash
+        if (remainingDashTime > 0f)
+        {
+            Move(dashDirection * DashAttackSpeed, deltaTime);
+            remainingDashTime -= deltaTime;
+        }
+
         float normalisedTime = GetNormalisedTime(stateMachine.Animator);
 
         if (normalisedTime >= previousFrameTime && normalisedTime < 1f)
@@ -34,7 +45,7 @@ public class PlayerAttackState : PlayerBaseState
             {
                 ApplyForce();
             }
-            
+
             if (stateMachine.InputReader.isAttacking)
             {
                 ComboAttack(normalisedTime);
@@ -42,33 +53,24 @@ public class PlayerAttackState : PlayerBaseState
         }
         else
         {
-            if (stateMachine.Targeter.CurrentTarget != null)
-            {
-                stateMachine.SwitchState(new PlayerTargetState(stateMachine));;
-            }
-            else
-            {
-                stateMachine.SwitchState(new PlayerMoveState(stateMachine));    
-            }
+            stateMachine.SwitchState(new PlayerMoveState(stateMachine));
         }
-        
+
         previousFrameTime = normalisedTime;
     }
 
     private void ComboAttack(float normalisedTime)
     {
-        
         if (attack.ComboIndex == -1) return;
-        if (normalisedTime < attack.ComboAttackTime) return; //hasn't finished previous anim / previous attack
+        if (normalisedTime < attack.ComboAttackTime) return;
         
-        stateMachine.SwitchState(new PlayerAttackState(stateMachine,attack.ComboIndex));
+        stateMachine.SwitchState(new PlayerAttackState(stateMachine, attack.ComboIndex));
     }
 
-    //Move forwards
     private void ApplyForce()
     {
         if (forceApplied) return;
-        stateMachine.ForceReceiver.AddForce(stateMachine.transform.forward * attack.ForceStrength);
+        stateMachine.ForceReceiver.AddForce(dashDirection * attack.ForceStrength);
         forceApplied = true;
     }
 }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e83f23f39331be4facdc531e8cf4e19, type: 3}
+  m_Name: PrototypeDialogueVN
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  Context: For Prototype VN Style
+  DialogueType: 0
+  Dialogue:
+  - Speaker: Maker
+    Text: I wish I had a proper VN sprite.
+    Image: {fileID: 1564759471, guid: c92a997c895e6d341be3ea58257e0b1f, type: 3}
+  - Speaker: Nika
+    Text: Be more patient, they're cooking.
+    Image: {fileID: -679430634, guid: 25826fe138daaea4d8665a495a159a34, type: 3}

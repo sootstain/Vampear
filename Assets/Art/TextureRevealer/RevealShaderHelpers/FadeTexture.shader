@@ -26,7 +26,7 @@ Shader "TNTC/FadeTexture" {
             fixed4 frag(v2f_img i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-                if (col.a > _TargetAlpha + 0.001)
+                if (col.a > _TargetAlpha) //+0.2?
                     col.a = lerp(col.a, _TargetAlpha, _FadeAmount);
                 return col;
             }

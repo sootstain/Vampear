@@ -32,7 +32,7 @@ Material:
     - _FadeAmount: 0.05
     - _FadeSpeed: 0.98
     - _MinAlpha: 0.2
-    - _TargetAlpha: 0
+    - _TargetAlpha: 0.2
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

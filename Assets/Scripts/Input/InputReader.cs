@@ -19,6 +19,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action TransformEvent;
     public event Action AimEvent;
     
+    public event Action InteractEvent;
+    
     private Controls controls;
     private void Start()
     {
@@ -52,7 +54,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        InteractEvent?.Invoke();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

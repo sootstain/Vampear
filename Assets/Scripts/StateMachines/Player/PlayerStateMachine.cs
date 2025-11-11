@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -33,15 +34,15 @@ public class PlayerStateMachine : StateMachine
     
     public bool IsInvincible { get; set; }
     
-    [field: SerializeField] public float interactionDistance;
-    
     [field: SerializeField] public GameObject visualSpherePrefab;
     
-    [field: SerializeField] public SpriteRenderer visualTarget;
+    [field: SerializeField] public Image visualTarget;
 
     [field: SerializeField] public GameObject BellGameObject;
     
     [field: SerializeField] public Vector3 Offset = new Vector3(0f, 2.325f, 0.65f);
+
+    [field: SerializeField] public float interactionRadius;
     
     private bool isVampire;
     private void Start()

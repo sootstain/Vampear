@@ -9,7 +9,10 @@ public class Trigger : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        other.TryGetComponent(out PlayerStateMachine stateMachine);
+        if (stateMachine == null) return;
         if (isTriggered) return;
+        
         gameEvent.TriggerEvent();
         isTriggered = true;
     }

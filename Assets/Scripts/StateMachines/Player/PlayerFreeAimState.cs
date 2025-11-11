@@ -24,7 +24,7 @@ public class PlayerFreeAimState : PlayerBaseState
 
     public override void Exit()
     {
-        //stateMachine.visualTarget.enabled = false;
+        stateMachine.visualTarget.enabled = false;
         stateMachine.InputReader.AimEvent -= OnAimCancel;
     }
 

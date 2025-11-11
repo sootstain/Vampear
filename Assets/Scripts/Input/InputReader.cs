@@ -26,6 +26,15 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         controls.Player.SetCallbacks(this);
         controls.Player.Enable();
     }
+    
+    private void Update()
+    {
+        if (controls != null && controls.Player.enabled)
+        {
+            Vector2 readValue = controls.Player.Move.ReadValue<Vector2>();
+            MovementValue = readValue;
+        }
+    }
 
     private void OnDestroy()
     {

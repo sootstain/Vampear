@@ -32,6 +32,10 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public LedgeDetection LedgeDetection { get; private set; }
     [field: SerializeField] public float DashCooldown { get; private set; } = 1f;
+
+    [Header( "Air Control - Tweak speed of turning and speed of air movement" )]
+    [field: SerializeField] public float AirControlSpeed { get; private set; } = 5f;
+    [field: SerializeField] public float MaxAirSpeed { get; private set; } = 8f;
     
     public bool HasDashAvailable { get; private set; } = true;
     private float dashCooldownTimer;

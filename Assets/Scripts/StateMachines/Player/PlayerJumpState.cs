@@ -6,40 +6,44 @@ public class PlayerJumpState : PlayerBaseState
 
     private readonly int JumpRef = Animator.StringToHash("Jump");
     private const float CrossFadeDuration = 0.1f;
-    private Vector3 momentum;
     
     private const float SnapAngleThreshold = 120f;
     private const float RotationSpeed = 20f;
-
-    public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine) 
-    {
-        
-    }
     
+    private Vector3 jumpMomentum;
+    private Quaternion lockedFacingRotation;
 
+    public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    
     public override void Enter()
-    {
+    { ;
         stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
-        momentum = stateMachine.CharacterController.velocity;
-        momentum.y = 0f; //only jump determines y movement
         stateMachine.Animator.CrossFadeInFixedTime(JumpRef, CrossFadeDuration);
         stateMachine.InputReader.DashEvent += OnDash;
-        if (stateMachine.InputReader.MovementValue.sqrMagnitude > Mathf.Epsilon)
+        lockedFacingRotation = stateMachine.transform.rotation;
+        
+        // This calculates if the player is pressing any key of WASD
+        Vector3 inputDir = CalculateJump();
+        if (inputDir.sqrMagnitude > Mathf.Epsilon)
         {
-            Vector3 jumpDirection = CalculateJump();
-            FaceJumpDirection(jumpDirection, Time.deltaTime);
+            jumpMomentum = inputDir.normalized;
+            FaceJumpDirection(jumpMomentum, Time.deltaTime);
+        }
+        else
+        {
+            jumpMomentum = Vector3.zero;
         }
     }
 
     public override void Exit()
     {
 
-        stateMachine.InputReader.DashEvent += OnDash;
+        stateMachine.InputReader.DashEvent -= OnDash;
     }
 
     public override void Tick(float deltaTime)
     {
-        Move(momentum, deltaTime);
+        AirMovement(deltaTime);
         if (stateMachine.InputReader.isAttacking) 
         {
             stateMachine.Animator.SetBool("isAttacking", true);
@@ -49,9 +53,23 @@ public class PlayerJumpState : PlayerBaseState
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
             return;
         }
+        stateMachine.transform.rotation = lockedFacingRotation;
+    }
 
+    private void AirMovement(float deltaTime)
+    {
+        Vector3 inputDir = CalculateJump();
+        if (inputDir.sqrMagnitude > Mathf.Epsilon)
+        {
+            jumpMomentum = Vector3.Lerp(
+                jumpMomentum,
+                inputDir.normalized * stateMachine.MaxAirSpeed,
+                stateMachine.AirControlSpeed * deltaTime
+            );
+        }
         
-        FaceTarget();
+        Move(jumpMomentum, deltaTime);
+        
     }
     
     private Vector3 CalculateJump()
@@ -65,9 +83,11 @@ public class PlayerJumpState : PlayerBaseState
         
         forward.Normalize();
         right.Normalize();
-
-        return forward * stateMachine.InputReader.MovementValue.y + 
-               right * stateMachine.InputReader.MovementValue.x;
+        
+        Vector3 result = forward * stateMachine.InputReader.MovementValue.y + 
+                         right * stateMachine.InputReader.MovementValue.x;
+        
+        return result;
     }
     
     private void FaceJumpDirection(Vector3 movement, float deltaTime)

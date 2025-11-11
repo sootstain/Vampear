@@ -14,15 +14,12 @@ public class PlayerFallState : PlayerBaseState
         {
             stateMachine.LedgeDetection.OnLedgeDetected += HandleLedgeDetection;
             isSubscribed = true;
-            Debug.Log("Subscribed in constructor");
         }
     }
 
     public override void Enter()
     {
-        Debug.Log("Falling");
         Debug.Log("LedgeDetection component: " + (stateMachine.LedgeDetection != null ? "Found" : "NULL!"));
-        
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f;
         stateMachine.Animator.CrossFadeInFixedTime(FallRef, CrossFadeDuration);
@@ -35,8 +32,6 @@ public class PlayerFallState : PlayerBaseState
             isSubscribed = true;
             Debug.Log("Subscribed in Enter()");
         }
-        
-        Debug.Log("Event subscribed in Fall State");
     }
 
     public override void Exit()
@@ -55,7 +50,6 @@ public class PlayerFallState : PlayerBaseState
         //if hit the ground
         if (stateMachine.CharacterController.isGrounded)
         {
-            Debug.Log("Back to normal");
             ReturnToMoveStates();
             return;       
         }
@@ -65,7 +59,6 @@ public class PlayerFallState : PlayerBaseState
     
     private void HandleLedgeDetection(Vector3 ledgeForward, Vector3 surfaceNormal)
     {
-        Debug.Log("HANDLE LEDGE DETECTION CALLED IN FALL STATE!");
         stateMachine.SwitchState(new PlayerHangState(stateMachine, ledgeForward, surfaceNormal));
     }
 }

@@ -31,10 +31,28 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public LedgeDetection LedgeDetection { get; private set; }
+    [field: SerializeField] public float DashCooldown { get; private set; } = 1f;
+    
+    public bool HasDashAvailable { get; private set; } = true;
+    private float dashCooldownTimer;
+    
+    public bool IsInvincible { get; set; }
+    
+    [field: SerializeField] public float interactionDistance;
+    
+    [field: SerializeField] public GameObject visualSpherePrefab;
+    
+    [field: SerializeField] public SpriteRenderer visualTarget;
+
+    [field: SerializeField] public GameObject BellGameObject;
+    
+    [field: SerializeField] public Vector3 Offset = new Vector3(0f, 2.325f, 0.65f);
     
     private bool isVampire;
     private void Start()
     {
+        Debug.Log("StateMachine LedgeDetection: " + (LedgeDetection != null ? "ASSIGNED" : "NULL!!!"));
+
         if (PlayerMesh.activeInHierarchy) isVampire = true;
         
         MainCameraPosition = Camera.main.transform;
@@ -56,6 +74,11 @@ public class PlayerStateMachine : StateMachine
 
     private void HandleTakeDamage()
     {
+        if (TryGetComponent<PlayerStateMachine>(out var player) && player.IsInvincible)
+        {
+            return;
+        }
+        
         SwitchState(new PlayerImpactState(this));
     }
 
@@ -78,5 +101,23 @@ public class PlayerStateMachine : StateMachine
     private void HandleDeath()
     {
         SwitchState(new PlayerDeadState(this));
+    }
+    
+    public void UpdateDashCooldown(float deltaTime)
+    {
+        if (!HasDashAvailable)
+        {
+            dashCooldownTimer -= deltaTime;
+            if (dashCooldownTimer <= 0f)
+            {
+                HasDashAvailable = true;
+            }
+        }
+    }
+
+    public void StartDashCooldown()
+    {
+        dashCooldownTimer = DashCooldown;
+        HasDashAvailable = false;
     }
 }

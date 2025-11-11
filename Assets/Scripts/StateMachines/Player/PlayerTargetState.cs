@@ -3,12 +3,9 @@ using UnityEngine;
 
 public class PlayerTargetState : PlayerBaseState
 {
-    //Target state for the chain whip
-    private readonly int TargetBlendTree = Animator.StringToHash("TargetBlendTree"); //for camera change
 
     private readonly int TargetForward = Animator.StringToHash("TargetForwards"); //for camera change
-
-    private readonly int TargetRight = Animator.StringToHash("TargetRight"); //for camera change
+    private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed"); //readonly for anim
 
     
     public PlayerTargetState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -18,20 +15,14 @@ public class PlayerTargetState : PlayerBaseState
 
     public override void Enter()
     {
-        //Move to over-the-shoulder camera
-        stateMachine.InputReader.isTargeting = true;
         stateMachine.InputReader.TargetEvent += OnCancel;
         stateMachine.InputReader.JumpEvent += OnJump;
-        stateMachine.InputReader.PullEvent += OnPull;
-        stateMachine.Animator.Play(TargetBlendTree);
     }
 
     public override void Exit()
     {
-        stateMachine.InputReader.isTargeting = false;
         stateMachine.InputReader.TargetEvent -= OnCancel;
         stateMachine.InputReader.JumpEvent -= OnJump;
-        stateMachine.InputReader.PullEvent -= OnPull;
     }
 
     public override void Tick(float deltaTime)
@@ -48,9 +39,17 @@ public class PlayerTargetState : PlayerBaseState
             return;
         }
         
-        Vector3 movement = CalculateMovement();
-        Move(movement * stateMachine.TargetingMovementSpeed, deltaTime);
+        Vector3 movement = CalculateTargetMovement();
+        
+        Move(movement * stateMachine.StandardMovementSpeed, deltaTime);
         UpdateAnimator(deltaTime);
+
+        if (stateMachine.InputReader.MovementValue == Vector2.zero)
+        {
+            stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0, 0.1f, Time.deltaTime);
+            return;
+        }
+        stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 1, 0.1f, Time.deltaTime);
         
         FaceTarget();
     }
@@ -65,20 +64,13 @@ public class PlayerTargetState : PlayerBaseState
     {
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
-
-    private void OnPull()
-    {
-        
-        stateMachine.SwitchState(new PlayerPullTargetState(stateMachine));
-    }
-    private Vector3 CalculateMovement()
+    private Vector3 CalculateTargetMovement()
     {
         Vector3 movement = new Vector3();
         movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
         movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
         return movement;       
     }
-
     private void UpdateAnimator(float deltaTime)
     {
         //TODO: Set dampTime after testing
@@ -91,16 +83,6 @@ public class PlayerTargetState : PlayerBaseState
         {
             float value = stateMachine.InputReader.MovementValue.y > 0 ? 1f : -1f;
             stateMachine.Animator.SetFloat(TargetForward, value, 0.1f, Time.deltaTime);       
-        }
-        
-        if (stateMachine.InputReader.MovementValue.x == 0)
-        {
-            stateMachine.Animator.SetFloat(TargetRight, 0, 0.1f, Time.deltaTime);
-        }
-        else
-        {
-            float value = stateMachine.InputReader.MovementValue.x > 0 ? 1f : -1f;
-            stateMachine.Animator.SetFloat(TargetRight, value, 0.1f, Time.deltaTime);       
         }
     }
 }

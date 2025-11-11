@@ -33,8 +33,6 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth - damage);
         
         OnTakeDamage?.Invoke();
-
-        StartCoroutine(Flash());
         
     }
 
@@ -42,16 +40,10 @@ public class Health : MonoBehaviour
     {
         //FOR NOW, JUST TESTING
         //Add death anim
-        Destroy(gameObject);
-    }
 
-    private IEnumerator Flash()
-    {
-        //TODO: Change this, it's just testing how this looks and it's dumb
-
-        GetComponent<MeshRenderer>().material.color = Color.white;
-        yield return new WaitForSeconds(0.1f);
-        GetComponent<MeshRenderer>().material.color = Color.red;
+        TryGetComponent(out PlayerStateMachine stateMachine);
+        if (stateMachine != null) return;
         
+        Destroy(gameObject);
     }
 }

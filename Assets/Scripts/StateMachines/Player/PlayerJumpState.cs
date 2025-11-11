@@ -23,7 +23,7 @@ public class PlayerJumpState : PlayerBaseState
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f; //only jump determines y movement
         stateMachine.Animator.CrossFadeInFixedTime(JumpRef, CrossFadeDuration);
-        stateMachine.LedgeDetection.OnLedgeDetected += HandleLedgeDetection;
+        stateMachine.InputReader.DashEvent += OnDash;
         if (stateMachine.InputReader.MovementValue.sqrMagnitude > Mathf.Epsilon)
         {
             Vector3 jumpDirection = CalculateJump();
@@ -33,7 +33,8 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void Exit()
     {
-        stateMachine.LedgeDetection.OnLedgeDetected -= HandleLedgeDetection;
+
+        stateMachine.InputReader.DashEvent += OnDash;
     }
 
     public override void Tick(float deltaTime)
@@ -49,14 +50,8 @@ public class PlayerJumpState : PlayerBaseState
             return;
         }
 
-
         
         FaceTarget();
-    }
-    
-    private void HandleLedgeDetection(Vector3 ledgeForward)
-    {
-        stateMachine.SwitchState(new PlayerHangState(stateMachine, ledgeForward));
     }
     
     private Vector3 CalculateJump()
@@ -96,6 +91,14 @@ public class PlayerJumpState : PlayerBaseState
                     rotationAmount
                 );
             }
+        }
+    }
+    
+    private void OnDash()
+    {
+        if (stateMachine.HasDashAvailable)
+        {
+            stateMachine.SwitchState(new PlayerDashState(stateMachine));
         }
     }
 }

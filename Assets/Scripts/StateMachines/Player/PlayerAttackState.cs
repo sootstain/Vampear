@@ -38,7 +38,7 @@ public class PlayerAttackState : PlayerBaseState
             if (stateMachine.InputReader.isAttacking)
             {
                 ComboAttack(normalisedTime);
-            }        
+            }
         }
         else
         {

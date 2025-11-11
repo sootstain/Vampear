@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Introduction
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
   Context: 'TRIGGER: Nika at home, faint piano playing, triggered by scene start'
+  DialogueType: 0
   Dialogue:
   - Speaker: Maker
     Text: You're still playing our old song.

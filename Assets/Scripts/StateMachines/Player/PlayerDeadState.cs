@@ -2,21 +2,28 @@ using UnityEngine;
 
 public class PlayerDeadState : PlayerBaseState
 {
+    private readonly int Die = Animator.StringToHash("Die");
     public PlayerDeadState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter()
     {
+        stateMachine.Animator.Play(Die);
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Tick(float deltaTime)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("You dead");
+        //bool animationComplete = stateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.5f;
+        //if (animationComplete)
+        //{
+            GameManager.Instance.ShowDeathScreen();
+        //}
     }
 }

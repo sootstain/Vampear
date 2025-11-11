@@ -11,7 +11,6 @@ public abstract class StateMachine : MonoBehaviour
 
     public void SwitchState(State newState)
     {
-        Debug.Log("Switching State");
         currentState?.Exit();
         currentState = newState;
         currentState?.Enter();

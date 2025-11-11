@@ -21,6 +21,8 @@ public class EnemyChasingState : EnemyBaseState
 
     public override void Tick(float deltaTime)
     {
+        if (stateMachine.Player == null) return;
+        
         if (!IsInChaseRange())
         {
             stateMachine.SwitchState(new EnemyIdleState(stateMachine));
@@ -38,6 +40,7 @@ public class EnemyChasingState : EnemyBaseState
 
     private void MoveToPlayer(float deltaTime)
     {
+        
         if (stateMachine.Agent.isOnNavMesh)
         {
             stateMachine.Agent.destination = stateMachine.Player.transform.position;

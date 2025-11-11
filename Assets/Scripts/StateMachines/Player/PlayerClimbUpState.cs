@@ -6,12 +6,12 @@ public class PlayerClimbUpState : PlayerBaseState
     private readonly int ClimbUpRef = Animator.StringToHash("ClimbUp");
     private const float CrossFadeDuration = 0.1f;
     
-    private readonly Vector3 Offset = new Vector3(0f, 2.325f, 0.65f); //Based on the chosen animation, could be fixed with root motion I think
+    public Vector3 Offset; //Based on the chosen animation, could be fixed with root motion I think
     //but I'm dumb :)
     
     public PlayerClimbUpState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        
+        Offset = stateMachine.Offset;
     }
 
     public override void Enter()

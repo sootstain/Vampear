@@ -17,6 +17,7 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void Tick(float deltaTime)
     {
+        if (stateMachine.Player == null) return;
         Move(deltaTime);
         if (IsInChaseRange())
         {

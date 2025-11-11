@@ -23,14 +23,15 @@ public class PlayerPullTargetState : PlayerBaseState
     public float damper = 14;
     public float strength = 800; 
     public float velocity = 50;
-    public float waveCount = 3;
-    public float waveHeight = 1;
+    //public float waveCount = 3;
+    //public float waveHeight = 1;
     
     private Vector3 currentWhipPosition;
     private float whipAnimationTimer = 0f; 
     public float whipDuration = 0.5f;
+    public float whipSpeed = 50f;
     
-    private AnimationCurve affectCurve;
+    //private AnimationCurve affectCurve;
     
     public PlayerPullTargetState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -41,13 +42,13 @@ public class PlayerPullTargetState : PlayerBaseState
         spring.SetTarget(0);
         whipBase = stateMachine.WhipBase;
         target = stateMachine.Targeter.CurrentTarget;
-        affectCurve = stateMachine.whipCurve;
+        //affectCurve = stateMachine.whipCurve;
         currentWhipPosition = whipBase.position;
     }
     
     public override void Enter()
     {
-        
+        whipBase.gameObject.SetActive(true);
         stateMachine.Animator.Play(ChainAnim);
         pulling = true;
         whipAnimationTimer = 0f;
@@ -78,17 +79,19 @@ public class PlayerPullTargetState : PlayerBaseState
         
         var up = Quaternion.LookRotation(whipDirection) * Vector3.up;
         
-        currentWhipPosition = Vector3.Lerp(currentWhipPosition, grabPoint, Time.deltaTime *12f);
+        currentWhipPosition = Vector3.Lerp(currentWhipPosition, grabPoint, Time.deltaTime * whipSpeed); //making it fast
         
         for (var i = 0; i < quality + 1; i++) {
             var delta = i / (float) quality;
-            var waveOffset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * spring.Value * affectCurve.Evaluate(delta));
-            lr.SetPosition(i, Vector3.Lerp(whipBase.position, currentWhipPosition, delta) + waveOffset);
+            //var waveOffset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * spring.Value * affectCurve.Evaluate(delta));
+            //lr.SetPosition(i, Vector3.Lerp(whipBase.position, currentWhipPosition, delta) + waveOffset);
+            lr.SetPosition(i, Vector3.Lerp(whipBase.position, currentWhipPosition, delta));
         }
     }
 
     public override void Exit()
     {
+        whipBase.gameObject.SetActive(false);
         pulling = false;
         lr.positionCount = 0;
         lr.enabled = false;
@@ -115,7 +118,8 @@ public class PlayerPullTargetState : PlayerBaseState
     {
         Vector3 pullPosNorm = (stateMachine.WhipBase.position - target.transform.position).normalized;
         Vector3 targetPos = stateMachine.WhipBase.position - (pullPosNorm * 1f);
-        target.GetPulled(targetPos, 1);
+        
+        target.GetPulled(targetPos, 1, whipDuration);
     }
 
     private void StopPull()

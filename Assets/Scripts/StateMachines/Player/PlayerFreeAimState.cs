@@ -7,7 +7,9 @@ public class PlayerFreeAimState : PlayerBaseState
 {
     
     private GameObject sphere;
-    private readonly int Shoot = Animator.StringToHash("ThrowDown");
+    private readonly int Shoot = Animator.StringToHash("ChainThrow");
+    
+    
     
     public PlayerFreeAimState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -22,7 +24,7 @@ public class PlayerFreeAimState : PlayerBaseState
 
     public override void Exit()
     {
-        stateMachine.visualTarget.enabled = false;
+        //stateMachine.visualTarget.enabled = false;
         stateMachine.InputReader.AimEvent -= OnAimCancel;
     }
 
@@ -33,6 +35,7 @@ public class PlayerFreeAimState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        
         //Get the mouse pos
         Ray rayOrigin = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hitInfo;

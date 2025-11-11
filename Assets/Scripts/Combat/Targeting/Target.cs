@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Target : MonoBehaviour
 {
     public event Action<Target> OnDestroyed;
 
     private Rigidbody rb;
+    private bool isBeingPulled = false;
     
     private void Start()
     {
@@ -19,9 +21,34 @@ public class Target : MonoBehaviour
         OnDestroyed?.Invoke(this);
     }
 
-    public void GetPulled(Vector3 targetPosition, float trajectoryHeight)
+    public void GetPulled(Vector3 targetPosition, float height, float duration)
     {
-        rb.linearVelocity = CalculatePullVelocity(transform.position, targetPosition, trajectoryHeight);
+        if (!isBeingPulled)
+        {
+            StartCoroutine(ArcPull(targetPosition, height, duration));
+        }
+    }
+    
+    public IEnumerator ArcPull(Vector3 targetPosition, float trajectoryHeight, float duration)
+    {
+        //rb.linearVelocity = CalculatePullVelocity(transform.position, targetPosition, trajectoryHeight);
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.enabled = false;
+
+        Vector3 start = transform.position;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+            Vector3 pos = Vector3.Lerp(start, targetPosition, t);
+            pos.y = Mathf.Sin(Mathf.PI * t) * trajectoryHeight + Mathf.Lerp(start.y, targetPosition.y, t);
+            transform.position = pos;
+            yield return null;
+        }
+
+        agent.enabled = true;
+        isBeingPulled = false;
     }
 
     private Vector3 CalculatePullVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)

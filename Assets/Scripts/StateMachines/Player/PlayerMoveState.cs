@@ -84,45 +84,6 @@ public class PlayerMoveState : PlayerBaseState
         FaceMoveDirection(movement, deltaTime);
     }
 
-    private Vector3 CalculateMovement()
-    {
-        Vector3 forward = stateMachine.MainCameraPosition.forward;
-        Vector3 right = stateMachine.MainCameraPosition.right;
-
-        //don't care about vertical pos
-        forward.y = 0;
-        right.y = 0;
-        
-        forward.Normalize();
-        right.Normalize();
-
-        return forward * stateMachine.InputReader.MovementValue.y + 
-               right * stateMachine.InputReader.MovementValue.x;
-    }
-
-    private void FaceMoveDirection(Vector3 movement, float deltaTime)
-    {
-        if (movement.sqrMagnitude > Mathf.Epsilon)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
-            float angleDifference = Quaternion.Angle(stateMachine.transform.rotation, targetRotation);
-            if (angleDifference > SnapAngleThreshold)
-            {
-                stateMachine.transform.rotation = targetRotation;
-            }
-            else
-            {
-                // Slerp is used
-                // BUT Quaternion.RotateTowards can be used for framerate independent fast rotation
-                float rotationAmount = Mathf.Min(1f, RotationSpeed * deltaTime);
-                stateMachine.transform.rotation = Quaternion.Slerp(
-                    stateMachine.transform.rotation, 
-                    targetRotation, 
-                    rotationAmount
-                );
-            }
-        }
-    }
     private void OnDash()
     {
         if (stateMachine.HasDashAvailable)

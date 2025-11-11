@@ -5,6 +5,7 @@ public class PlayerTargetState : PlayerBaseState
 {
 
     private readonly int TargetForward = Animator.StringToHash("TargetForwards"); //for camera change
+    private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed"); //readonly for anim
 
     
     public PlayerTargetState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -38,9 +39,17 @@ public class PlayerTargetState : PlayerBaseState
             return;
         }
         
-        Vector3 movement = CalculateMovement();
-        Move(movement * stateMachine.TargetingMovementSpeed, deltaTime);
+        Vector3 movement = CalculateTargetMovement();
+        
+        Move(movement * stateMachine.StandardMovementSpeed, deltaTime);
         UpdateAnimator(deltaTime);
+
+        if (stateMachine.InputReader.MovementValue == Vector2.zero)
+        {
+            stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0, 0.1f, Time.deltaTime);
+            return;
+        }
+        stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 1, 0.1f, Time.deltaTime);
         
         FaceTarget();
     }
@@ -55,15 +64,13 @@ public class PlayerTargetState : PlayerBaseState
     {
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
-    
-    private Vector3 CalculateMovement()
+    private Vector3 CalculateTargetMovement()
     {
         Vector3 movement = new Vector3();
         movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
         movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
         return movement;       
     }
-
     private void UpdateAnimator(float deltaTime)
     {
         //TODO: Set dampTime after testing

@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RevealLamp
+  m_Name: PewEnd
   m_Shader: {fileID: -6465566751694194690, guid: b82c18d7180c74240a740e20e5a75c48, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -50,7 +50,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_41271c3c5f484ca2a435c65087a81705:
-        m_Texture: {fileID: 2800000, guid: 248ffbcdd959c7946aede6aa0dc6c52d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9b005a0bc719e6845a2308becb33087f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTexture:

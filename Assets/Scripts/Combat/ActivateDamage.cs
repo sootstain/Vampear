@@ -1,18 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
 {
-    [SerializeField] private GameObject[] catchableHands;
+    [SerializeField] private List<GameObject> catchableHands;
 
     //TODO: For both hands, currently both are enabled at once
-    public void EnableDamageDealing(int hand)
+    
+    //For enemies, will change after we have enemy models.
+    public void EnableDamageDealing()
     {
-        //left and right hands
-        catchableHands[hand].SetActive(true);
+        foreach (var x in catchableHands)
+        {
+            x.SetActive(true);    
+        }
+        
     }
     
-    public void DisableDamageDealing(int hand)
+    public void DisableDamageDealing()
     {
-        catchableHands[hand].SetActive(false);
+        foreach (var x in catchableHands)
+        {
+            x.SetActive(false);    
+        }
     }
+    
 }

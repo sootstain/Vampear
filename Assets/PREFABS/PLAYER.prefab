@@ -487,9 +487,9 @@ GameObject:
   - component: {fileID: 8178310463383519404}
   - component: {fileID: 6625304919605211203}
   - component: {fileID: 1691600620685897562}
-  - component: {fileID: 3310248359926580184}
   - component: {fileID: 1310741895781742380}
   - component: {fileID: 4262248738690196910}
+  - component: {fileID: 3021945519575828166}
   m_Layer: 0
   m_Name: PLAYER
   m_TagString: Player
@@ -614,6 +614,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   <LedgeDetection>k__BackingField: {fileID: 1310741895781742380}
   <DashCooldown>k__BackingField: 1
+  DealDamage: {fileID: 0}
   interactionDistance: 0
   visualSpherePrefab: {fileID: 5407649885477146253, guid: bbb21eabbc936694999f587f7cda80b3, type: 3}
   visualTarget: {fileID: 0}
@@ -720,19 +721,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3310248359926580184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3595745195789594173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3446b41336e234b4f8c7bf516c3ab008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 100
 --- !u!114 &1310741895781742380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,6 +756,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
+--- !u!114 &3021945519575828166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595745195789594173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a59d9490000e4b4c945e8cdb967d99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DealDamage
+  catchableHands:
+  - {fileID: 8425123138811151512}
+  - {fileID: 3679043426569589064}
 --- !u!1 &3679043426569589064
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1374,7 @@ Transform:
   m_GameObject: {fileID: 6211887850578276201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000015815976, y: 0.000013113022, z: 5.9657583}
+  m_LocalPosition: {x: 0.00000015815976, y: 0.000012993813, z: 5.9657583}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

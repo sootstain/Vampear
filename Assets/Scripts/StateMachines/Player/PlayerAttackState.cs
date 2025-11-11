@@ -6,18 +6,22 @@ public class PlayerAttackState : PlayerBaseState
     private Attack attack;
     private float previousFrameTime;
     private bool forceApplied;
+    private DealDamage damage;
     public PlayerAttackState(PlayerStateMachine stateMachine, int comboIndex) : base(stateMachine)
     {
         attack = stateMachine.Attacks[comboIndex];
+        damage = stateMachine.DealDamage;
     }
 
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
+        damage.EnableDamageDealing();
     }
 
     public override void Exit()
     {
+        damage.DisableDamageDealing();
     }
 
     public override void Tick(float deltaTime)

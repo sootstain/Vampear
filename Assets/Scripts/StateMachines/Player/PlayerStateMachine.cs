@@ -55,6 +55,7 @@ public class PlayerStateMachine : StateMachine
         
         SwitchState(new PlayerMoveState(this));
         InputReader.TransformEvent += OnTransform;
+        IsInvincible = false;
     }
     
     private void OnEnable()

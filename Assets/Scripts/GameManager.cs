@@ -35,6 +35,16 @@ public class GameManager : MonoBehaviour
         deathScreen.SetActive(true);
     }
 
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void Pause()
     {
         Time.timeScale = 0;

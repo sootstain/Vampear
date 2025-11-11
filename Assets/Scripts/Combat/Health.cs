@@ -21,8 +21,10 @@ public class Health : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Die();
+            //Die();
+            Debug.Log("You should be dead");
             OnDeath?.Invoke();
+            return;
         }
 
         if (TryGetComponent<EnemyStateMachine>(out var enemy) && enemy.IsBlocking)

@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &418735977589282595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7242861579916380023}
+  - component: {fileID: 8375558726733147234}
+  - component: {fileID: 3756617379065630806}
+  - component: {fileID: 9180074546181453723}
+  - component: {fileID: 5024780122717811879}
+  m_Layer: 0
+  m_Name: Singleton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7242861579916380023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418735977589282595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8685, y: 0, z: -3.1315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8375558726733147234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418735977589282595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196bbec5836b45345b8d4706fb75b631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PaintManager
+  texturePaint: {fileID: 4800000, guid: 0ea0be4fbb19cb840889b307d2ded575, type: 3}
+  extendIslands: {fileID: 4800000, guid: c54aaef87560f1d4e95febd664f61d47, type: 3}
+  fadeMaterial: {fileID: 2100000, guid: a1b49057d9faa504d9c5a1f4404543b4, type: 2}
+  fadeInterval: 0.01
+--- !u!114 &3756617379065630806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418735977589282595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89d35667badf70409ba4a0af86949e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  VNDialogueContainer: {fileID: 0}
+  DSDialogueContainer: {fileID: 0}
+  DSDialoguePanel: {fileID: 0}
+  DSSpeakerText: {fileID: 0}
+  DSDialogueText: {fileID: 0}
+  DSCharacterImage: {fileID: 0}
+  VNDialoguePanel: {fileID: 0}
+  VNSpeakerText: {fileID: 0}
+  VNDialogueText: {fileID: 0}
+  VNCharacterImage: {fileID: 0}
+  typeSpeed: 0.03
+--- !u!114 &9180074546181453723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418735977589282595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c900f5234f5178a4b82bf48eb145e6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameEventListener
+  gameEvent: {fileID: 11400000, guid: a6bd4be418fbbe647bc5765136d8152d, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3756617379065630806}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: StartDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 56a475fa295a7c343b20d685c2e1eb91, type: 2}
+          m_ObjectArgumentAssemblyTypeName: DialogueSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5024780122717811879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418735977589282595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab083c86a7c30484ebf277332ebef9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  startingEvent: {fileID: 0}
+  deathScreen: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  isPaused: 0

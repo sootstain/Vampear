@@ -49,6 +49,7 @@ public class PlayerStateMachine : StateMachine
     {
         if (PlayerMesh.activeInHierarchy) isVampire = true;
         MainCameraPosition = Camera.main.transform;
+        BellGameObject.SetActive(true);
 
         SwitchState(new PlayerMoveState(this));
         InputReader.TransformEvent += OnTransform;

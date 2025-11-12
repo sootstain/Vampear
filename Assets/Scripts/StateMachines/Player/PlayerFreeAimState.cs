@@ -8,7 +8,10 @@ public class PlayerFreeAimState : PlayerBaseState
     
     private GameObject sphere;
     private readonly int Shoot = Animator.StringToHash("ChainThrow");
+    private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed"); //readonly for anim
     
+    private readonly int MoveBlendTree = Animator.StringToHash("ChainMovement"); //for camera change
+
     
     
     public PlayerFreeAimState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -63,6 +66,19 @@ public class PlayerFreeAimState : PlayerBaseState
                 }
             }
             //else sphere time baby
+            Vector3 movement = CalculateMovement();
+        
+            Move(movement * stateMachine.StandardMovementSpeed, deltaTime);
+
+            if (stateMachine.InputReader.MovementValue == Vector2.zero)
+            {
+                stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0, 0.1f, Time.deltaTime);
+                return;
+            }
+            stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 1, 0.1f, Time.deltaTime);
+        
+            FaceMoveDirection(movement, deltaTime);
+
         }
     }
 }

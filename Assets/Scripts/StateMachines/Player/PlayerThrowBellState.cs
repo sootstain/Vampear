@@ -20,23 +20,23 @@ public class PlayerThrowBellState : PlayerBaseState
     public float damper = 14;
     public float strength = 800;
     public float velocity = 50;
-    //public float waveCount = 3;
-    //public float waveHeight = 1;
+    public float waveCount = 3;
+    public float waveHeight = 0.01f; //smol bumps
     public float whipSpeed = 50f; //making this faster
     public float snapBackSpeed = 50f;
 
-    /*private AnimationCurve affectCurve;
+    private AnimationCurve affectCurve;
     
     private float whipAnimationTimer = 0f;
     public float whipDuration = 0.4f;
     public float snapBackDuration = 0.3f;
-    */
+    
     
     public PlayerThrowBellState(PlayerStateMachine stateMachine, Vector3 hitInfo) : base(stateMachine)
     {
         lr = stateMachine.WhipLine;
         whipBase = stateMachine.WhipBase;
-        //affectCurve = stateMachine.whipCurve;
+        affectCurve = stateMachine.whipCurve;
         spring = new Spring();
         spring.SetTarget(1f); // needed for visible wave
         bell = stateMachine.BellGameObject;
@@ -49,7 +49,7 @@ public class PlayerThrowBellState : PlayerBaseState
         stateMachine.Animator.Play(ChainAnim);
         pulling = true;
         isRetracting = false;
-        //whipAnimationTimer = 0f;
+        whipAnimationTimer = 0f;
 
         lr.enabled = true;
         lr.positionCount = quality + 1;
@@ -61,7 +61,7 @@ public class PlayerThrowBellState : PlayerBaseState
 
         if (bell != null)
         {
-            bell.SetActive(true);
+            //bell.SetActive(true);
             bell.transform.position = whipBase.position;
         }
     }
@@ -70,7 +70,7 @@ public class PlayerThrowBellState : PlayerBaseState
     {
         if (!pulling) return;
 
-        //whipAnimationTimer += deltaTime;
+        whipAnimationTimer += deltaTime;
         spring.SetDamper(damper);
         spring.SetStrength(strength);
         spring.Update(deltaTime);
@@ -83,7 +83,7 @@ public class PlayerThrowBellState : PlayerBaseState
             {
                 InstantiateSphere();
                 isRetracting = true;
-                //whipAnimationTimer = 0f;
+                whipAnimationTimer = 0f;
             }
         }
         else
@@ -104,20 +104,21 @@ public class PlayerThrowBellState : PlayerBaseState
     {
         Vector3 whipDirection = (currentWhipPosition - whipBase.position).normalized;
         var up = Quaternion.LookRotation(whipDirection) * Vector3.up;
-
+        Debug.DrawLine(whipBase.position, currentWhipPosition, Color.red);
+        Debug.Log(Vector3.Distance(whipBase.position, currentWhipPosition));
         for (int i = 0; i <= quality; i++)
         {
             float delta = i / (float)quality;
-            //float waveIntensity = spring.Value * affectCurve.Evaluate(delta);
+            float waveIntensity = spring.Value * affectCurve.Evaluate(delta);
             //Removing all animation stuff
-            //Vector3 waveOffset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * waveIntensity);
-            //Vector3 position = Vector3.Lerp(whipBase.position, currentWhipPosition, delta) + waveOffset;
-            Vector3 position = Vector3.Lerp(whipBase.position, currentWhipPosition, delta);
+            Vector3 waveOffset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * waveIntensity);
+            Vector3 position = Vector3.Lerp(whipBase.position, currentWhipPosition, delta) + waveOffset;
+            //Vector3 position = Vector3.Lerp(whipBase.position, currentWhipPosition, delta);
             lr.SetPosition(i, position);
         }
 
         if (bell != null)
-            bell.transform.position = currentWhipPosition;
+            bell.transform.position = lr.GetPosition(lr.positionCount - 1);
     }
 
     private void InstantiateSphere()
@@ -131,8 +132,8 @@ public class PlayerThrowBellState : PlayerBaseState
         lr.positionCount = 0;
         lr.enabled = false;
 
-        if (bell != null)
-            bell.SetActive(false);
+        /*if (bell != null)
+            bell.SetActive(false);*/
 
         stateMachine.SwitchState(new PlayerMoveState(stateMachine));
     }
@@ -142,7 +143,7 @@ public class PlayerThrowBellState : PlayerBaseState
         pulling = false;
         lr.enabled = false;
 
-        if (bell != null)
-            bell.SetActive(false);
+        /*if (bell != null)
+            bell.SetActive(false);*/
     }
 }

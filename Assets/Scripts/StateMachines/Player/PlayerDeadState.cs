@@ -9,12 +9,13 @@ public class PlayerDeadState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.CharacterController.enabled = false;
         stateMachine.Animator.Play(Die);
     }
 
     public override void Exit()
     {
-        
+        stateMachine.CharacterController.enabled = true;
     }
 
     public override void Tick(float deltaTime)

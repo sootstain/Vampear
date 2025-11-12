@@ -40,9 +40,10 @@ public class Target : MonoBehaviour
 
         while (t < 1f)
         {
+            
             t += Time.deltaTime / duration;
             Vector3 pos = Vector3.Lerp(start, targetPosition, t);
-            pos.y = Mathf.Sin(Mathf.PI * t) * trajectoryHeight + Mathf.Lerp(start.y, targetPosition.y, t);
+            pos.y = Mathf.Sin(Mathf.PI * t) * trajectoryHeight + Mathf.Lerp(start.y, start.y, t);
             transform.position = pos;
             yield return null;
         }
@@ -51,6 +52,7 @@ public class Target : MonoBehaviour
         isBeingPulled = false;
     }
 
+    //Old method, only works with rigidbody :(
     private Vector3 CalculatePullVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
     {
         float gravity = Physics.gravity.y; //could maybe integrate with ForceReceiver? So no rigidbody lol, will fix

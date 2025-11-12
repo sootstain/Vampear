@@ -117,7 +117,7 @@ public class PlayerPullTargetState : PlayerBaseState
     private void PullTarget()
     {
         Vector3 pullPosNorm = (stateMachine.WhipBase.position - target.transform.position).normalized;
-        Vector3 targetPos = stateMachine.WhipBase.position - (pullPosNorm * 1f);
+        Vector3 targetPos = stateMachine.WhipBase.position - (pullPosNorm * 2f);
         
         target.GetPulled(targetPos, 1, whipDuration);
     }

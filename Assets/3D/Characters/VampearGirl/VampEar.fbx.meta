@@ -35,7 +35,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: <Root Transform>
+    motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: "\nClip 'root|Aiming' has import animation warnings
       that might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -147,8 +147,224 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bell_low
+        weight: 0
+      - path: Bell_LP
+        weight: 0
+      - path: collar_low
+        weight: 0
+      - path: eye_low
+        weight: 0
+      - path: hair_low
+        weight: 0
+      - path: hands
+        weight: 0
+      - path: head_low
+        weight: 0
+      - path: lashes_low
+        weight: 0
+      - path: legs_low
+        weight: 0
+      - path: pants_low
+        weight: 0
+      - path: root
+        weight: 1
+      - path: root/c_chain_01.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x/c_chain_04.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x/c_chain_04.x/c_chain_05.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x/c_chain_04.x/c_chain_05.x/c_chain_06.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x/c_chain_04.x/c_chain_05.x/c_chain_06.x/c_chain_07.x
+        weight: 1
+      - path: root/root.x
+        weight: 1
+      - path: root/root.x/spine_01.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_ear_01.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_ear_01.l/c_ear_02.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_ear_01.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_ear_01.r/c_ear_02.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eye.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eye.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eye_offset.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eye_offset.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l/c_eyebrow_01.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l/c_eyebrow_01_end.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l/c_eyebrow_02.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l/c_eyebrow_03.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r/c_eyebrow_01.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r/c_eyebrow_01_end.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r/c_eyebrow_02.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r/c_eyebrow_03.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_jawbone.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/eyelid_bot.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/eyelid_bot.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/eyelid_top.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/eyelid_top.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/arm_twist.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/forearm_twist.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_index1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_index1.l/c_index2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_index1.l/c_index2.l/c_index3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_middle1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_middle1.l/c_middle2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_middle1.l/c_middle2.l/c_middle3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_pinky1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_pinky1.l/c_pinky2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_pinky1.l/c_pinky2.l/c_pinky3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_ring1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_ring1.l/c_ring2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_ring1.l/c_ring2.l/c_ring3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_thumb1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_thumb1.l/c_thumb2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_thumb1.l/c_thumb2.l/c_thumb3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/Weapon
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/arm_twist.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/forearm_twist.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_index1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_index1.r/c_index2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_index1.r/c_index2.r/c_index3.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_middle1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_middle1.r/c_middle2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_middle1.r/c_middle2.r/c_middle3.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_pinky1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_pinky1.r/c_pinky2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_pinky1.r/c_pinky2.r/c_pinky3.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_ring1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_ring1.r/c_ring2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_ring1.r/c_ring2.r/c_ring3.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_thumb1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_thumb1.r/c_thumb2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_thumb1.r/c_thumb2.r/c_thumb3.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.l
+        weight: 1
+      - path: root/root.x/thigh_stretch.l/leg_stretch.l
+        weight: 1
+      - path: root/root.x/thigh_stretch.l/leg_stretch.l/foot.l
+        weight: 1
+      - path: root/root.x/thigh_stretch.l/leg_stretch.l/foot.l/toes_01.l
+        weight: 1
+      - path: root/root.x/thigh_stretch.l/leg_stretch.l/leg_twist.l
+        weight: 0
+      - path: root/root.x/thigh_stretch.l/thigh_twist.l
+        weight: 0
+      - path: root/root.x/thigh_stretch.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.r/leg_stretch.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.r/leg_stretch.r/foot.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.r/leg_stretch.r/foot.r/toes_01.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.r/leg_stretch.r/leg_twist.r
+        weight: 0
+      - path: root/root.x/thigh_stretch.r/thigh_twist.r
+        weight: 0
+      - path: shocker_low
+        weight: 0
+      - path: shoes_1_low
+        weight: 0
+      - path: shoes_1_low.001
+        weight: 0
+      - path: teeth_low
+        weight: 0
+      - path: Whip_LP
+        weight: 0
+      maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
@@ -263,8 +479,224 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bell_low
+        weight: 0
+      - path: Bell_LP
+        weight: 0
+      - path: collar_low
+        weight: 0
+      - path: eye_low
+        weight: 0
+      - path: hair_low
+        weight: 0
+      - path: hands
+        weight: 0
+      - path: head_low
+        weight: 0
+      - path: lashes_low
+        weight: 0
+      - path: legs_low
+        weight: 0
+      - path: pants_low
+        weight: 0
+      - path: root
+        weight: 1
+      - path: root/c_chain_01.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x/c_chain_04.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x/c_chain_04.x/c_chain_05.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x/c_chain_04.x/c_chain_05.x/c_chain_06.x
+        weight: 1
+      - path: root/c_chain_01.x/c_chain_02.x/c_chain_03.x/c_chain_04.x/c_chain_05.x/c_chain_06.x/c_chain_07.x
+        weight: 1
+      - path: root/root.x
+        weight: 1
+      - path: root/root.x/spine_01.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_ear_01.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_ear_01.l/c_ear_02.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_ear_01.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_ear_01.r/c_ear_02.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eye.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eye.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eye_offset.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eye_offset.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l/c_eyebrow_01.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l/c_eyebrow_01_end.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l/c_eyebrow_02.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.l/c_eyebrow_03.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r/c_eyebrow_01.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r/c_eyebrow_01_end.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r/c_eyebrow_02.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_eyebrow_full.r/c_eyebrow_03.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/c_jawbone.x
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/eyelid_bot.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/eyelid_bot.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/eyelid_top.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x/eyelid_top.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/arm_twist.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/forearm_twist.l
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_index1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_index1.l/c_index2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_index1.l/c_index2.l/c_index3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_middle1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_middle1.l/c_middle2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_middle1.l/c_middle2.l/c_middle3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_pinky1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_pinky1.l/c_pinky2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_pinky1.l/c_pinky2.l/c_pinky3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_ring1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_ring1.l/c_ring2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_ring1.l/c_ring2.l/c_ring3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_thumb1.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_thumb1.l/c_thumb2.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/c_thumb1.l/c_thumb2.l/c_thumb3.l
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.l/arm_stretch.l/forearm_stretch.l/hand.l/Weapon
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/arm_twist.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/forearm_twist.r
+        weight: 0
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_index1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_index1.r/c_index2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_index1.r/c_index2.r/c_index3.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_middle1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_middle1.r/c_middle2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_middle1.r/c_middle2.r/c_middle3.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_pinky1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_pinky1.r/c_pinky2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_pinky1.r/c_pinky2.r/c_pinky3.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_ring1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_ring1.r/c_ring2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_ring1.r/c_ring2.r/c_ring3.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_thumb1.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_thumb1.r/c_thumb2.r
+        weight: 1
+      - path: root/root.x/spine_01.x/spine_02.x/spine_03.x/shoulder.r/arm_stretch.r/forearm_stretch.r/hand.r/c_thumb1.r/c_thumb2.r/c_thumb3.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.l
+        weight: 1
+      - path: root/root.x/thigh_stretch.l/leg_stretch.l
+        weight: 1
+      - path: root/root.x/thigh_stretch.l/leg_stretch.l/foot.l
+        weight: 1
+      - path: root/root.x/thigh_stretch.l/leg_stretch.l/foot.l/toes_01.l
+        weight: 1
+      - path: root/root.x/thigh_stretch.l/leg_stretch.l/leg_twist.l
+        weight: 0
+      - path: root/root.x/thigh_stretch.l/thigh_twist.l
+        weight: 0
+      - path: root/root.x/thigh_stretch.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.r/leg_stretch.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.r/leg_stretch.r/foot.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.r/leg_stretch.r/foot.r/toes_01.r
+        weight: 1
+      - path: root/root.x/thigh_stretch.r/leg_stretch.r/leg_twist.r
+        weight: 0
+      - path: root/root.x/thigh_stretch.r/thigh_twist.r
+        weight: 0
+      - path: shocker_low
+        weight: 0
+      - path: shoes_1_low
+        weight: 0
+      - path: shoes_1_low.001
+        weight: 0
+      - path: teeth_low
+        weight: 0
+      - path: Whip_LP
+        weight: 0
+      maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
@@ -487,10 +919,10 @@ ModelImporter:
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
@@ -572,8 +1004,8 @@ ModelImporter:
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1

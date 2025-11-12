@@ -20,6 +20,12 @@ public abstract class EnemyBaseState : State
         float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
         return playerDistanceSqr <= stateMachine.AttackingRange * stateMachine.AttackingRange;
     }
+
+    protected bool IsInRangedAttackRange()
+    {
+        float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
+        return (playerDistanceSqr <= stateMachine.RangedAttackRange * stateMachine.RangedAttackRange) && (playerDistanceSqr > stateMachine.AttackingRange * stateMachine.AttackingRange);
+    }
     
     protected void Move(float deltaTime)
     {

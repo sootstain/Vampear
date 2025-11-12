@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class PlayerClimbUpState : PlayerBaseState
 {
-    
+    //DON'T THINK WE USE THIS STATE ANYMORE, BUT KEEPING IT ANYWAY FOR NOW.
     private readonly int ClimbUpRef = Animator.StringToHash("ClimbUp");
     private const float CrossFadeDuration = 0.1f;
     
-    public Vector3 Offset; //Based on the chosen animation, could be fixed with root motion I think
-    //but I'm dumb :)
+    public Vector3 Offset;
     
     public PlayerClimbUpState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        Offset = stateMachine.Offset;
+        //Offset = stateMachine.Offset;
     }
 
     public override void Enter()

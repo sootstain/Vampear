@@ -26,8 +26,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public float DashCooldown { get; private set; } = 1f;
 
-    public LedgeDetection LedgeDetection;
-    public DealDamage DealDamage;
+    [field: SerializeField] public LedgeDetection LedgeDetection;
+    [field: SerializeField] public DealDamage DealDamage;
     
     public bool HasDashAvailable { get; private set; } = true;
     private float dashCooldownTimer;
@@ -40,20 +40,16 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public GameObject BellGameObject;
     
-    [field: SerializeField] public Vector3 Offset = new Vector3(0f, 2.325f, 0.65f);
+    //[field: SerializeField] public Vector3 Offset = new Vector3(0f, 2.325f, 0.65f);
 
     [field: SerializeField] public float interactionRadius;
     
     private bool isVampire;
     private void Start()
     {
-        //Debug.Log("StateMachine LedgeDetection: " + (LedgeDetection != null ? "ASSIGNED" : "NULL!!!"));
-
         if (PlayerMesh.activeInHierarchy) isVampire = true;
         MainCameraPosition = Camera.main.transform;
-        DealDamage = GetComponent<DealDamage>();
-        LedgeDetection = GetComponent<LedgeDetection>();
-        
+
         SwitchState(new PlayerMoveState(this));
         InputReader.TransformEvent += OnTransform;
         IsInvincible = false;

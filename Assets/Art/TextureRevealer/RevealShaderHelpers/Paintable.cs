@@ -9,7 +9,7 @@ public class Paintable : MonoBehaviour {
     RenderTexture uvIslandsRenderTexture;
     RenderTexture maskRenderTexture;
     RenderTexture supportTexture;
-    
+    public bool IsBeingRevealed { get; set; } = false;
     Renderer rend;
 
     int maskTextureID = Shader.PropertyToID("_MaskTexture");

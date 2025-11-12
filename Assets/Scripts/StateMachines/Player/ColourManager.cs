@@ -20,7 +20,8 @@ public class ColourManager : MonoBehaviour{
     int uvIslandsID = Shader.PropertyToID("_UVIslands");
     int fadeID = Shader.PropertyToID("_Fade");
     
-
+    
+    
     Material paintMaterial;
     Material extendMaterial;
 
@@ -113,20 +114,20 @@ public class ColourManager : MonoBehaviour{
     
     private void FadeAllPaintables()
     {
+        foreach (var p in allPaintables)
         {
-            foreach (var p in allPaintables)
-            {
-                RenderTexture rt = p.getSupport();
-                if (rt == null) continue;
+            if (p == null) continue;
 
-                // Allocate a temporary RT of the same size and format - if I remove this then it flickers so IDK
-                RenderTexture temp = RenderTexture.GetTemporary(rt.width, rt.height, 0, rt.format);
-                Graphics.Blit(rt, temp, fadeMaterial);
-                Graphics.Blit(temp, rt);
+            if (p.IsBeingRevealed)
+                continue;
 
-                // Release temp
-                RenderTexture.ReleaseTemporary(temp);
-            }
+            RenderTexture rt = p.getSupport();
+            if (rt == null) continue;
+
+            RenderTexture temp = RenderTexture.GetTemporary(rt.width, rt.height, 0, rt.format);
+            Graphics.Blit(rt, temp, fadeMaterial);
+            Graphics.Blit(temp, rt);
+            RenderTexture.ReleaseTemporary(temp);
         }
     }
 

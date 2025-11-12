@@ -9,21 +9,23 @@ public class PlayerThrowBellState : PlayerBaseState
     private LineRenderer lr;
     private GameObject bell;
 
-    private Vector3 grabPoint;
+    private Vector3 targetDirection;
     private Vector3 currentWhipPosition;
+    private float currentWhipLength;
     private bool pulling;
     private bool isRetracting;
+    private bool hitSomething;
 
-    // Whip parameters
     public int quality = 500;
     private Spring spring;
     public float damper = 14;
     public float strength = 800;
     public float velocity = 50;
     public float waveCount = 3;
-    public float waveHeight = 0.01f; //smol bumps
-    public float whipSpeed = 50f; //making this faster
+    public float waveHeight = 0.05f;
+    public float whipSpeed = 50f;
     public float snapBackSpeed = 50f;
+    public float maxWhipLength = 10f;
 
     private AnimationCurve affectCurve;
     
@@ -31,25 +33,39 @@ public class PlayerThrowBellState : PlayerBaseState
     public float whipDuration = 0.4f;
     public float snapBackDuration = 0.3f;
     
+    private RectTransform crosshair;
+    private Camera mainCamera;
     
-    public PlayerThrowBellState(PlayerStateMachine stateMachine, Vector3 hitInfo) : base(stateMachine)
+    public PlayerThrowBellState(PlayerStateMachine stateMachine, RectTransform crosshairUI) : base(stateMachine)
     {
         lr = stateMachine.WhipLine;
         whipBase = stateMachine.WhipBase;
         affectCurve = stateMachine.whipCurve;
         spring = new Spring();
-        spring.SetTarget(1f); // needed for visible wave
+        spring.SetTarget(1f);
         bell = stateMachine.BellGameObject;
-        grabPoint = hitInfo;
+        crosshair = crosshairUI;
+        mainCamera = Camera.main;
     }
 
     public override void Enter()
     {
+
         whipBase.gameObject.SetActive(true);
         stateMachine.Animator.Play(ChainAnim);
         pulling = true;
         isRetracting = false;
+        hitSomething = false;
         whipAnimationTimer = 0f;
+        currentWhipLength = 0f;
+
+        Vector3 crosshairWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(
+            crosshair.position.x, 
+            crosshair.position.y, 
+            mainCamera.nearClipPlane + 10f
+        ));
+        
+        targetDirection = (crosshairWorldPos - whipBase.position).normalized;
 
         lr.enabled = true;
         lr.positionCount = quality + 1;
@@ -61,7 +77,6 @@ public class PlayerThrowBellState : PlayerBaseState
 
         if (bell != null)
         {
-            //bell.SetActive(true);
             bell.transform.position = whipBase.position;
         }
     }
@@ -77,24 +92,39 @@ public class PlayerThrowBellState : PlayerBaseState
 
         if (!isRetracting)
         {
-            currentWhipPosition = Vector3.MoveTowards(currentWhipPosition, grabPoint, deltaTime * whipSpeed);
+            currentWhipLength += deltaTime * whipSpeed;
+            currentWhipPosition = whipBase.position + targetDirection * currentWhipLength;
 
-            if (Vector3.Distance(currentWhipPosition, grabPoint) < 0.05f)
+            RaycastHit hit;
+            if (Physics.Raycast(whipBase.position, targetDirection, out hit, currentWhipLength))
             {
-                InstantiateSphere();
+                currentWhipPosition = hit.point;
+                hitSomething = true;
+                InstantiateSphere(hit.point);
+                isRetracting = true;
+                whipAnimationTimer = 0f;
+                currentWhipLength = Vector3.Distance(whipBase.position, currentWhipPosition);
+            }
+            //Changed this to max length as we're using a crosshair; so it can extend outwards until reaching max length
+            else if (currentWhipLength >= maxWhipLength)
+            {
+                currentWhipPosition = whipBase.position + targetDirection * maxWhipLength;
+                currentWhipLength = maxWhipLength;
                 isRetracting = true;
                 whipAnimationTimer = 0f;
             }
         }
         else
         {
-            currentWhipPosition = Vector3.MoveTowards(currentWhipPosition, whipBase.position, deltaTime * snapBackSpeed);
-
-            if (Vector3.Distance(currentWhipPosition, whipBase.position) < 0.05f)
+            currentWhipLength -= deltaTime * snapBackSpeed;
+            
+            if (currentWhipLength <= 0f)
             {
                 StopPull();
                 return;
             }
+            
+            currentWhipPosition = whipBase.position + targetDirection * currentWhipLength;
         }
 
         DrawWhip();
@@ -104,16 +134,13 @@ public class PlayerThrowBellState : PlayerBaseState
     {
         Vector3 whipDirection = (currentWhipPosition - whipBase.position).normalized;
         var up = Quaternion.LookRotation(whipDirection) * Vector3.up;
-        Debug.DrawLine(whipBase.position, currentWhipPosition, Color.red);
-        Debug.Log(Vector3.Distance(whipBase.position, currentWhipPosition));
+        
         for (int i = 0; i <= quality; i++)
         {
             float delta = i / (float)quality;
             float waveIntensity = spring.Value * affectCurve.Evaluate(delta);
-            //Removing all animation stuff
             Vector3 waveOffset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * waveIntensity);
             Vector3 position = Vector3.Lerp(whipBase.position, currentWhipPosition, delta) + waveOffset;
-            //Vector3 position = Vector3.Lerp(whipBase.position, currentWhipPosition, delta);
             lr.SetPosition(i, position);
         }
 
@@ -121,9 +148,9 @@ public class PlayerThrowBellState : PlayerBaseState
             bell.transform.position = lr.GetPosition(lr.positionCount - 1);
     }
 
-    private void InstantiateSphere()
+    private void InstantiateSphere(Vector3 position)
     {
-        Object.Instantiate(stateMachine.visualSpherePrefab, grabPoint, Quaternion.identity);
+        Object.Instantiate(stateMachine.visualSpherePrefab, position, Quaternion.identity);
     }
 
     private void StopPull()
@@ -132,9 +159,6 @@ public class PlayerThrowBellState : PlayerBaseState
         lr.positionCount = 0;
         lr.enabled = false;
 
-        /*if (bell != null)
-            bell.SetActive(false);*/
-
         stateMachine.SwitchState(new PlayerMoveState(stateMachine));
     }
 
@@ -142,8 +166,5 @@ public class PlayerThrowBellState : PlayerBaseState
     {
         pulling = false;
         lr.enabled = false;
-
-        /*if (bell != null)
-            bell.SetActive(false);*/
     }
 }

@@ -43,8 +43,8 @@ public class DialogueManager : MonoBehaviour
         else
             Destroy(gameObject);
         
-        VNDialogueContainer.SetActive(false);
-        DSDialogueContainer.SetActive(false);
+        //VNDialogueContainer.SetActive(false);
+        //DSDialogueContainer.SetActive(false);
     }
     
     public void StartDialogue(DialogueSO dialogue)

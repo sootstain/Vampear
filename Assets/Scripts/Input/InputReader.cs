@@ -19,12 +19,23 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action TransformEvent;
     public event Action AimEvent;
     
+    public event Action InteractEvent;
+    
     private Controls controls;
     private void Start()
     {
         controls = new Controls();
         controls.Player.SetCallbacks(this);
         controls.Player.Enable();
+    }
+    
+    private void Update()
+    {
+        if (controls != null && controls.Player.enabled)
+        {
+            Vector2 readValue = controls.Player.Move.ReadValue<Vector2>();
+            MovementValue = readValue;
+        }
     }
 
     private void OnDestroy()
@@ -52,7 +63,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        InteractEvent?.Invoke();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

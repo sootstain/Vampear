@@ -15,7 +15,10 @@ public class EnemyChasingState : EnemyBaseState
 
     public override void Exit()
     {
-        stateMachine.Agent.ResetPath();
+        if (stateMachine.Agent.hasPath)
+        {
+            stateMachine.Agent.ResetPath();    
+        }
         stateMachine.Agent.velocity = Vector3.zero;
     }
 
@@ -28,11 +31,18 @@ public class EnemyChasingState : EnemyBaseState
             stateMachine.SwitchState(new EnemyIdleState(stateMachine));
             return;
         }
-        else if (IsInAttackRange())
+        else if (IsInAttackRange()) //leaving this here but think it'll always go from chase -> ranged attack -> melee
         {
             stateMachine.SwitchState(new EnemyAttackingState(stateMachine));
             return;
         }
+        else if (IsInRangedAttackRange())
+        {
+            stateMachine.SwitchState(new EnemyRangedAttackState(stateMachine));
+            return;
+        }
+ 
+
         stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);
         MoveToPlayer(deltaTime);
         FacePlayer();

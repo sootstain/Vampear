@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e83f23f39331be4facdc531e8cf4e19, type: 3}
+  m_Name: PrototypeDialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  Context: For Prototype DS Style
+  DialogueType: 1
+  Dialogue:
+  - Speaker: Maker
+    Text: Watch out, there might be dangers in the dark.
+    Image: {fileID: 1564759471, guid: c92a997c895e6d341be3ea58257e0b1f, type: 3}
+  - Speaker: Nika
+    Text: I know what I'm doing.
+    Image: {fileID: -506070943, guid: b9ec3bbb5fc7ae94bad1c4aefb4252e0, type: 3}

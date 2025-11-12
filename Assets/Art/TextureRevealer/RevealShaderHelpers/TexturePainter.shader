@@ -61,16 +61,7 @@
                 float f = mask(i.worldPos, _PainterPosition, _Radius, _Hardness);
                 float edge = f * _Strength;
                 
-                float4 result;
-                if (_Fade > 0.5) //just as a test for now; set to arbitrary 0.01 alpha, to eventually make with sound
-                {
-                    float4 transparentColor = float4(0, 0, 0, 0.1);
-                    result = lerp(col, transparentColor, edge);
-                }
-                else
-                {
-                    result = lerp(col, _PainterColor, edge);
-                }
+                float4 result = lerp(col, _PainterColor, edge);
                 
                 return result;
             }

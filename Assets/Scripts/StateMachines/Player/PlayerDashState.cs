@@ -4,9 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerDashState : PlayerBaseState
 {
     private readonly int DashHash = Animator.StringToHash("Dash");
-    
-    private const float DashDuration = 0.3f;
-    private const float DashSpeed = 20f;
     private float dashTimer;
     private Vector3 dashDirection;
     private bool hasAttacked = false;
@@ -18,7 +15,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void Enter()
     {
-        dashTimer = DashDuration;
+        dashTimer = stateMachine.DashDuration;
         dashDirection = GetDashDirection();
         stateMachine.Animator.CrossFadeInFixedTime(DashHash, 0.1f);
         stateMachine.IsInvincible = true;
@@ -28,7 +25,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        Move(dashDirection * DashSpeed, deltaTime);
+        Move(dashDirection * stateMachine.DashSpeed, deltaTime);
         dashTimer -= deltaTime;
         if (stateMachine.InputReader.isAttacking && !hasAttacked)
         {

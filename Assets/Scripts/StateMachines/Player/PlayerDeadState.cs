@@ -9,21 +9,22 @@ public class PlayerDeadState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.CharacterController.enabled = false;
         stateMachine.Animator.Play(Die);
     }
 
     public override void Exit()
     {
-        
+        stateMachine.CharacterController.enabled = true;
     }
 
     public override void Tick(float deltaTime)
     {
         Debug.Log("You dead");
-        //bool animationComplete = stateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.5f;
-        //if (animationComplete)
-        //{
+        bool animationComplete = stateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.5f;
+        if (animationComplete)
+        {
             GameManager.Instance.ShowDeathScreen();
-        //}
+        }
     }
 }

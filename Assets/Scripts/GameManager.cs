@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
         
-        //deathScreen.SetActive(false);
+        deathScreen.SetActive(false);
+        pauseMenu.SetActive(false);
         if(startingEvent != null) startingEvent.TriggerEvent();
     }
 
@@ -33,6 +34,16 @@ public class GameManager : MonoBehaviour
         Pause();
         //Add fade scene transition
         deathScreen.SetActive(true);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void Pause()

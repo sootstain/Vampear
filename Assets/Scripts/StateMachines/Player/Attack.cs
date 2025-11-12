@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [Serializable]
 public class Attack
@@ -15,4 +18,21 @@ public class Attack
     [field: SerializeField] public float ForceStrength { get; private set; }
     [field: SerializeField] public float Damage { get; private set; }
     [field: SerializeField] public float Knockback { get; private set; }
+    [field: SerializeField] public List<ParticleSystem> VisualEffect { get; private set; }
+
+    public void PlayVFX()
+    {
+        foreach (var x in VisualEffect)
+        {
+            x.Play();
+        }
+    }
+    
+    public void StopVFX()
+    {
+        foreach (var x in VisualEffect)
+        {
+            x.Stop();
+        }
+    }
 }

@@ -16,11 +16,13 @@ public class PlayerAttackState : PlayerBaseState
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
+        attack.PlayVFX();
         damage.EnableDamageDealing();
     }
 
     public override void Exit()
     {
+        attack.StopVFX();
         damage.DisableDamageDealing();
     }
 

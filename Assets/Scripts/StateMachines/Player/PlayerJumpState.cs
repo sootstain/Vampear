@@ -6,15 +6,22 @@ public class PlayerJumpState : PlayerBaseState
     private const float SnapAngleThreshold = 120f;
     private const float RotationSpeed = 20f;
     
+    private AnimationCurve jumpCurve;
     private Vector3 jumpMomentum;
     private Quaternion lockedFacingRotation;
+    private float jumpTimer;
+    private float jumpDuration = 2f;
 
-    public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
+    {
+        jumpCurve = stateMachine.jumpCurve;
+    }
     
     public override void Enter()
     { 
         stateMachine.Animator.SetTrigger("Jump");
         stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
+        
         stateMachine.InputReader.DashEvent += OnDash;
         lockedFacingRotation = stateMachine.transform.rotation;
         
@@ -39,7 +46,11 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        AirMovement(deltaTime);
+        jumpTimer += deltaTime;
+        float normalizedTime = Mathf.Clamp01(jumpTimer / jumpDuration);
+        float speedMultiplier = jumpCurve.Evaluate(normalizedTime);
+        
+        AirMovement(deltaTime, speedMultiplier);
         if (stateMachine.InputReader.isAttacking) 
         {
             stateMachine.Animator.SetBool("isAttacking", true);
@@ -52,7 +63,7 @@ public class PlayerJumpState : PlayerBaseState
         stateMachine.transform.rotation = lockedFacingRotation;
     }
 
-    private void AirMovement(float deltaTime)
+    private void AirMovement(float deltaTime, float speedMultiplier)
     {
         Vector3 inputDir = CalculateJump();
         if (inputDir.sqrMagnitude > Mathf.Epsilon)
@@ -64,7 +75,7 @@ public class PlayerJumpState : PlayerBaseState
             );
         }
         
-        Move(jumpMomentum, deltaTime);
+        Move(jumpMomentum * speedMultiplier, deltaTime);
         
     }
     

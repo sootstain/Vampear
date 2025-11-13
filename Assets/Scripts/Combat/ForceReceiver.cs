@@ -8,28 +8,27 @@ public class ForceReceiver : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
     [SerializeField] private NavMeshAgent agent;
+    
     [SerializeField] private float drag = 0.3f;
+    [SerializeField] private float baseGravity = -9.81f;
+    [SerializeField] private float fallMultiplier = 2.5f;
+    [SerializeField] private float lowJumpMultiplier = 2.0f;
+    [SerializeField] private float apexHangGravityScale = 0.5f;
+    [SerializeField] private float apexThreshold = 0.5f;
+    [SerializeField] private float maxFallSpeed = -25f;
+    
 
     private Vector3 dampingVelocity;
     private Vector3 impact;
     private float verticalVelocity;
+    
+    public InputReader InputReader { get; set; }
 
     public Vector3 Movement => impact + Vector3.up * verticalVelocity;
 
     private void Update()
     {
-        
-        //TODO: Maybe change this out, use root motion?
-        //Apply gravity, to customise a bit more with jumping / parkour movements
-        
-        if (verticalVelocity < 0f && controller.isGrounded)
-        {
-            verticalVelocity = Physics.gravity.y * Time.deltaTime;
-        }
-        else
-        {
-            verticalVelocity += Physics.gravity.y * Time.deltaTime; //Keep adding, accelerating
-        }
+        ApplyVariableGravity(Time.deltaTime);
 
         impact = Vector3.SmoothDamp(impact, Vector3.zero, ref dampingVelocity, drag);
 
@@ -41,6 +40,37 @@ public class ForceReceiver : MonoBehaviour
                 agent.enabled = true;
             }
         }
+    }
+    
+    private void ApplyVariableGravity(float deltaTime)
+    {
+        bool isGrounded = controller.isGrounded;
+        float gravityForce = baseGravity;
+
+        if (isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = baseGravity * deltaTime;
+            return;
+        }
+
+        if (verticalVelocity > 0f)
+        {
+            if (InputReader != null && !InputReader.isJumpHeld)
+            {
+                gravityForce *= lowJumpMultiplier;
+            }
+            else if (Mathf.Abs(verticalVelocity) < apexThreshold)
+            {
+                gravityForce *= apexHangGravityScale;
+            }
+        }
+        else if (verticalVelocity < 0f)
+        {
+            gravityForce *= fallMultiplier;
+        }
+
+        verticalVelocity += gravityForce * deltaTime;
+        verticalVelocity = Mathf.Max(verticalVelocity, maxFallSpeed);
     }
 
     public void Reset()

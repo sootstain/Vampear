@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     public bool isAttacking { get; private set; }
-    
     public bool isTargeting { get; set; }
     
     public bool isJumping { get; private set; }
+    public bool isJumpHeld { get; private set; }
     public bool isAiming { get; set; }
 
     public Vector2 MovementValue { get; private set; }
@@ -75,12 +75,14 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (context.performed)
         {
-            isJumping = true;
+            isJumping = true;    // for jump start
+            isJumpHeld = true;   // for variable gravity
             JumpEvent?.Invoke();
         }
-        else
+        else if (context.canceled)
         {
             isJumping = false;
+            isJumpHeld = false;
         }
     }
 

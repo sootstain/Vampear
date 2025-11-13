@@ -41,7 +41,7 @@ public class PlayerDashState : PlayerBaseState
             float remainingTime = stateMachine.DashDuration - dashTimer;
             
             // Switch to attack state with Slash 2
-            stateMachine.SwitchState(new PlayerDashAttackState(stateMachine, slash2Index, dashDirection, remainingTime));;
+            stateMachine.SwitchState(new PlayerDashAttackState(stateMachine, slash2Index, dashDirection, remainingTime));
             return;
         }
         

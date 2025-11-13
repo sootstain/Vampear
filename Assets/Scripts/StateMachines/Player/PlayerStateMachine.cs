@@ -23,6 +23,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public GameObject BatMesh { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
+    [field: SerializeField] public AnimationCurve jumpCurve;
     [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public float DashCooldown { get; private set; } = 1f;
 

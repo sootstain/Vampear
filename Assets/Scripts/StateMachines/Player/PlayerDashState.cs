@@ -34,7 +34,7 @@ public class PlayerDashState : PlayerBaseState
         float speedMultiplier = DashCurve.Evaluate(normalizedTime);
         
         Move(dashDirection * stateMachine.DashSpeed * speedMultiplier, deltaTime);
-        dashTimer += deltaTime;
+        
         if (stateMachine.InputReader.isAttacking && !hasAttacked)
         {
             hasAttacked = true;

@@ -34,7 +34,7 @@ public class PlayerStateMachine : StateMachine
     [Header( "Dash - Tweak speed and duration of dash" )]
     [field: SerializeField] public float DashDuration { get; private set; } = 0.3f;
     [field: SerializeField] public float DashSpeed { get; private set; } = 20f;
-    
+    [field: SerializeField] public AnimationCurve dashCurve;
     public bool HasDashAvailable { get; private set; } = true;
     private float dashCooldownTimer;
     

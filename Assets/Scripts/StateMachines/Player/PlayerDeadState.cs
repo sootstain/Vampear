@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class PlayerDeadState : PlayerBaseState
 {
-    private readonly int Die = Animator.StringToHash("Die");
+    
     public PlayerDeadState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter()
     {
+        stateMachine.Animator.SetTrigger("Die");
         stateMachine.CharacterController.enabled = false;
-        stateMachine.Animator.Play(Die);
     }
 
     public override void Exit()

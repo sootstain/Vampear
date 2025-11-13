@@ -7,13 +7,10 @@ public class PlayerFreeAimState : PlayerBaseState
 {
     
     private GameObject sphere;
-    private readonly int Shoot = Animator.StringToHash("ChainThrow");
-    private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed"); //readonly for anim
     
-    private readonly int MoveBlendTree = Animator.StringToHash("ChainMovement"); //for camera change
     private RectTransform crosshair;
     
-    
+    private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed"); //readonly for anim
     public PlayerFreeAimState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         crosshair = stateMachine.visualTarget.rectTransform;
@@ -22,13 +19,15 @@ public class PlayerFreeAimState : PlayerBaseState
     
     public override void Enter()
     {
+        stateMachine.Animator.SetBool("isAiming", true);
+        
         crosshair.gameObject.SetActive(true);
         stateMachine.InputReader.AimEvent += OnAimCancel;
-        stateMachine.Animator.Play(Shoot);
     }
 
     public override void Exit()
     {
+        stateMachine.Animator.SetBool("isAiming", false);
         crosshair.gameObject.SetActive(false);
         stateMachine.InputReader.AimEvent -= OnAimCancel;
     }
@@ -61,20 +60,18 @@ public class PlayerFreeAimState : PlayerBaseState
                 
                 }
             }
-            
-            Vector3 movement = CalculateMovement();
-        
-            Move(movement * stateMachine.StandardMovementSpeed, deltaTime);
-
-            if (stateMachine.InputReader.MovementValue == Vector2.zero)
-            {
-                stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0, 0.1f, Time.deltaTime);
-                return;
-            }
-            stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 1, 0.1f, Time.deltaTime);
-        
-            FaceMoveDirection(movement, deltaTime);
-
         }
+        Vector3 movement = CalculateMovement();
+        
+        Move(movement * stateMachine.StandardMovementSpeed, deltaTime);
+
+        if (stateMachine.InputReader.MovementValue == Vector2.zero)
+        {
+            stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0, 0.1f, Time.deltaTime);
+            return;
+        }
+        stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 1, 0.1f, Time.deltaTime);
+        
+        FaceMoveDirection(movement, deltaTime);
     }
 }

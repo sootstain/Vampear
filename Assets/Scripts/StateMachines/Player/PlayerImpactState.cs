@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerImpactState : PlayerBaseState
 {
-    private readonly int ImpactHash = Animator.StringToHash("Impact");
-    private const float CrossFadeDuration = 0.1f;
     private float duration = 1f;
     
     public PlayerImpactState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -12,7 +10,7 @@ public class PlayerImpactState : PlayerBaseState
     
     public override void Enter()
     {
-        stateMachine.Animator.CrossFadeInFixedTime(ImpactHash, CrossFadeDuration);
+        stateMachine.Animator.SetTrigger("Hurt");
     }
 
     public override void Exit()

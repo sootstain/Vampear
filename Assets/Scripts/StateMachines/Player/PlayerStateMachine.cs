@@ -49,6 +49,8 @@ public class PlayerStateMachine : StateMachine
     //[field: SerializeField] public Vector3 Offset = new Vector3(0f, 2.325f, 0.65f);
 
     [field: SerializeField] public float interactionRadius;
+
+    [field: SerializeField] public GameObject[] chainSegments = new GameObject[7];
     
     private bool isVampire;
     private void Start()

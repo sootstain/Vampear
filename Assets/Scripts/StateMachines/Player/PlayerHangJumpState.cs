@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerHangJumpState : PlayerBaseState
 {
+    //TODO: Currently hooked up to Front Flip; get double jump working first OR wire up differently
+    //Will do after air movement / plain jump feels good.
     private readonly int JumpRef = Animator.StringToHash("Jump");
     private const float CrossFadeDuration = 0.1f;
 

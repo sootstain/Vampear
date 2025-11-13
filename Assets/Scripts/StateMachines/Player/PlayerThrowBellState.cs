@@ -3,8 +3,6 @@ using DG.Tweening;
 
 public class PlayerThrowBellState : PlayerBaseState
 {
-    private readonly int ChainAnim = Animator.StringToHash("Swing");
-
     private Transform whipBase;
     private LineRenderer lr;
     private GameObject bell;
@@ -30,8 +28,8 @@ public class PlayerThrowBellState : PlayerBaseState
     private AnimationCurve affectCurve;
     
     private float whipAnimationTimer = 0f;
-    public float whipDuration = 0.4f;
-    public float snapBackDuration = 0.3f;
+    public float whipDuration = 0.5f;
+    public float snapBackDuration = 0.4f;
     
     private RectTransform crosshair;
     private Camera mainCamera;
@@ -52,7 +50,7 @@ public class PlayerThrowBellState : PlayerBaseState
     {
 
         whipBase.gameObject.SetActive(true);
-        stateMachine.Animator.Play(ChainAnim);
+        stateMachine.Animator.SetTrigger("ThrewBell");
         pulling = true;
         isRetracting = false;
         hitSomething = false;
@@ -164,6 +162,7 @@ public class PlayerThrowBellState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.Animator.SetBool("ThrewBell", false);
         pulling = false;
         lr.enabled = false;
     }

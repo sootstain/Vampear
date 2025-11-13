@@ -5,8 +5,7 @@ using DG.Tweening;
 
 public class PlayerPullTargetState : PlayerBaseState
 {
-    //private readonly int PullAnim = Animator.StringToHash("Pull");
-    private readonly int ChainAnim = Animator.StringToHash("ChainThrow");
+    
     
     Transform cameraPos, whipBase;
     private float maxDistance;
@@ -49,7 +48,7 @@ public class PlayerPullTargetState : PlayerBaseState
     public override void Enter()
     {
         whipBase.gameObject.SetActive(true);
-        stateMachine.Animator.Play(ChainAnim);
+        stateMachine.Animator.SetTrigger("ThrewBell");
         pulling = true;
         whipAnimationTimer = 0f;
         if (target != null)
@@ -91,6 +90,7 @@ public class PlayerPullTargetState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.Animator.SetTrigger("ThrewBell");
         whipBase.gameObject.SetActive(false);
         pulling = false;
         lr.positionCount = 0;
@@ -116,6 +116,7 @@ public class PlayerPullTargetState : PlayerBaseState
     
     private void PullTarget()
     {
+        stateMachine.Animator.SetTrigger("Pull");
         Vector3 pullPosNorm = (stateMachine.WhipBase.position - target.transform.position).normalized;
         Vector3 targetPos = stateMachine.WhipBase.position - (pullPosNorm * 2f);
         

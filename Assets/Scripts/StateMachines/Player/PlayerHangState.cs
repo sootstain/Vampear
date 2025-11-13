@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerHangState : PlayerBaseState
 {
-    private readonly int HangRef = Animator.StringToHash("Hang");
-    private const float CrossFadeDuration = 0.1f;
     private const float SnapSpeed = 15f;
     
     private Vector3 targetHangPosition;
@@ -20,6 +18,7 @@ public class PlayerHangState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.Animator.SetBool("IsHanging", true);
         Vector3 horizontalForward = Vector3.ProjectOnPlane(ledgeForward, Vector3.up).normalized;
 
         if (horizontalForward.sqrMagnitude < 0.1f)
@@ -29,7 +28,6 @@ public class PlayerHangState : PlayerBaseState
         
         stateMachine.transform.rotation = Quaternion.LookRotation(horizontalForward, Vector3.up);
         
-        stateMachine.Animator.CrossFadeInFixedTime(HangRef, CrossFadeDuration);
         stateMachine.ForceReceiver.Reset();
         stateMachine.CharacterController.enabled = false;
         stateMachine.transform.position = targetHangPosition;
@@ -38,6 +36,7 @@ public class PlayerHangState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.Animator.SetBool("IsHanging", false);
         stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.transform.forward, Vector3.up);
         
         stateMachine.CharacterController.enabled = true;

@@ -17,7 +17,7 @@ public class PlayerDashState : PlayerBaseState
     {
         dashTimer = stateMachine.DashDuration;
         dashDirection = GetDashDirection();
-        stateMachine.Animator.CrossFadeInFixedTime(DashHash, 0.1f);
+        stateMachine.Animator.SetBool("Dash", true);
         stateMachine.IsInvincible = true;
         stateMachine.StartDashCooldown();
         stateMachine.ForceReceiver.enabled = false;
@@ -44,6 +44,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.Animator.SetBool("Dash", false);
         stateMachine.IsInvincible = false;
         stateMachine.ForceReceiver.enabled = true;
     }

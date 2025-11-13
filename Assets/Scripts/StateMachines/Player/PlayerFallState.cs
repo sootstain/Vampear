@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerFallState : PlayerBaseState
 {
-    private readonly int FallRef = Animator.StringToHash("Fall");
-    private const float CrossFadeDuration = 0.1f;
     private Vector3 momentum; 
     private bool isSubscribed = false;
     
@@ -22,7 +20,6 @@ public class PlayerFallState : PlayerBaseState
         Debug.Log("LedgeDetection component: " + (stateMachine.LedgeDetection != null ? "Found" : "NULL!"));
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f;
-        stateMachine.Animator.CrossFadeInFixedTime(FallRef, CrossFadeDuration);
         stateMachine.LedgeDetection.ResetDetection();
         
         // Subscribe here if not already subscribed

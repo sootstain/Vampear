@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerBaseState
 {
-    private readonly int Uppercut = Animator.StringToHash("Uppercut"); //for camera change
 
-    private readonly int JumpRef = Animator.StringToHash("Jump");
-    private const float CrossFadeDuration = 0.1f;
-    
     private const float SnapAngleThreshold = 120f;
     private const float RotationSpeed = 20f;
     
@@ -16,9 +12,9 @@ public class PlayerJumpState : PlayerBaseState
     public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine) { }
     
     public override void Enter()
-    { ;
+    { 
+        stateMachine.Animator.SetTrigger("Jump");
         stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
-        stateMachine.Animator.CrossFadeInFixedTime(JumpRef, CrossFadeDuration);
         stateMachine.InputReader.DashEvent += OnDash;
         lockedFacingRotation = stateMachine.transform.rotation;
         

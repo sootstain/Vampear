@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerTargetState : PlayerBaseState
 {
 
+    //TODO: Fix this after strafing added
     private readonly int TargetForward = Animator.StringToHash("TargetForwards"); //for camera change
     private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed"); //readonly for anim
 

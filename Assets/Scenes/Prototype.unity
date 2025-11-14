@@ -411,6 +411,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6385654662965974593, guid: 1e94398d7f9fde344b6bb8ba44b942bb, type: 3}
+--- !u!1 &139433938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4123061136272565555, guid: a94d0c4991371c74885088f5246a1efc, type: 3}
+  m_PrefabInstance: {fileID: 3415037429647237975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &142178946
 GameObject:
   m_ObjectHideFlags: 0
@@ -5750,6 +5755,11 @@ MonoBehaviour:
   player: {fileID: 3595745194310697208}
   throwPoint: {fileID: 1016000658}
   throwForce: 20
+--- !u!1 &1907080017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5171042205434345832, guid: a94d0c4991371c74885088f5246a1efc, type: 3}
+  m_PrefabInstance: {fileID: 3415037429647237975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1910536595
 GameObject:
   m_ObjectHideFlags: 0
@@ -8053,6 +8063,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1871665194723189545, guid: a94d0c4991371c74885088f5246a1efc, type: 3}
+      propertyPath: catchableHands.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871665194723189545, guid: a94d0c4991371c74885088f5246a1efc, type: 3}
+      propertyPath: 'catchableHands.Array.data[0]'
+      value: 
+      objectReference: {fileID: 139433938}
+    - target: {fileID: 1871665194723189545, guid: a94d0c4991371c74885088f5246a1efc, type: 3}
+      propertyPath: 'catchableHands.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1907080017}
     - target: {fileID: 3043633344084523739, guid: a94d0c4991371c74885088f5246a1efc, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
@@ -8159,7 +8181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6430545351853236966, guid: a94d0c4991371c74885088f5246a1efc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0000000024833753
+      value: 0.000000001241915
       objectReference: {fileID: 0}
     - target: {fileID: 9041682545438412705, guid: a94d0c4991371c74885088f5246a1efc, type: 3}
       propertyPath: visualTarget

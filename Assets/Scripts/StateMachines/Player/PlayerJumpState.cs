@@ -10,7 +10,7 @@ public class PlayerJumpState : PlayerBaseState
     private Vector3 jumpMomentum;
     private Quaternion lockedFacingRotation;
     private float jumpTimer;
-    private float jumpDuration = 2f;
+    private float speedMultiplier;
 
     public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -19,8 +19,11 @@ public class PlayerJumpState : PlayerBaseState
     
     public override void Enter()
     { 
+        float normalizedTime = jumpTimer / stateMachine.JumpDuration;
+        float speedMultiplier = jumpCurve.Evaluate(normalizedTime);
+        
         stateMachine.Animator.SetTrigger("Jump");
-        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
+        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce, speedMultiplier);
         
         stateMachine.InputReader.DashEvent += OnDash;
         lockedFacingRotation = stateMachine.transform.rotation;
@@ -47,8 +50,8 @@ public class PlayerJumpState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         jumpTimer += deltaTime;
-        float normalizedTime = Mathf.Clamp01(jumpTimer / jumpDuration);
-        float speedMultiplier = jumpCurve.Evaluate(normalizedTime);
+        float normalizedTime = (jumpTimer / stateMachine.JumpDuration);
+        float speedMultiplier = jumpCurve.Evaluate(jumpTimer / stateMachine.JumpDuration);
         
         AirMovement(deltaTime, speedMultiplier);
         if (stateMachine.InputReader.isAttacking) 

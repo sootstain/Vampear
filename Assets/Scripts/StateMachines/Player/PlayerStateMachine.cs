@@ -23,6 +23,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public GameObject BatMesh { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
+    [field: SerializeField] public AnimationCurve jumpCurve;
+    [field: SerializeField] public float JumpDuration { get; private set; } = 2f;
     [field: SerializeField] public AnimationCurve whipCurve { get; private set; }
     [field: SerializeField] public float DashCooldown { get; private set; } = 1f;
 
@@ -33,6 +35,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float MaxAirSpeed { get; private set; } = 8f;
     [Header( "Dash - Tweak speed and duration of dash" )]
     [field: SerializeField] public float DashDuration { get; private set; } = 0.3f;
+
     [field: SerializeField] public float DashSpeed { get; private set; } = 20f;
     [field: SerializeField] public AnimationCurve dashCurve;
     public bool HasDashAvailable { get; private set; } = true;

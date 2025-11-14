@@ -6,53 +6,82 @@ public class PlayerJumpState : PlayerBaseState
     private const float SnapAngleThreshold = 120f;
     private const float RotationSpeed = 20f;
     
+    private AnimationCurve jumpCurve;
     private Vector3 jumpMomentum;
     private Quaternion lockedFacingRotation;
+    private float jumpTimer;
+    private float speedMultiplier;
 
-    public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
+    {
+        jumpCurve = stateMachine.jumpCurve;
+    }
     
     public override void Enter()
     { 
+       //float normalizedTime = jumpTimer / stateMachine.JumpDuration;
+        //float speedMultiplier = jumpCurve.Evaluate(normalizedTime);
+        
         stateMachine.Animator.SetTrigger("Jump");
-        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
+        //stateMachine.ForceReceiver.Jump(stateMachine.JumpForce, speedMultiplier);
+        
         stateMachine.InputReader.DashEvent += OnDash;
         lockedFacingRotation = stateMachine.transform.rotation;
         
         // This calculates if the player is pressing any key of WASD
-        Vector3 inputDir = CalculateJump();
-        if (inputDir.sqrMagnitude > Mathf.Epsilon)
-        {
-            jumpMomentum = inputDir.normalized;
-            FaceJumpDirection(jumpMomentum, Time.deltaTime);
-        }
-        else
-        {
-            jumpMomentum = Vector3.zero;
-        }
+        //Vector3 inputDir = CalculateJump();
+        //if (inputDir.sqrMagnitude > Mathf.Epsilon)
+        //{
+        //    jumpMomentum = inputDir.normalized;
+        //    FaceJumpDirection(jumpMomentum, Time.deltaTime);
+        //}
+        //else
+        //{
+        //    jumpMomentum = Vector3.zero;
+        //}
     }
 
     public override void Exit()
     {
-
+        stateMachine.ForceReceiver.GravityEnabled = true;
         stateMachine.InputReader.DashEvent -= OnDash;
     }
 
     public override void Tick(float deltaTime)
     {
-        AirMovement(deltaTime);
+        jumpTimer += deltaTime;
+        float normalizedTime = (jumpTimer / stateMachine.JumpDuration);
+        float speedMultiplier = jumpCurve.Evaluate(normalizedTime);
+        
+        float jumpVel = stateMachine.JumpForce * speedMultiplier;
+        stateMachine.ForceReceiver.SetJump(jumpVel);
+        
+        if (!stateMachine.InputReader.isJumpHeld && jumpVel > 0)
+        {
+            // Cut upward velocity when jump is released
+            stateMachine.ForceReceiver.SetJump(
+                stateMachine.ForceReceiver.GetVelocity() * 0.5f
+            );
+        }
+        
         if (stateMachine.InputReader.isAttacking) 
         {
             stateMachine.Animator.SetBool("isAttacking", true);
         }
-        else if (stateMachine.CharacterController.velocity.y <= 0f)
+        //Changed from animation exit so it goes through the full thing before fall state
+        //Not sure if the fall state meant to be managed in the jump animationcurve :)
+        //oh well
+        if (jumpTimer >= stateMachine.JumpDuration)
         {
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
             return;
         }
+        AirMovement(deltaTime, 1f);
+        stateMachine.ForceReceiver.GravityEnabled = false;
         stateMachine.transform.rotation = lockedFacingRotation;
     }
 
-    private void AirMovement(float deltaTime)
+    private void AirMovement(float deltaTime, float speedMultiplier)
     {
         Vector3 inputDir = CalculateJump();
         if (inputDir.sqrMagnitude > Mathf.Epsilon)
@@ -64,7 +93,7 @@ public class PlayerJumpState : PlayerBaseState
             );
         }
         
-        Move(jumpMomentum, deltaTime);
+        Move(jumpMomentum * speedMultiplier, deltaTime);
         
     }
     

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scratch : MonoBehaviour
+public class PlayerScratch : MonoBehaviour
 {
     [SerializeField] private Collider playerCollider;
     private List<Collider> collidedWith = new List<Collider>(); //to check if hit with current anim scratch
@@ -23,7 +23,10 @@ public class Scratch : MonoBehaviour
         if (other.TryGetComponent(out Health health))
         {
             Debug.Log("Take damage!");
-            health.TakeDamage(10);
+            health.TakeDamage(10); //arbitrary for now :)
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
+            Vector3 hitNormal = (other.transform.position - transform.position).normalized;
+            health.SpawnSplatter(hitPoint, hitNormal);
         }
         
         if (other.TryGetComponent(out ForceReceiver forceReceiver))

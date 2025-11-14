@@ -12,12 +12,12 @@
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<Scratch>(out Scratch hand))
+            /*if (other.TryGetComponent<Scratch>(out Scratch hand))
             {
                 wholeCrate.enabled = false;
                 boxCollider.enabled = false;
                 fracturedCrate.SetActive(true);   
-            }
+            }*/
         }
 
         [ContextMenu("Test")]

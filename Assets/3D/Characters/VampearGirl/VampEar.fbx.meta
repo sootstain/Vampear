@@ -3,7 +3,27 @@ guid: 75318b04ccd65d5439c199f84d4f520d
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bell
+    second: {fileID: 2100000, guid: 6cf5e3d51f5181a4487c01f2f740d358, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Main
+    second: {fileID: 2100000, guid: 7e96e5ab237f7a74482b7e8d11dc33f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Second
+    second: {fileID: 2100000, guid: 926b7c38fca3273418eb0d131281e7da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Third
+    second: {fileID: 2100000, guid: 2183fdd9e98db2f4a85ad9823865c8f8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,7 +58,7 @@ ModelImporter:
       that will be discarded.\n\t'c_index1.r' has translation animation that will
       be discarded.\n\t'c_middle1.r' has translation animation that will be discarded.\n\t'c_pinky1.r'
       has translation animation that will be discarded.\n\t'c_ring1.r' has translation
-      animation that will be discarded.\n\nClip 'root|Jump' has import animation
+      animation that will be discarded.\n\nClip 'root|Hurt' has import animation
       warnings that might lower retargeting quality:\nNote: Activate translation
       DOF on avatar to improve retargeting quality.\n\t'spine_01.x' has translation
       animation that will be discarded.\n\t'c_middle1.l' has translation animation
@@ -46,21 +66,29 @@ ModelImporter:
       be discarded.\n\t'c_ring1.l' has translation animation that will be discarded.\n\t'c_middle1.r'
       has translation animation that will be discarded.\n\t'c_pinky1.r' has translation
       animation that will be discarded.\n\t'c_ring1.r' has translation animation
-      that will be discarded.\n\nClip 'root|LedgeGrab' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'c_middle1.r' has translation animation
-      that will be discarded.\n\t'c_pinky1.r' has translation animation that will
-      be discarded.\n\t'c_ring1.r' has translation animation that will be discarded.\n\nClip
-      'root|Run' has import animation warnings that might lower retargeting quality:\nNote:
-      Activate translation DOF on avatar to improve retargeting quality.\n\t'spine_01.x'
-      has translation animation that will be discarded.\n\nClip 'root|Throw' has
-      import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'spine_01.x' has
-      translation animation that will be discarded.\n\t'c_index1.l' has translation
-      animation that will be discarded.\n\t'c_index1.r' has translation animation
-      that will be discarded.\n\t'c_middle1.r' has translation animation that will
-      be discarded.\n\t'c_pinky1.r' has translation animation that will be discarded.\n\t'c_ring1.r'
-      has translation animation that will be discarded.\n"
+      that will be discarded.\n\nClip 'root|Jump' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'spine_01.x' has translation animation that
+      will be discarded.\n\t'c_middle1.l' has translation animation that will be
+      discarded.\n\t'c_pinky1.l' has translation animation that will be discarded.\n\t'c_ring1.l'
+      has translation animation that will be discarded.\n\t'c_middle1.r' has translation
+      animation that will be discarded.\n\t'c_pinky1.r' has translation animation
+      that will be discarded.\n\t'c_ring1.r' has translation animation that will
+      be discarded.\n\nClip 'root|LedgeGrab' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'c_middle1.r' has translation animation that will be
+      discarded.\n\t'c_pinky1.r' has translation animation that will be discarded.\n\t'c_ring1.r'
+      has translation animation that will be discarded.\n\nClip 'root|Run' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'spine_01.x' has translation
+      animation that will be discarded.\n\nClip 'root|Throw' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'spine_01.x' has translation
+      animation that will be discarded.\n\t'c_index1.l' has translation animation
+      that will be discarded.\n\t'c_index1.r' has translation animation that will
+      be discarded.\n\t'c_middle1.r' has translation animation that will be discarded.\n\t'c_pinky1.r'
+      has translation animation that will be discarded.\n\t'c_ring1.r' has translation
+      animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -558,6 +586,35 @@ ModelImporter:
       keepOriginalPositionY: 0
       keepOriginalPositionXZ: 1
       heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: root|Hurt
+      takeName: root|Hurt
+      internalID: 3517511938571808190
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []

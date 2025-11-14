@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using System;
-using UnityEngine.VFX;
 
 public class Health : MonoBehaviour
 {
@@ -11,8 +10,6 @@ public class Health : MonoBehaviour
 
     public event Action OnTakeDamage;
     public event Action OnDeath;
-    
-    [field: SerializeField] public VisualEffect HitEffect;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,15 +33,9 @@ public class Health : MonoBehaviour
         }
         Debug.Log(currentHealth);
         currentHealth = Mathf.Max(0, currentHealth - damage);
-        //HitEffect.Play();
+        
         OnTakeDamage?.Invoke();
         
-    }
-
-    public void SpawnSplatter(Vector3 collisionPoint, Vector3 hitNormal)
-    {
-        var effect = Instantiate(HitEffect, collisionPoint, Quaternion.LookRotation(hitNormal));
-        effect.Play();
     }
 
     private void Die()

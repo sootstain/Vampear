@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class EnemyStateMachine : StateMachine
@@ -26,8 +25,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float BlockCooldown { get; private set; } = 5f;
     
     [field: SerializeField] public float BlockChance { get; private set; } = 0.2f;
-    
-    
+
     private float lastBlockTime = -999f;
     
     

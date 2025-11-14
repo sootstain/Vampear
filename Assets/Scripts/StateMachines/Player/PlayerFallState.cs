@@ -43,7 +43,10 @@ public class PlayerFallState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         Move(momentum, deltaTime);
-        
+
+        stateMachine.Animator.SetFloat("VerticalVelocity", stateMachine.CharacterController.velocity.y);
+        stateMachine.Animator.SetBool("isGrounded", stateMachine.CharacterController.isGrounded);
+
         //if hit the ground
         if (stateMachine.CharacterController.isGrounded)
         {

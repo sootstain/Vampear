@@ -26,15 +26,6 @@ public class PlayerMoveState : PlayerBaseState
         
         stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0f); //reset
         
-        if (shouldFade)
-        {
-            stateMachine.Animator.CrossFadeInFixedTime(MoveBlendTree, CrossFadeDuration);
-        }
-        else
-        {
-            stateMachine.Animator.Play(MoveBlendTree);
-        }
-        
     }
 
     public override void Exit()

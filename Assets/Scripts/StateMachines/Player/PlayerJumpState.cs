@@ -68,6 +68,10 @@ public class PlayerJumpState : PlayerBaseState
         {
             stateMachine.Animator.SetBool("isAttacking", true);
         }
+
+        stateMachine.Animator.SetFloat("VerticalVelocity", stateMachine.CharacterController.velocity.y);
+        stateMachine.Animator.SetBool("isGrounded", stateMachine.CharacterController.isGrounded);
+
         //Changed from animation exit so it goes through the full thing before fall state
         //Not sure if the fall state meant to be managed in the jump animationcurve :)
         //oh well

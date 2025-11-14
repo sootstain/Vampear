@@ -21,6 +21,7 @@ public class ForceReceiver : MonoBehaviour
     private Vector3 dampingVelocity;
     private Vector3 impact;
     private float verticalVelocity;
+    public bool GravityEnabled { get; set; } = true;
     
     public InputReader InputReader { get; set; }
 
@@ -28,6 +29,9 @@ public class ForceReceiver : MonoBehaviour
 
     private void Update()
     {
+        if (!GravityEnabled)
+            return;
+        
         ApplyVariableGravity(Time.deltaTime);
 
         impact = Vector3.SmoothDamp(impact, Vector3.zero, ref dampingVelocity, drag);
@@ -88,8 +92,18 @@ public class ForceReceiver : MonoBehaviour
         }
     }
     
-    public void Jump(float jumpForce, float multiplier)
+    public void Jump(float jumpForce)
     {
-        verticalVelocity += jumpForce * multiplier;
+        verticalVelocity += jumpForce;
+    }
+
+    public void SetJump(float force)
+    {
+        verticalVelocity = force;
+    }
+
+    public float GetVelocity()
+    {
+        return verticalVelocity;
     }
 }

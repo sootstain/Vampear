@@ -13,7 +13,7 @@ public class PlayerHangJumpState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce, 1);
+        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
         
         
         stateMachine.Animator.CrossFadeInFixedTime(JumpRef, CrossFadeDuration);

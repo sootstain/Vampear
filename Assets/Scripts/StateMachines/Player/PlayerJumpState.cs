@@ -19,31 +19,31 @@ public class PlayerJumpState : PlayerBaseState
     
     public override void Enter()
     { 
-        float normalizedTime = jumpTimer / stateMachine.JumpDuration;
-        float speedMultiplier = jumpCurve.Evaluate(normalizedTime);
+       //float normalizedTime = jumpTimer / stateMachine.JumpDuration;
+        //float speedMultiplier = jumpCurve.Evaluate(normalizedTime);
         
         stateMachine.Animator.SetTrigger("Jump");
-        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce, speedMultiplier);
+        //stateMachine.ForceReceiver.Jump(stateMachine.JumpForce, speedMultiplier);
         
         stateMachine.InputReader.DashEvent += OnDash;
         lockedFacingRotation = stateMachine.transform.rotation;
         
         // This calculates if the player is pressing any key of WASD
-        Vector3 inputDir = CalculateJump();
-        if (inputDir.sqrMagnitude > Mathf.Epsilon)
-        {
-            jumpMomentum = inputDir.normalized;
-            FaceJumpDirection(jumpMomentum, Time.deltaTime);
-        }
-        else
-        {
-            jumpMomentum = Vector3.zero;
-        }
+        //Vector3 inputDir = CalculateJump();
+        //if (inputDir.sqrMagnitude > Mathf.Epsilon)
+        //{
+        //    jumpMomentum = inputDir.normalized;
+        //    FaceJumpDirection(jumpMomentum, Time.deltaTime);
+        //}
+        //else
+        //{
+        //    jumpMomentum = Vector3.zero;
+        //}
     }
 
     public override void Exit()
     {
-
+        stateMachine.ForceReceiver.GravityEnabled = true;
         stateMachine.InputReader.DashEvent -= OnDash;
     }
 
@@ -51,18 +51,33 @@ public class PlayerJumpState : PlayerBaseState
     {
         jumpTimer += deltaTime;
         float normalizedTime = (jumpTimer / stateMachine.JumpDuration);
-        float speedMultiplier = jumpCurve.Evaluate(jumpTimer / stateMachine.JumpDuration);
+        float speedMultiplier = jumpCurve.Evaluate(normalizedTime);
         
-        AirMovement(deltaTime, speedMultiplier);
+        float jumpVel = stateMachine.JumpForce * speedMultiplier;
+        stateMachine.ForceReceiver.SetJump(jumpVel);
+        
+        if (!stateMachine.InputReader.isJumpHeld && jumpVel > 0)
+        {
+            // Cut upward velocity when jump is released
+            stateMachine.ForceReceiver.SetJump(
+                stateMachine.ForceReceiver.GetVelocity() * 0.5f
+            );
+        }
+        
         if (stateMachine.InputReader.isAttacking) 
         {
             stateMachine.Animator.SetBool("isAttacking", true);
         }
-        else if (stateMachine.CharacterController.velocity.y <= 0f)
+        //Changed from animation exit so it goes through the full thing before fall state
+        //Not sure if the fall state meant to be managed in the jump animationcurve :)
+        //oh well
+        if (jumpTimer >= stateMachine.JumpDuration)
         {
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
             return;
         }
+        AirMovement(deltaTime, 1f);
+        stateMachine.ForceReceiver.GravityEnabled = false;
         stateMachine.transform.rotation = lockedFacingRotation;
     }
 

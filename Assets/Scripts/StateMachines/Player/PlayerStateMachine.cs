@@ -55,6 +55,7 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public GameObject[] chainSegments = new GameObject[7];
     
+    
     private bool isVampire;
     private void Start()
     {

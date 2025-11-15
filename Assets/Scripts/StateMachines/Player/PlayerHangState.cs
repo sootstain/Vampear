@@ -8,6 +8,7 @@ public class PlayerHangState : PlayerBaseState
     private Vector3 ledgeForward;
     private Vector3 surfaceNormal;
     private bool hasSnapped = false;
+    private Vector3 WallNormal;
     
     public PlayerHangState(PlayerStateMachine stateMachine, Vector3 ledgeForward, Vector3 surfaceNormal) : base(stateMachine)
     {
@@ -18,7 +19,7 @@ public class PlayerHangState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.Animator.SetBool("IsHanging", true);
+        stateMachine.Animator.SetBool("isHanging", true);
         Vector3 horizontalForward = Vector3.ProjectOnPlane(ledgeForward, Vector3.up).normalized;
 
         if (horizontalForward.sqrMagnitude < 0.1f)
@@ -36,7 +37,7 @@ public class PlayerHangState : PlayerBaseState
 
     public override void Exit()
     {
-        stateMachine.Animator.SetBool("IsHanging", false);
+        stateMachine.Animator.SetBool("isHanging", false);
         stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.transform.forward, Vector3.up);
         
         stateMachine.CharacterController.enabled = true;
@@ -50,10 +51,12 @@ public class PlayerHangState : PlayerBaseState
         
         if (stateMachine.InputReader.isJumping)
         {
+            Debug.Log("Jumping!");
             stateMachine.SwitchState(new PlayerHangJumpState(stateMachine));    
         }
         else if (stateMachine.InputReader.MovementValue.y < 0f)
         {
+            Debug.Log("Falling!");
             stateMachine.SwitchState(new PlayerFallState(stateMachine));       
         }
     }

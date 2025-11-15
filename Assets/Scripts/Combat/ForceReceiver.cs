@@ -19,7 +19,7 @@ public class ForceReceiver : MonoBehaviour
     
 
     private Vector3 dampingVelocity;
-    private Vector3 impact;
+    public Vector3 impact;
     private float verticalVelocity;
     public bool GravityEnabled { get; set; } = true;
     

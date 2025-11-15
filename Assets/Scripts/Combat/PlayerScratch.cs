@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Combat script
+// This is ONLY the collision
 public class PlayerScratch : MonoBehaviour
 {
     [SerializeField] private Collider playerCollider;
+    [SerializeField] private float damage = 10f;
+    [SerializeField] private float knockbackForce = 5f;
     private List<Collider> collidedWith = new List<Collider>(); //to check if hit with current anim scratch
     
     private void OnEnable()
@@ -34,6 +38,8 @@ public class PlayerScratch : MonoBehaviour
             Vector3 direction = (other.transform.position - playerCollider.transform.position).normalized;
             forceReceiver.AddForce(direction * 5); //knockback force, currently arbitrary
         }
+        
+        //HitStopManager.Instance.TriggerHitStop(0.05f);
 
     }
 }

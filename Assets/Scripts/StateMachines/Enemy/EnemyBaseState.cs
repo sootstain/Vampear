@@ -47,4 +47,20 @@ public abstract class EnemyBaseState : State
         //lookPos.Normalize();
         stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
     }
+
+    protected void ReturnToLocomotion()
+    {
+        if (IsInAttackRange())
+        {
+            stateMachine.SwitchState(new EnemyAttackingState(stateMachine));
+        }
+        else if (IsInChaseRange())
+        {
+            stateMachine.SwitchState(new EnemyChasingState(stateMachine));
+        }
+        else
+        {
+            stateMachine.SwitchState(new EnemyIdleState(stateMachine));
+        }
+    }
 }

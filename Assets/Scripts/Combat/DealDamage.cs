@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// This is ONLY the damage
+// I don't think this approach needs to be optimised. No gain in disabling one claw
 public class DealDamage : MonoBehaviour
 {
     [SerializeField] private List<GameObject> catchableHands;

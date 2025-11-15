@@ -7154,7 +7154,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   visualSpherePrefab: {fileID: 5407649885477146253, guid: bbb21eabbc936694999f587f7cda80b3, type: 3}
   visualTarget: {fileID: 0}
-  BellGameObject: {fileID: 1297797540458133062}
+  BellGameObject: {fileID: 0}
   JumpEffect: {fileID: 1756498027142418685}
   LandEffect: {fileID: 6336283337793872404}
   SonarEffectPrefab: {fileID: 5945962632542472474}
@@ -13585,11 +13585,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1871665194723189545}
   m_SourcePrefab: {fileID: 100100000, guid: 75318b04ccd65d5439c199f84d4f520d, type: 3}
---- !u!1 &1297797540458133062 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5773576024516127165, guid: 75318b04ccd65d5439c199f84d4f520d, type: 3}
-  m_PrefabInstance: {fileID: 4764086238508425211}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1394492974209450015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3366628971686436892, guid: 75318b04ccd65d5439c199f84d4f520d, type: 3}

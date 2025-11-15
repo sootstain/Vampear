@@ -19,9 +19,9 @@ public class PlayerDashState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.Animator.SetTrigger("Dash");
         dashTimer = 0f;
         dashDirection = GetDashDirection();
-        stateMachine.Animator.SetBool("Dash", true);
         stateMachine.IsInvincible = true;
         stateMachine.StartDashCooldown();
         stateMachine.ForceReceiver.enabled = false;
@@ -49,11 +49,11 @@ public class PlayerDashState : PlayerBaseState
         {
             stateMachine.SwitchState(new PlayerMoveState(stateMachine));
         }
+
     }
 
     public override void Exit()
     {
-        stateMachine.Animator.SetBool("Dash", false);
         stateMachine.IsInvincible = false;
         stateMachine.ForceReceiver.enabled = true;
     }

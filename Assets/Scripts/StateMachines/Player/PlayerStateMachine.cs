@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -49,12 +50,9 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public GameObject BellGameObject;
     
-    //[field: SerializeField] public Vector3 Offset = new Vector3(0f, 2.325f, 0.65f);
-
-    [field: SerializeField] public float interactionRadius;
-
-    [field: SerializeField] public GameObject[] chainSegments = new GameObject[7];
+    [field: SerializeField] public ParticleSystem JumpEffect;
     
+    [field: SerializeField] public ParticleSystem LandEffect;
     
     private bool isVampire;
     private void Start()
@@ -105,7 +103,7 @@ public class PlayerStateMachine : StateMachine
             isVampire = true;
         }
     }
-
+    
     private void HandleDeath()
     {
         SwitchState(new PlayerDeadState(this));

@@ -13,6 +13,7 @@ public class PlayerFallState : PlayerBaseState
             stateMachine.LedgeDetection.OnLedgeDetected += HandleLedgeDetection;
             isSubscribed = true;
         }
+        
     }
 
     public override void Enter()
@@ -33,6 +34,7 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Exit()
     {
+        
         if (isSubscribed)
         {
             stateMachine.LedgeDetection.OnLedgeDetected -= HandleLedgeDetection;
@@ -44,16 +46,15 @@ public class PlayerFallState : PlayerBaseState
     {
         Move(momentum, deltaTime);
 
-        stateMachine.Animator.SetFloat("VerticalVelocity", stateMachine.CharacterController.velocity.y);
-        stateMachine.Animator.SetBool("isGrounded", stateMachine.CharacterController.isGrounded);
 
         //if hit the ground
         if (stateMachine.CharacterController.isGrounded)
         {
+            stateMachine.LandEffect.Play();
+            stateMachine.Animator.SetBool("isGrounded", true);
             ReturnToMoveStates();
             return;       
         }
-        
         FaceTarget();
     }
     

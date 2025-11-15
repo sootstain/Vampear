@@ -7,6 +7,9 @@ public class PlayerFreeAimState : PlayerBaseState
 {
     
     private GameObject sphere;
+    private Transform whipBase;
+    private LineRenderer lr;
+    private GameObject bellObject;
     
     private RectTransform crosshair;
     
@@ -15,13 +18,20 @@ public class PlayerFreeAimState : PlayerBaseState
     {
         crosshair = stateMachine.visualTarget.rectTransform;
         sphere = stateMachine.visualSpherePrefab;
+        lr = stateMachine.WhipLine;
+        whipBase = stateMachine.WhipBase;
+        bellObject = stateMachine.BellGameObject;
     }
     
     public override void Enter()
     {
         stateMachine.Animator.SetBool("isAiming", true);
-        
         crosshair.gameObject.SetActive(true);
+        lr.positionCount = 2; 
+        lr.useWorldSpace = true;
+        lr.SetPosition(0, whipBase.position);
+        lr.SetPosition(1, bellObject.transform.position);
+        
         stateMachine.InputReader.AimEvent += OnAimCancel;
     }
 
@@ -29,6 +39,7 @@ public class PlayerFreeAimState : PlayerBaseState
     {
         stateMachine.Animator.SetBool("isAiming", false);
         crosshair.gameObject.SetActive(false);
+        lr.positionCount = 0;
         stateMachine.InputReader.AimEvent -= OnAimCancel;
     }
 
@@ -39,6 +50,8 @@ public class PlayerFreeAimState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        lr.SetPosition(0, whipBase.position);
+        lr.SetPosition(1, bellObject.transform.position);
         
         Ray rayOrigin = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hitInfo;

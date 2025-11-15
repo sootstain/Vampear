@@ -44,13 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2017df46a5cf25448a7850a7260088f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrowingPaintSphere
-  spherePrefab: {fileID: 2555734448600350902, guid: 1874042913f94cc4a9d638168f7e4547, type: 3}
   minRadius: 0.1
   maxRadius: 3
   growthSpeed: 3
   fadeDelay: 5
   fadeDuration: 2
   highlightAlpha: 1
+  paintColor: {r: 1, g: 1, b: 1, a: 1}
   hardness: 1
   strength: 0.2
-  paintColor: {r: 1, g: 1, b: 1, a: 1}

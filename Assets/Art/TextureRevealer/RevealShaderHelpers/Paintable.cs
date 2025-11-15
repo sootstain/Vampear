@@ -10,6 +10,7 @@ public class Paintable : MonoBehaviour {
     RenderTexture maskRenderTexture;
     RenderTexture supportTexture;
     public bool IsBeingRevealed { get; set; } = false;
+    public bool ForceAlphaZero = false;
     Renderer rend;
 
     int maskTextureID = Shader.PropertyToID("_MaskTexture");

@@ -7040,23 +7040,14 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.21803221
-      value: 2.5326767
+      time: 0.08238158
+      value: 2.51931
       inSlope: 0.3506221
       outSlope: 0.3506221
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.6024798
-    - serializedVersion: 3
-      time: 0.4183957
-      value: 0.8577032
-      inSlope: -0.2793999
-      outSlope: -0.2793999
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.73678684
       value: 2.5616932
@@ -7213,6 +7204,7 @@ MonoBehaviour:
   apexHangGravityScale: 0.5
   apexThreshold: 0.5
   maxFallSpeed: -25
+  impact: {x: 0, y: 0, z: 0}
 --- !u!23 &3096120949437555357
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -44,12 +44,20 @@ public class PlayerDashState : PlayerBaseState
             stateMachine.SwitchState(new PlayerDashAttackState(stateMachine, slash2Index, dashDirection, remainingTime));
             return;
         }
+
         
         if (dashTimer >= stateMachine.DashDuration)
         {
-            stateMachine.SwitchState(new PlayerMoveState(stateMachine));
+            if (stateMachine.CharacterController.isGrounded)
+            {
+                stateMachine.SwitchState(new PlayerMoveState(stateMachine));
+            }
+            else
+            {
+                stateMachine.ForceReceiver.SetJump(0f);
+                stateMachine.SwitchState(new PlayerFallState(stateMachine));
+            }
         }
-
     }
 
     public override void Exit()

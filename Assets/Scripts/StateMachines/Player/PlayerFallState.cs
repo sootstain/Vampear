@@ -18,6 +18,8 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Enter()
     {
+        
+        stateMachine.InputReader.DashEvent += OnDash;
         Debug.Log("LedgeDetection component: " + (stateMachine.LedgeDetection != null ? "Found" : "NULL!"));
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f;
@@ -34,7 +36,7 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Exit()
     {
-        
+        stateMachine.InputReader.DashEvent -= OnDash;
         if (isSubscribed)
         {
             stateMachine.LedgeDetection.OnLedgeDetected -= HandleLedgeDetection;
@@ -61,5 +63,12 @@ public class PlayerFallState : PlayerBaseState
     private void HandleLedgeDetection(Vector3 ledgeForward, Vector3 surfaceNormal)
     {
         stateMachine.SwitchState(new PlayerHangState(stateMachine, ledgeForward, surfaceNormal));
+    }
+    private void OnDash()
+    {
+        if (stateMachine.HasDashAvailable)
+        {
+            stateMachine.SwitchState(new PlayerDashState(stateMachine));
+        }
     }
 }

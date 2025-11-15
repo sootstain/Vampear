@@ -13370,14 +13370,6 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3885130719082810538, guid: 7c3a5134a3035b54ebc5f7ce49609e89, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.26
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734231621142741311, guid: 7c3a5134a3035b54ebc5f7ce49609e89, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.039999418
-      objectReference: {fileID: 0}
     - target: {fileID: 4734231621142741311, guid: 7c3a5134a3035b54ebc5f7ce49609e89, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0

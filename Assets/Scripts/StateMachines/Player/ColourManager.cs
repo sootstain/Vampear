@@ -118,7 +118,7 @@ public class ColourManager : MonoBehaviour{
         {
             if (p == null) continue;
 
-            if (p.IsBeingRevealed)
+            if (p.IsBeingRevealed || p.ForceAlphaZero) 
                 continue;
 
             RenderTexture rt = p.getSupport();

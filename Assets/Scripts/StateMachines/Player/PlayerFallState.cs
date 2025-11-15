@@ -13,10 +13,13 @@ public class PlayerFallState : PlayerBaseState
             stateMachine.LedgeDetection.OnLedgeDetected += HandleLedgeDetection;
             isSubscribed = true;
         }
+        
     }
 
     public override void Enter()
     {
+        
+        stateMachine.InputReader.DashEvent += OnDash;
         Debug.Log("LedgeDetection component: " + (stateMachine.LedgeDetection != null ? "Found" : "NULL!"));
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f;
@@ -33,6 +36,7 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.InputReader.DashEvent -= OnDash;
         if (isSubscribed)
         {
             stateMachine.LedgeDetection.OnLedgeDetected -= HandleLedgeDetection;
@@ -44,21 +48,27 @@ public class PlayerFallState : PlayerBaseState
     {
         Move(momentum, deltaTime);
 
-        stateMachine.Animator.SetFloat("VerticalVelocity", stateMachine.CharacterController.velocity.y);
-        stateMachine.Animator.SetBool("isGrounded", stateMachine.CharacterController.isGrounded);
 
         //if hit the ground
         if (stateMachine.CharacterController.isGrounded)
         {
+            stateMachine.LandEffect.Play();
+            stateMachine.Animator.SetBool("isGrounded", true);
             ReturnToMoveStates();
             return;       
         }
-        
         FaceTarget();
     }
     
     private void HandleLedgeDetection(Vector3 ledgeForward, Vector3 surfaceNormal)
     {
         stateMachine.SwitchState(new PlayerHangState(stateMachine, ledgeForward, surfaceNormal));
+    }
+    private void OnDash()
+    {
+        if (stateMachine.HasDashAvailable)
+        {
+            stateMachine.SwitchState(new PlayerDashState(stateMachine));
+        }
     }
 }

@@ -96,6 +96,10 @@ public class PlayerThrowBellState : PlayerBaseState
             RaycastHit hit;
             if (Physics.Raycast(whipBase.position, targetDirection, out hit, currentWhipLength))
             {
+                foreach (var x in stateMachine.SonarEffectPrefab.GetComponentsInChildren<ParticleSystem>())
+                {
+                    x.Play();
+                }
                 currentWhipPosition = hit.point;
                 hitSomething = true;
                 InstantiateSphere(hit.point);

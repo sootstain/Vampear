@@ -17,7 +17,7 @@ public class PlayerScratch : MonoBehaviour
         
         if (collidedWith.Contains(other)) return;
         
-        Debug.Log("Adding to list");
+        //Debug.Log("Adding to list");
         collidedWith.Add(other);
         
         if (other.TryGetComponent(out Health health))

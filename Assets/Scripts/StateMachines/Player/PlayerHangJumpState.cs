@@ -13,9 +13,20 @@ public class PlayerHangJumpState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
+        Debug.Log("HangJump Entered");
+        stateMachine.ForceReceiver.Reset();
+        stateMachine.ForceReceiver.impact = Vector3.zero; 
         
+        stateMachine.CharacterController.enabled = false;
+    
+        // Moves away from wall. 
+        float clearanceDistance = stateMachine.CharacterController.radius * 2f + 0.1f;
+        stateMachine.transform.position += stateMachine.transform.forward * clearanceDistance;
+
+        stateMachine.CharacterController.enabled = true;
         
+        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce * 4f);
+
         stateMachine.Animator.CrossFadeInFixedTime(JumpRef, CrossFadeDuration);
     }
 
@@ -25,10 +36,12 @@ public class PlayerHangJumpState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        
         Vector3 movement = CalculateMovement();
         Move(movement, deltaTime);
         if (stateMachine.CharacterController.velocity.y <= 0f)
         {
+            
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
         }
         

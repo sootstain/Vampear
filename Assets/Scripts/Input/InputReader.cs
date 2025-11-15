@@ -10,16 +10,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool isJumping { get; private set; }
     public bool isJumpHeld { get; private set; }
     public bool isAiming { get; set; }
+    
+    public bool isReadyToInteract { get; private set; }
 
     public Vector2 MovementValue { get; private set; }
     public event Action JumpEvent;
     public event Action DashEvent;
     public event Action TargetEvent;
-    public event Action PullEvent;
     public event Action TransformEvent;
-    public event Action AimEvent;
     
     public event Action InteractEvent;
+    public event Action AimEvent;
     
     private Controls controls;
     private void Start()
@@ -63,7 +64,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        InteractEvent?.Invoke();
+        if (context.started) isReadyToInteract = true;
+        else if (context.canceled) isReadyToInteract = false;
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

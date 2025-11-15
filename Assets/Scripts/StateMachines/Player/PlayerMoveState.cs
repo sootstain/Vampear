@@ -22,7 +22,6 @@ public class PlayerMoveState : PlayerBaseState
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.JumpEvent += OnJump;
         stateMachine.InputReader.DashEvent += OnDash;
-        stateMachine.InputReader.InteractEvent += OnInteraction;
         
         stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0f); //reset
         
@@ -34,7 +33,6 @@ public class PlayerMoveState : PlayerBaseState
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.JumpEvent -= OnJump;
         stateMachine.InputReader.DashEvent -= OnDash;
-        stateMachine.InputReader.InteractEvent -= OnInteraction;
     }
     
     private void OnTarget()
@@ -42,22 +40,7 @@ public class PlayerMoveState : PlayerBaseState
         if (!stateMachine.Targeter.SelectTarget()) return;
         stateMachine.SwitchState(new PlayerTargetState(stateMachine));
     }
-
-    private void OnInteraction()
-    {
-        Debug.Log("listening :(");
-        var check = Physics.OverlapSphere(stateMachine.CharacterController.transform.position, stateMachine.interactionRadius);
-        if (check.Length > 0) //for now as unlikely to have many events close to each other? otherwise get closest distance
-        {
-            Debug.Log("Found colliders");
-            check[0].gameObject.TryGetComponent(out Interactable interactable);
-            if (interactable != null)
-            {
-                Debug.Log("Found some with interactable even");
-                interactable.TriggerInteract();
-            }
-        }
-    }
+    
 
     private void OnJump()
     {

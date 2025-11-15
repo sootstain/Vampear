@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     
     public GameObject deathScreen;
     public GameObject pauseMenu;
+    public GameObject interactDisplay;
     
     public bool isPaused = false;
     void Awake()
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
         
+        interactDisplay.SetActive(false);
         deathScreen.SetActive(false);
         pauseMenu.SetActive(false);
         if(startingEvent != null) startingEvent.TriggerEvent();

@@ -54,6 +54,8 @@ public class PlayerStateMachine : StateMachine
     
     [field: SerializeField] public ParticleSystem LandEffect;
     
+    [field: SerializeField] public GameObject SonarEffectPrefab;
+    
     private bool isVampire;
     private void Start()
     {

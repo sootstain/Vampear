@@ -1,19 +1,17 @@
-
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class PlayerFreeAimState : PlayerBaseState
 {
-    
     private GameObject sphere;
     private Transform whipBase;
     private LineRenderer lr;
     private GameObject bellObject;
-    
     private RectTransform crosshair;
+    private PlayerAimController aimController;
     
-    private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed"); //readonly for anim
+    private readonly int MoveSpeedAnimRef = Animator.StringToHash("MoveSpeed");
+    
     public PlayerFreeAimState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         crosshair = stateMachine.visualTarget.rectTransform;
@@ -21,12 +19,15 @@ public class PlayerFreeAimState : PlayerBaseState
         lr = stateMachine.WhipLine;
         whipBase = stateMachine.WhipBase;
         bellObject = stateMachine.BellGameObject;
+        aimController = stateMachine.AimController;
     }
     
     public override void Enter()
     {
         stateMachine.Animator.SetBool("isAiming", true);
         crosshair.gameObject.SetActive(true);
+        
+        // Setup whip line renderer
         lr.positionCount = 2; 
         lr.useWorldSpace = true;
         lr.SetPosition(0, whipBase.position);
@@ -53,38 +54,44 @@ public class PlayerFreeAimState : PlayerBaseState
         lr.SetPosition(0, whipBase.position);
         lr.SetPosition(1, bellObject.transform.position);
         
-        Ray rayOrigin = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hitInfo;
+        aimController.UpdateAimDirection();
+        aimController.RotatePlayerToAimDirection(deltaTime);
+    
         
-        if (Physics.Raycast(rayOrigin, out hitInfo))
+        if (stateMachine.InputReader.isAttacking)
         {
-            //Instantiate target
-            if (stateMachine.InputReader.isAttacking)
-            {
-                hitInfo.collider.gameObject.TryGetComponent(out Target target);
-                if (target != null)
-                {
-                    stateMachine.Targeter.CurrentTarget = target;
-                    stateMachine.SwitchState(new PlayerPullTargetState(stateMachine));
-                }
-                else
-                {
-                    stateMachine.SwitchState(new PlayerThrowBellState(stateMachine, crosshair));
-                
-                }
-            }
+            ThrowWhip();
         }
+
         Vector3 movement = CalculateMovement();
         
         Move(movement * stateMachine.StandardMovementSpeed, deltaTime);
 
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
-            stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0, 0.1f, Time.deltaTime);
-            return;
+            stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 0, 0.1f, deltaTime);
         }
-        stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 1, 0.1f, Time.deltaTime);
+        else
+        {
+            stateMachine.Animator.SetFloat(MoveSpeedAnimRef, 1, 0.1f, deltaTime);
+        }
+    }
+    
+    private void ThrowWhip()
+    {
+        Ray rayOrigin = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         
-        FaceMoveDirection(movement, deltaTime);
+        if (Physics.Raycast(rayOrigin, out RaycastHit hitInfo))
+        {
+            if (hitInfo.collider.TryGetComponent(out Target target))
+            {
+                stateMachine.Targeter.CurrentTarget = target;
+                stateMachine.SwitchState(new PlayerPullTargetState(stateMachine));
+            }
+            else
+            {
+                stateMachine.SwitchState(new PlayerThrowBellState(stateMachine, crosshair));
+            }
+        }
     }
 }

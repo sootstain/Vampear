@@ -56,7 +56,7 @@ public class PlayerStateMachine : StateMachine
     
     [field: SerializeField] public GameObject SonarEffectPrefab;
     
-    
+    [field: SerializeField] public PlayerAimController AimController { get; private set; }
     private bool isVampire;
     private void Start()
     {

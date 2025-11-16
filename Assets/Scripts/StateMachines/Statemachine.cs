@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour
 {
-    private State currentState;
+    public State currentState { get; private set; }
     private void Update()
     {
         // null condition operator

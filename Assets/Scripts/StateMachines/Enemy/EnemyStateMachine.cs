@@ -15,6 +15,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public WeaponDamage Weapon { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Target Target { get; private set; }
+    [field: SerializeField] public bool IsRangedEnemy { get; private set; }
     [Header("Speed related stuff")]
     [field: SerializeField] public float MovementSpeed { get; private set; } = 3f;
     [field: SerializeField] public float StrafeSpeed { get; private set; } = 2f;
@@ -39,12 +40,13 @@ public class EnemyStateMachine : StateMachine
     public bool IsPreparingAttack { get; set; }
     public bool IsBlocking { get; set; }
     public bool IsLockedTarget { get; set; }
+    public bool IsAttacking { get; set; }
     
     private float lastBlockTime = -999f;
-    //private EnemyManager enemyManager;
+    private EnemyManager enemyManager;
     
     public GameObject Player { get; private set; }
-    //public EnemyManager EnemyManager => enemyManager;
+    public EnemyManager EnemyManager => enemyManager;
 
     public float AttackRange => AttackingRange;
     private void Start()
@@ -73,6 +75,15 @@ public class EnemyStateMachine : StateMachine
 
     private void HandleTakeDamage()
     {
+        if (IsPreparingAttack)
+        {
+            IsPreparingAttack = false;
+            if (CounterParticle != null)
+            {
+                CounterParticle.Clear();
+                CounterParticle.Stop();
+            }
+        }
         if (CanBlock() && Random.value < BlockChance)
         {
             ResetBlockCooldown();
@@ -82,18 +93,6 @@ public class EnemyStateMachine : StateMachine
         SwitchState(new EnemyImpactState(this));
     }
     
-    public float GetDistanceToPlayer()
-    {
-        if (Player == null) return Mathf.Infinity;
-        return Vector3.Distance(transform.position, Player.transform.position);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, PlayerChasingRange);
-    }
-
     private void HandleDeath()
     {
         if (CounterParticle != null)
@@ -102,6 +101,74 @@ public class EnemyStateMachine : StateMachine
             CounterParticle.Stop();
         }
         SwitchState(new EnemyDeadState(this));
+    }
+    
+    public void StartPrepareAttack()
+    {
+        if (currentState is EnemyDeadState) return;
+        SwitchState(new EnemyPrepareAttackState(this));
+    }
+    
+    public void StartRetreat()
+    {
+        if (currentState is EnemyDeadState) return;
+        SwitchState(new EnemyRetreatState(this));
+    }
+    
+    public float GetDistanceToPlayer()
+    {
+        if (Player == null) return Mathf.Infinity;
+        return Vector3.Distance(transform.position, Player.transform.position);
+    }
+    
+    public void StartAttack()
+    {
+        if (currentState is EnemyDeadState) return;
+        
+        if (IsRangedEnemy)
+        {
+            StartRangedAttack();
+        }
+        else
+        {
+            StartPrepareAttack();
+        }
+    }
+
+    public void StartRangedAttack()
+    {
+        if (currentState is EnemyDeadState) return;
+        IsAttacking = true;
+        SwitchState(new EnemyRangedAttackState(this));
+    }
+    
+    public void CancelPrepareAttack()
+    {
+        if (IsPreparingAttack)
+        {
+            IsPreparingAttack = false;
+            if (CounterParticle != null)
+            {
+                CounterParticle.Clear();
+                CounterParticle.Stop();
+            }
+            SwitchState(new EnemyIdleState(this));
+        }
+    }
+    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, PlayerChasingRange);
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, AttackingRange);
+        
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, RangedAttackRange);
+        
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, RetreatDistance);
     }
     
 }

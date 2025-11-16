@@ -18,34 +18,21 @@ public class EnemyRangedAttackState : EnemyBaseState
 
     public override void Exit()
     {
-        
+        stateMachine.IsAttacking = false;
     }
 
     public override void Tick(float deltaTime)
     {
         if (stateMachine.Player == null) return;
-
+        
         FacePlayer();
 
+        // Wait for the animation to complete playing
         bool animationComplete = stateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f;
         if (animationComplete)
         {
-            /*if (IsInRangedAttackRange())
-            {
-                Debug.Log("Repeat this state!");
-                stateMachine.SwitchState(this);
-            }*/
-            if (IsInAttackRange())
-            {
-                Debug.Log("Switching to melee");
-                stateMachine.SwitchState(new EnemyAttackingState(stateMachine));
-            }
-            else
-            {
-                Debug.Log("Switching to chase");
-                stateMachine.SwitchState(new EnemyChasingState(stateMachine));
-            }
-            
+            // After ranged attack completes, the manager will handle retreat, just go to chase state after
+            stateMachine.SwitchState(new EnemyChasingState(stateMachine));
         }
     }
     
